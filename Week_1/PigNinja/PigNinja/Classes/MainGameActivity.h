@@ -19,9 +19,9 @@
 @interface MainGameActivity : CCScene <CCPhysicsCollisionDelegate>{
     
     CCSprite *redFlower;
+    
     CCSprite *blueFlower;
     CCLabelTTF *scoreLabel;
-
     CCSprite *_sprite;
     CGPoint touchedPoint;
     int score;
