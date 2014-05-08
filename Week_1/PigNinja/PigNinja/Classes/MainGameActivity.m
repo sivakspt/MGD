@@ -153,7 +153,7 @@
     CCLOG(@"Move sprite to @ %@",NSStringFromCGPoint(touchLoc));
     
     [_sprite removeFromParent];
-    [redFlower removeFromParent];
+//    [redFlower removeFromParent];
     
     
     
@@ -167,7 +167,10 @@
     
 }
 
+    //Red flower hit, good, add a point
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair userCollision:(CCNode *)_sprite redCollision:(CCNode *)redFlower {
+    
+
     [redFlower removeFromParent];
     NSLog(@"COLLISION DETECTED:  RED FLOWER HIT, REMOVING FROM VIEW AND ADDING TO SCORE the score is now: %d", score);
     [scoreLabel removeFromParent];
@@ -200,6 +203,7 @@
     return YES;
 }
 
+//Hit a blue flower, deduct a point
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair userCollision:(CCNode *)_sprite blueCollision:(CCNode *)blueFlower {
     //[blueFlower removeFromParent];
     [scoreLabel removeFromParent];
@@ -302,7 +306,7 @@
     // Move the flowers
     CCAction *actionMove = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(-redFlower.contentSize.width/2, randomY/2)];
     
-    CCAction *moveBlueFlowers = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(-blueFlower.contentSize.width/2, randomY)];
+    CCAction *moveBlueFlowers = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(-blueFlower.contentSize.width/2, randomBlueY)];
 
     CCAction *actionRemove = [CCActionRemove action];
     [redFlower runAction:[CCActionSequence actionWithArray:@[actionMove,actionRemove]]];
