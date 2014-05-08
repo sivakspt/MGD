@@ -164,12 +164,12 @@
     
 }
 
-    //Red flower hit, good, add a point
+    //Bacon  hit, good, add a point
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair userCollision:(CCNode *)_sprite redCollision:(CCNode *)redFlower {
     
 
     [redFlower removeFromParent];
-    NSLog(@"COLLISION DETECTED:  RED FLOWER HIT, REMOVING FROM VIEW AND ADDING TO SCORE the score is now: %d", score);
+    NSLog(@"COLLISION DETECTED:  BACON HIT, REMOVING FROM VIEW AND ADDING TO SCORE the score is now: %d", score);
     [scoreLabel removeFromParent];
     score ++;
     
@@ -193,10 +193,6 @@
     CCAction *actionRemove = [CCActionRemove action];
     
     
-    CCAction *actionRemoveRed = [CCActionRemove action];
-    
-    [redFlower runAction:actionRemove];
-    //  [blueFlower runAction:actionRemove];
     return YES;
 }
 
@@ -229,10 +225,10 @@
     scoreLabel.position = ccp(0.89f, 0.95f);
     
     [self addChild:scoreLabel];
-    CCAction *actionRemove = [CCActionRemove action];
     
-    [redFlower runAction:actionRemove];
-      [blueFlower runAction:actionRemove];
+    
+    [blueFlower removeFromParent];
+    
     return YES;
 }
 
