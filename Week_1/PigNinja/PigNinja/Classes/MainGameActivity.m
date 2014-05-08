@@ -133,9 +133,6 @@
 -(void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
     CGPoint touchLoc = [touch locationInNode:self];
     
-    [[OALSimpleAudio sharedInstance] playBg:@"background-music-aac.caf" loop:YES];
-    
-    
     CCPhysicsNode *_physicsWorld;
     _physicsWorld = [CCPhysicsNode node];
     _physicsWorld.gravity = ccp(0,0);
@@ -150,9 +147,11 @@
     // Log touch location
     CCLOG(@"Move sprite to @ %@",NSStringFromCGPoint(touchLoc));
     
-    [_sprite removeFromParent];
-//    [redFlower removeFromParent];
-    
+    //Remove objects TODO fix this part for creation and interaction!!==================!
+   // [_sprite removeFromParent];
+    [redFlower removeFromParent];
+    [blueFlower removeFromParent];
+    //-=--------------------------------------------------------
     
     
     [self flowerBomb:1.5f];
@@ -233,7 +232,7 @@
     CCAction *actionRemove = [CCActionRemove action];
     
     [redFlower runAction:actionRemove];
-    //  [blueFlower runAction:actionRemove];
+      [blueFlower runAction:actionRemove];
     return YES;
 }
 
@@ -248,6 +247,7 @@
     blueFlower = [CCSprite spriteWithImageNamed:@"blueFlower.png"];
     
     
+    [_sprite removeFromParent];
     CCPhysicsNode *_physicsWorld;
     _physicsWorld = [CCPhysicsNode node];
     _physicsWorld.gravity = ccp(0,0);
@@ -289,11 +289,13 @@
     
     //Add the blueFlowers
     
-    blueFlower.position = CGPointMake(self.contentSize.width + blueFlower.contentSize.width/2, randomD);
+    blueFlower.position = CGPointMake(self.contentSize.width + blueFlower.contentSize.width/2, randomBlueY);
     blueFlower.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, blueFlower.contentSize} cornerRadius:0];
     blueFlower.physicsBody.collisionGroup = @"blueGroup";
     blueFlower.physicsBody.collisionType  = @"blueCollision";
     [_physicsWorld addChild:blueFlower];
+    
+    
     
     // Set time for the animation and range randomization
     int minDuration = 2;
@@ -309,6 +311,7 @@
     CCAction *actionRemove = [CCActionRemove action];
     [redFlower runAction:[CCActionSequence actionWithArray:@[actionMove,actionRemove]]];
     [blueFlower runAction:[CCActionSequence actionWithArray:@[moveBlueFlowers,actionRemove]]];
+   //  [blueFlower2 runAction:[CCActionSequence actionWithArray:@[moveBlueFlowers,actionRemove]]];
     
     
 }

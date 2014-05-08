@@ -237,9 +237,9 @@
 		if( i != NSNotFound )
 			[self removeActionAtIndex:i hashElement:element];
 	}
-//	else {
-//		CCLOG(@"cocos2d: removeAction: Target not found");
-//	}
+	else {
+		CCLOG(@"cocos2d: removeAction: Target not found");
+	}
 }
 
 -(void) removeActionByTag:(NSInteger)aTag target:(id)target
