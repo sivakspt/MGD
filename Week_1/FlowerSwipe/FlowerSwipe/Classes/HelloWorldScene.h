@@ -21,10 +21,11 @@
     CCSprite *redFlower;
     
     CCSprite *blueFlower;
-    
+    CCLabelTTF *scoreLabel;
     CCSprite *_sprite;
-    CGPoint *touchedPoint;
-    
+    CGPoint touchedPoint;
+    int score;
+    NSString *scoreString;
 
 }
 

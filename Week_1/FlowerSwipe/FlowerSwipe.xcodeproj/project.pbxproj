@@ -218,6 +218,9 @@
 		E9481E8D191B1A1300585A29 /* redFlower.png in Resources */ = {isa = PBXBuildFile; fileRef = E9481E87191B1A1300585A29 /* redFlower.png */; };
 		E9481E8E191B1A1300585A29 /* sand_island.png in Resources */ = {isa = PBXBuildFile; fileRef = E9481E88191B1A1300585A29 /* sand_island.png */; };
 		E9481E8F191B1A1300585A29 /* sand.png in Resources */ = {isa = PBXBuildFile; fileRef = E9481E89191B1A1300585A29 /* sand.png */; };
+		E9E15A7A191B715D00DAA4AF /* bacon.png in Resources */ = {isa = PBXBuildFile; fileRef = E9E15A79191B715D00DAA4AF /* bacon.png */; };
+		E9E15A7D191B743500DAA4AF /* crunch.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E9E15A7C191B743500DAA4AF /* crunch.mp3 */; };
+		E9E15A7F191B74A700DAA4AF /* whip.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E9E15A7E191B74A700DAA4AF /* whip.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -665,6 +668,9 @@
 		E9481E87191B1A1300585A29 /* redFlower.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redFlower.png; sourceTree = "<group>"; };
 		E9481E88191B1A1300585A29 /* sand_island.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sand_island.png; sourceTree = "<group>"; };
 		E9481E89191B1A1300585A29 /* sand.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sand.png; sourceTree = "<group>"; };
+		E9E15A79191B715D00DAA4AF /* bacon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bacon.png; sourceTree = "<group>"; };
+		E9E15A7C191B743500DAA4AF /* crunch.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = crunch.mp3; sourceTree = "<group>"; };
+		E9E15A7E191B74A700DAA4AF /* whip.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = whip.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -736,6 +742,8 @@
 		E9481BE4191B19DD00585A29 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E9E15A7B191B731500DAA4AF /* Audio */,
+				E9E15A79191B715D00DAA4AF /* bacon.png */,
 				E9481BE5191B19DD00585A29 /* Default.png */,
 				E9481BE7191B19DD00585A29 /* Default@2x.png */,
 				E9481BE9191B19DD00585A29 /* Default-568h@2x.png */,
@@ -1568,6 +1576,15 @@
 			name = Classes;
 			sourceTree = "<group>";
 		};
+		E9E15A7B191B731500DAA4AF /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				E9E15A7E191B74A700DAA4AF /* whip.mp3 */,
+				E9E15A7C191B743500DAA4AF /* crunch.mp3 */,
+			);
+			name = Audio;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1638,6 +1655,7 @@
 			files = (
 				E9481BE8191B19DD00585A29 /* Default@2x.png in Resources */,
 				E9481BFB191B19DD00585A29 /* Icon-120.png in Resources */,
+				E9E15A7F191B74A700DAA4AF /* whip.mp3 in Resources */,
 				E9481DFF191B19E000585A29 /* LICENSE_CCBReader.txt in Resources */,
 				E9481BF1191B19DD00585A29 /* Icon@2x.png in Resources */,
 				E9481C03191B19DD00585A29 /* Icon-Small@2x.png in Resources */,
@@ -1647,6 +1665,7 @@
 				E9481BFD191B19DD00585A29 /* Icon-iPad-Spotlight-iOS7@2x.png in Resources */,
 				E9481BEC191B19DD00585A29 /* Default-Landscape~ipad.png in Resources */,
 				E9481E8D191B1A1300585A29 /* redFlower.png in Resources */,
+				E9E15A7D191B743500DAA4AF /* crunch.mp3 in Resources */,
 				E9481E8F191B1A1300585A29 /* sand.png in Resources */,
 				E9481C01191B19DD00585A29 /* Icon-Small.png in Resources */,
 				E9481BFF191B19DD00585A29 /* Icon-Small-50.png in Resources */,
@@ -1658,6 +1677,7 @@
 				E9481BEA191B19DD00585A29 /* Default-568h@2x.png in Resources */,
 				E9481E8E191B1A1300585A29 /* sand_island.png in Resources */,
 				E9481C0A191B19DD00585A29 /* iTunesArtwork in Resources */,
+				E9E15A7A191B715D00DAA4AF /* bacon.png in Resources */,
 				E9481C05191B19DD00585A29 /* Icon-Spotlight-iOS7.png in Resources */,
 				E9481BF9191B19DD00585A29 /* Icon-76@2x.png in Resources */,
 				E9481E6D191B19E000585A29 /* LICENSE_Chipmunk.txt in Resources */,
@@ -2013,6 +2033,7 @@
 				E9481E80191B19E000585A29 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E9481E81191B19E000585A29 /* Build configuration list for PBXNativeTarget "FlowerSwipe" */ = {
 			isa = XCConfigurationList;
@@ -2021,6 +2042,7 @@
 				E9481E83191B19E000585A29 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
