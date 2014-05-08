@@ -49,6 +49,8 @@
     [self addChild:background];
     
     
+    //Physics for collisions
+    
     CCPhysicsNode *_physicsWorld;
     _physicsWorld = [CCPhysicsNode node];
     _physicsWorld.gravity = ccp(0,0);
@@ -65,10 +67,8 @@
    // [_physicsWorld addChild:_sprite];
     
     //Score label
-    
     scoreString = [NSString stringWithFormat: @"Score: %d", score];
-    
-    
+
     scoreLabel = [CCLabelTTF labelWithString:scoreString fontName:@"Verdana-Bold" fontSize:18.0f];
     scoreLabel.positionType = CCPositionTypeNormalized;
     scoreLabel.color = [CCColor whiteColor];
@@ -78,13 +78,14 @@
     [self addChild:scoreLabel];
     
     
-    // Create a back button
+    // Create a menu button
     CCButton *backButton = [CCButton buttonWithTitle:@" Exit " fontName:@"Verdana" fontSize:16.0f];
     backButton.positionType = CCPositionTypeNormalized;
     backButton.position = ccp(0.07f, 0.95f); // Top Right of screen
     [backButton setTarget:self selector:@selector(onBackClicked:)];
     [self addChild:backButton];
     
+    //Set off the fun
     [self flowerBomb:.05f];
     
     // done
