@@ -19,16 +19,14 @@
 @interface MainGameActivity : CCScene <CCPhysicsCollisionDelegate>{
     
     CCSprite *redFlower;
-    
     CCSprite *blueFlower;
     CCLabelTTF *scoreLabel;
+
     CCSprite *_sprite;
     CGPoint touchedPoint;
     int score;
     NSString *scoreString;
-    NSMutableArray * _baconArray;
-    NSMutableArray * _flowerArray;
-    CCPhysicsNode *_physicsWorld;
+
 }
 
 // -----------------------------------------------------------------------

@@ -25,7 +25,6 @@
 
 + (MainGameActivity *)scene
 {
-
     return [[self alloc] init];
 }
 
@@ -33,9 +32,6 @@
 
 - (id)init
 {
-    _flowerArray = [[NSMutableArray alloc] init];
-    _baconArray = [[NSMutableArray alloc] init];
-    
     score = 0;
     redFlower = [CCSprite spriteWithImageNamed:@"redFlower.png"];
     
@@ -54,13 +50,13 @@
     
     
     //Physics for collisions
-    _physicsWorld;
+    
+    CCPhysicsNode *_physicsWorld;
     _physicsWorld = [CCPhysicsNode node];
     _physicsWorld.gravity = ccp(0,0);
-    _physicsWorld.debugDraw = YES;
+    // _physicsWorld.debugDraw = YES;
     _physicsWorld.collisionDelegate = self;
     [self addChild:_physicsWorld];
-
     
     // Add a sprite
     _sprite = [CCSprite spriteWithImageNamed:@"pig.png"];
@@ -68,9 +64,7 @@
     _sprite.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, _sprite.contentSize} cornerRadius:0]; // 1
     _sprite.physicsBody.collisionGroup = @"usergroup";
     _sprite.physicsBody.collisionType  = @"userCollision";
-    [_physicsWorld addChild:_sprite];
-    
-    
+   // [_physicsWorld addChild:_sprite];
     
     //Score label
     scoreString = [NSString stringWithFormat: @"Score: %d", score];
@@ -91,13 +85,12 @@
     [backButton setTarget:self selector:@selector(onBackClicked:)];
     [self addChild:backButton];
     
-    //Set on the fun
-    [self schedule:@selector(flowerBomb:) interval:2.0];
+    //Set off the fun
+    [self flowerBomb:.05f];
     
     // done
 	return self;
 }
-
 
 // -----------------------------------------------------------------------
 
@@ -105,7 +98,12 @@
 {
     // clean up code goes here
 }
-
+- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair monsterCollision:(CCNode *)monster projectileCollision:(CCNode *)projectile {
+    [monster removeFromParent];
+    [projectile removeFromParent];
+    
+    return YES;
+}
 
 // -----------------------------------------------------------------------
 #pragma mark - Enter & Exit
@@ -135,47 +133,44 @@
 // -----------------------------------------------------------------------
 
 -(void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
-
-    
-
-    //Set background on touch
-    CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.6f green:0.6f blue:0.6f alpha:1.0f]];
-
-    //User touch location
     CGPoint touchLoc = [touch locationInNode:self];
-    touchedPoint = touchLoc;
+    
+    [[OALSimpleAudio sharedInstance] playBg:@"background-music-aac.caf" loop:YES];
+    
+    
+    CCPhysicsNode *_physicsWorld;
+    _physicsWorld = [CCPhysicsNode node];
+    _physicsWorld.gravity = ccp(0,0);
+    //    _physicsWorld.debugDraw = YES;
+    _physicsWorld.collisionDelegate = self;
     
     //Play sound on movement
-   
     OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
     [audio playEffect:@"whip.mp3"];
+    
     
     // Log touch location
     CCLOG(@"Move sprite to @ %@",NSStringFromCGPoint(touchLoc));
     
-<<<<<<< HEAD
-
-//    [redFlower removeFromParent];
-=======
     [_sprite removeFromParent];
-    [redFlower removeFromParent];
->>>>>>> parent of c9b71d7... Redpointing here
+//    [redFlower removeFromParent];
+    
+    
+    
+    [self flowerBomb:1.5f];
     
     // Move our sprite to touch location
     CCActionMoveTo *actionMove = [CCActionMoveTo actionWithDuration:1.0f position:touchLoc];
-    _sprite.position  = touchedPoint;
     [_sprite runAction:actionMove];
-    
-    
-   
-    
-  
     
     
     
 }
 
+    //Red flower hit, good, add a point
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair userCollision:(CCNode *)_sprite redCollision:(CCNode *)redFlower {
+    
+
     [redFlower removeFromParent];
     NSLog(@"COLLISION DETECTED:  RED FLOWER HIT, REMOVING FROM VIEW AND ADDING TO SCORE the score is now: %d", score);
     [scoreLabel removeFromParent];
@@ -198,7 +193,7 @@
     scoreLabel.position = ccp(0.89f, 0.95f);
     
     [self addChild:scoreLabel];
-
+    CCAction *actionRemove = [CCActionRemove action];
     
     
     CCAction *actionRemoveRed = [CCActionRemove action];
@@ -208,6 +203,7 @@
     return YES;
 }
 
+//Hit a blue flower, deduct a point
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair userCollision:(CCNode *)_sprite blueCollision:(CCNode *)blueFlower {
     //[blueFlower removeFromParent];
     [scoreLabel removeFromParent];
@@ -234,12 +230,9 @@
     
     //Center
     scoreLabel.position = ccp(0.89f, 0.95f);
-
-    CCAction *actionRemove = [CCActionRemove action];
     
-    //Set the score
     [self addChild:scoreLabel];
-
+    CCAction *actionRemove = [CCActionRemove action];
     
     [redFlower runAction:actionRemove];
     //  [blueFlower runAction:actionRemove];
@@ -256,23 +249,22 @@
     
     blueFlower = [CCSprite spriteWithImageNamed:@"blueFlower.png"];
     
-
+    
+    CCPhysicsNode *_physicsWorld;
     _physicsWorld = [CCPhysicsNode node];
     _physicsWorld.gravity = ccp(0,0);
-      _physicsWorld.debugDraw = YES;
+    //  _physicsWorld.debugDraw = YES;
     _physicsWorld.collisionDelegate = self;
     
-    [self addChild:_physicsWorld];
-    
-    /*
     _sprite = [CCSprite spriteWithImageNamed:@"pig.png"];
     _sprite.position  = ccp(self.contentSize.width/2,self.contentSize.height/2);
     _sprite.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, _sprite.contentSize} cornerRadius:0]; // 1
     _sprite.physicsBody.collisionGroup = @"usergroup";
     _sprite.physicsBody.collisionType  = @"userCollision";
     [_physicsWorld addChild:_sprite];
-    */
     
+    
+    [self addChild:_physicsWorld];
     
     // Set our bounds for flowers
     int minY = redFlower.contentSize.height / 2;
@@ -289,19 +281,7 @@
     int randomD = (arc4random() % rangeY) + minY;
     int randomBlueY = (arc4random() % rangeBlue + minYBlue);
     
-    // Add the bacon & flowers
-    
-    /*
-    CCSprite *bacon = [CCSprite spriteWithImageNamed:@"bacon.png"];
-    
-    bacon.position = CGPointMake(self.contentSize.width + redFlower.contentSize.width/2, randomY/randomBlueY-1);
-    bacon.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, redFlower.contentSize} cornerRadius:0];
-    bacon.physicsBody.collisionGroup = @"redGroup";
-    bacon.physicsBody.collisionType  = @"baconCollision";
-    [_physicsWorld addChild:bacon];
-
-    */
-    
+    // Add the redflowers
     
     redFlower.position = CGPointMake(self.contentSize.width + redFlower.contentSize.width/2, randomY);
     redFlower.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, redFlower.contentSize} cornerRadius:0];
@@ -326,11 +306,7 @@
     // Move the flowers
     CCAction *actionMove = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(-redFlower.contentSize.width/2, randomY/2)];
     
-<<<<<<< HEAD
-    CCAction *moveBlueFlowers = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(-blueFlower.contentSize.width/2, randomD)];
-=======
-    CCAction *moveBlueFlowers = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(-blueFlower.contentSize.width/2, randomY)];
->>>>>>> parent of c9b71d7... Redpointing here
+    CCAction *moveBlueFlowers = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(-blueFlower.contentSize.width/2, randomBlueY)];
 
     CCAction *actionRemove = [CCActionRemove action];
     [redFlower runAction:[CCActionSequence actionWithArray:@[actionMove,actionRemove]]];
