@@ -26,7 +26,9 @@
     CGPoint touchedPoint;
     int score;
     NSString *scoreString;
-
+    NSMutableArray * _baconArray;
+    NSMutableArray * _flowerArray;
+    CCPhysicsNode *_physicsWorld;
 }
 
 // -----------------------------------------------------------------------
