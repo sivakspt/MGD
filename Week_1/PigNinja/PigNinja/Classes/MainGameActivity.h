@@ -1,10 +1,10 @@
 //
 //  MainGameActivity.h
 //  FlowerSwipe
-//
+//  Template files from Cocos2D Lib
 //  Created by Luke Switzer on 5/7/14.
 //  Copyright com.lukeswitzer.ninjastrike 2014. All rights reserved.
-//
+//  Template files from Cocos2D Lib
 // -----------------------------------------------------------------------
 
 // Importing cocos2d.h and cocos2d-ui.h, will import anything you need to start using Cocos2D v3

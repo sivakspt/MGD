@@ -4,6 +4,7 @@
 //
 //  Created by Luke Switzer on 5/7/14.
 //  Copyright com.lukeswitzer.ninjastrike 2014. All rights reserved.
+//  Template files from Cocos2D Lib
 //
 // -----------------------------------------------------------------------
 
@@ -37,6 +38,8 @@
     
     blueFlower = [CCSprite spriteWithImageNamed:@"blueFlower.png"];
     
+    _sprite = [CCSprite spriteWithImageNamed:@"pig.png"];
+    
     // Apple recommend assigning self with supers return value
     self = [super init];
     if (!self) return(nil);
@@ -59,7 +62,7 @@
     [self addChild:_physicsWorld];
     
     // Add a sprite
-    _sprite = [CCSprite spriteWithImageNamed:@"pig.png"];
+
     _sprite.position  = ccp(self.contentSize.width/2,self.contentSize.height/2);
     _sprite.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, _sprite.contentSize} cornerRadius:0]; // 1
     _sprite.physicsBody.collisionGroup = @"usergroup";
@@ -98,12 +101,7 @@
 {
     // clean up code goes here
 }
-- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair monsterCollision:(CCNode *)monster projectileCollision:(CCNode *)projectile {
-    [monster removeFromParent];
-    [projectile removeFromParent];
-    
-    return YES;
-}
+
 
 // -----------------------------------------------------------------------
 #pragma mark - Enter & Exit
@@ -198,7 +196,7 @@
     
     CCAction *actionRemoveRed = [CCActionRemove action];
     
-    [redFlower runAction:actionRemoveRed];
+    [redFlower runAction:actionRemove];
     //  [blueFlower runAction:actionRemove];
     return YES;
 }
