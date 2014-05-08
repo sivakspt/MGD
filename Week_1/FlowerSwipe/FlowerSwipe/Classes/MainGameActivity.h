@@ -1,5 +1,5 @@
 //
-//  HelloWorldScene.h
+//  MainGameActivity.h
 //  FlowerSwipe
 //
 //  Created by Luke Switzer on 5/7/14.
@@ -16,7 +16,7 @@
 /**
  *  The main scene
  */
-@interface HelloWorldScene : CCScene <CCPhysicsCollisionDelegate>{
+@interface MainGameActivity : CCScene <CCPhysicsCollisionDelegate>{
     
     CCSprite *redFlower;
     
@@ -31,7 +31,7 @@
 
 // -----------------------------------------------------------------------
 
-+ (HelloWorldScene *)scene;
++ (MainGameActivity *)scene;
 - (id)init;
 
 // -----------------------------------------------------------------------

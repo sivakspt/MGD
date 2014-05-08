@@ -9,7 +9,7 @@
 
 // Import the interfaces
 #import "IntroScene.h"
-#import "HelloWorldScene.h"
+#import "MainGameActivity.h"
 
 // -----------------------------------------------------------------------
 #pragma mark - IntroScene
@@ -49,7 +49,7 @@
     [self addChild:label];
     
     //Title Screen - info label
-    CCLabelTTF *infoLabel = [CCLabelTTF labelWithString:@"Get the Bacon! " fontName:@"Verdana" fontSize:18.0f];
+    CCLabelTTF *infoLabel = [CCLabelTTF labelWithString:@"Get the Bacon, Dodge the Plants! " fontName:@"Verdana" fontSize:18.0f];
     infoLabel.positionType = CCPositionTypeNormalized;
     infoLabel.color = [CCColor whiteColor];
     
@@ -63,6 +63,11 @@
     startButton.positionType = CCPositionTypeNormalized;
     startButton.position = ccp(0.5f, 0.35f);
     [startButton setTarget:self selector:@selector(onSpinningClicked:)];
+    
+    //Play sound on bacon
+    OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
+    [audio playEffect:@"crunch.mp3"];
+    
     [self addChild:startButton];
 
     // done
@@ -76,7 +81,7 @@
 - (void)onSpinningClicked:(id)sender
 {
     // start spinning scene with transition
-    [[CCDirector sharedDirector] replaceScene:[HelloWorldScene scene]
+    [[CCDirector sharedDirector] replaceScene:[MainGameActivity scene]
                                withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionLeft duration:1.0f]];
 }
 

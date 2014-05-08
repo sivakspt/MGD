@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E9481BDE191B19DD00585A29"
-               BuildableName = "libObjectiveChipmunk.a"
-               BlueprintName = "ObjectiveChipmunk"
-               ReferencedContainer = "container:FlowerSwipe.xcodeproj">
+               BlueprintIdentifier = "E9481BC7191B19DD00585A29"
+               BuildableName = "PigNinja.app"
+               BlueprintName = "PigNinja"
+               ReferencedContainer = "container:PigNinja.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -29,6 +29,15 @@
       buildConfiguration = "Debug">
       <Testables>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "E9481BC7191B19DD00585A29"
+            BuildableName = "PigNinja.app"
+            BlueprintName = "PigNinja"
+            ReferencedContainer = "container:PigNinja.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </TestAction>
    <LaunchAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
@@ -39,6 +48,15 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
+      <BuildableProductRunnable>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "E9481BC7191B19DD00585A29"
+            BuildableName = "PigNinja.app"
+            BlueprintName = "PigNinja"
+            ReferencedContainer = "container:PigNinja.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -48,6 +66,15 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
+      <BuildableProductRunnable>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "E9481BC7191B19DD00585A29"
+            BuildableName = "PigNinja.app"
+            BlueprintName = "PigNinja"
+            ReferencedContainer = "container:PigNinja.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

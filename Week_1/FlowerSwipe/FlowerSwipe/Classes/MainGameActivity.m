@@ -1,5 +1,5 @@
-    //
-//  HelloWorldScene.m
+//
+//  MainGameActivity.m
 //  FlowerSwipe
 //
 //  Created by Luke Switzer on 5/7/14.
@@ -7,23 +7,23 @@
 //
 // -----------------------------------------------------------------------
 
-#import "HelloWorldScene.h"
+#import "MainGameActivity.h"
 #import "IntroScene.h"
 
 // -----------------------------------------------------------------------
 #pragma mark - HelloWorldScene
 // -----------------------------------------------------------------------
 
-@implementation HelloWorldScene
+@implementation MainGameActivity
 {
-
+    
 }
 
 // -----------------------------------------------------------------------
 #pragma mark - Create & Destroy
 // -----------------------------------------------------------------------
 
-+ (HelloWorldScene *)scene
++ (MainGameActivity *)scene
 {
     return [[self alloc] init];
 }
@@ -48,11 +48,11 @@
     CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.2f green:0.2f blue:0.2f alpha:1.0f]];
     [self addChild:background];
     
-
+    
     CCPhysicsNode *_physicsWorld;
     _physicsWorld = [CCPhysicsNode node];
     _physicsWorld.gravity = ccp(0,0);
-   // _physicsWorld.debugDraw = YES;
+    // _physicsWorld.debugDraw = YES;
     _physicsWorld.collisionDelegate = self;
     [self addChild:_physicsWorld];
     
@@ -62,12 +62,12 @@
     _sprite.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, _sprite.contentSize} cornerRadius:0]; // 1
     _sprite.physicsBody.collisionGroup = @"usergroup";
     _sprite.physicsBody.collisionType  = @"userCollision";
-    [_physicsWorld addChild:_sprite];
+   // [_physicsWorld addChild:_sprite];
     
     //Score label
-
+    
     scoreString = [NSString stringWithFormat: @"Score: %d", score];
-
+    
     
     scoreLabel = [CCLabelTTF labelWithString:scoreString fontName:@"Verdana-Bold" fontSize:18.0f];
     scoreLabel.positionType = CCPositionTypeNormalized;
@@ -76,7 +76,7 @@
     //Center
     scoreLabel.position = ccp(0.89f, 0.95f);
     [self addChild:scoreLabel];
-
+    
     
     // Create a back button
     CCButton *backButton = [CCButton buttonWithTitle:@" Exit " fontName:@"Verdana" fontSize:16.0f];
@@ -85,8 +85,8 @@
     [backButton setTarget:self selector:@selector(onBackClicked:)];
     [self addChild:backButton];
     
+    [self flowerBomb:.05f];
     
-
     // done
 	return self;
 }
@@ -133,45 +133,49 @@
 
 -(void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
     CGPoint touchLoc = [touch locationInNode:self];
-
+    
     [[OALSimpleAudio sharedInstance] playBg:@"background-music-aac.caf" loop:YES];
     
     
     CCPhysicsNode *_physicsWorld;
     _physicsWorld = [CCPhysicsNode node];
     _physicsWorld.gravity = ccp(0,0);
-//    _physicsWorld.debugDraw = YES;
+    //    _physicsWorld.debugDraw = YES;
     _physicsWorld.collisionDelegate = self;
     
     //Play sound on movement
     OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
     [audio playEffect:@"whip.mp3"];
-
+    
     
     // Log touch location
     CCLOG(@"Move sprite to @ %@",NSStringFromCGPoint(touchLoc));
-   
+    
     [_sprite removeFromParent];
     [redFlower removeFromParent];
-   
-   
+    
+    
     
     [self flowerBomb:1.5f];
-
+    
     // Move our sprite to touch location
     CCActionMoveTo *actionMove = [CCActionMoveTo actionWithDuration:1.0f position:touchLoc];
     [_sprite runAction:actionMove];
- 
-   
+    
+    
     
 }
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair userCollision:(CCNode *)_sprite redCollision:(CCNode *)redFlower {
-        [redFlower removeFromParent];
+    [redFlower removeFromParent];
     NSLog(@"COLLISION DETECTED:  RED FLOWER HIT, REMOVING FROM VIEW AND ADDING TO SCORE the score is now: %d", score);
     [scoreLabel removeFromParent];
     score ++;
-   
+    
+    //Play sound on bacon
+    OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
+    [audio playEffect:@"crunch.mp3"];
+    
     
     
     scoreString = [NSString stringWithFormat: @"Score: %d", score];
@@ -186,21 +190,26 @@
     
     [self addChild:scoreLabel];
     CCAction *actionRemove = [CCActionRemove action];
-
+    
     
     CCAction *actionRemoveRed = [CCActionRemove action];
-
+    
     [redFlower runAction:actionRemoveRed];
-  //  [blueFlower runAction:actionRemove];
+    //  [blueFlower runAction:actionRemove];
     return YES;
 }
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair userCollision:(CCNode *)_sprite blueCollision:(CCNode *)blueFlower {
     //[blueFlower removeFromParent];
     [scoreLabel removeFromParent];
-        score --;
+    score --;
     scoreLabel = [CCLabelTTF labelWithString:scoreString fontName:@"Verdana" fontSize:18.0f];
     NSLog(@"COLLISION DETECTED:  BLUE FLOWER HIT, POINT DEDUCTION :: BLUE, the score is now: %d", score);
+    
+    
+    //Play sound on point loss
+    OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
+    [audio playEffect:@"boing.mp3"];
     
     
     scoreString = [NSString stringWithFormat: @"Score: %d", score];
@@ -219,7 +228,7 @@
     
     [self addChild:scoreLabel];
     CCAction *actionRemove = [CCActionRemove action];
-
+    
     [redFlower runAction:actionRemove];
     //  [blueFlower runAction:actionRemove];
     return YES;
@@ -235,11 +244,11 @@
     
     blueFlower = [CCSprite spriteWithImageNamed:@"blueFlower.png"];
     
- 
+    
     CCPhysicsNode *_physicsWorld;
     _physicsWorld = [CCPhysicsNode node];
     _physicsWorld.gravity = ccp(0,0);
-  //  _physicsWorld.debugDraw = YES;
+    //  _physicsWorld.debugDraw = YES;
     _physicsWorld.collisionDelegate = self;
     
     _sprite = [CCSprite spriteWithImageNamed:@"pig.png"];
@@ -255,7 +264,7 @@
     // Set our bounds for flowers
     int minY = redFlower.contentSize.height / 2;
     int maxY = self.contentSize.height - redFlower.contentSize.height / 2;
-   
+    
     //Set randoms for the blues
     int minYBlue = blueFlower.contentSize.height/.2 +1 ;
     int maxYBlue = self.contentSize.height - blueFlower.contentSize.height /3;
@@ -283,7 +292,7 @@
     blueFlower.physicsBody.collisionType  = @"blueCollision";
     [_physicsWorld addChild:blueFlower];
     
-        // Set time for the animation and range randomization
+    // Set time for the animation and range randomization
     int minDuration = 2;
     int maxDuration = 4;
     int rangeDuration = maxDuration - minDuration;
@@ -293,14 +302,11 @@
     CCAction *actionMove = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(-redFlower.contentSize.width/2, randomY/2)];
     
     CCAction *moveBlueFlowers = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(-blueFlower.contentSize.width/2, randomY)];
-    
-    
 
-    
     CCAction *actionRemove = [CCActionRemove action];
     [redFlower runAction:[CCActionSequence actionWithArray:@[actionMove,actionRemove]]];
     [blueFlower runAction:[CCActionSequence actionWithArray:@[moveBlueFlowers,actionRemove]]];
-
+    
     
 }
 

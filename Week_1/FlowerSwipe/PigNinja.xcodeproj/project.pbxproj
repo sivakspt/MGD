@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E92B90AB191B7CEA00ECC1D3 /* libObjectiveChipmunk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E9481BDF191B19DD00585A29 /* libObjectiveChipmunk.a */; };
 		E9481BCC191B19DD00585A29 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9481BCB191B19DD00585A29 /* QuartzCore.framework */; };
 		E9481BCE191B19DD00585A29 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9481BCD191B19DD00585A29 /* OpenGLES.framework */; };
 		E9481BD0191B19DD00585A29 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9481BCF191B19DD00585A29 /* OpenAL.framework */; };
@@ -16,7 +17,6 @@
 		E9481BD8191B19DD00585A29 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9481BD7191B19DD00585A29 /* Foundation.framework */; };
 		E9481BDA191B19DD00585A29 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9481BD9191B19DD00585A29 /* CoreGraphics.framework */; };
 		E9481BDC191B19DD00585A29 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9481BDB191B19DD00585A29 /* CoreText.framework */; };
-		E9481BE2191B19DD00585A29 /* libObjectiveChipmunk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E9481BDF191B19DD00585A29 /* libObjectiveChipmunk.a */; };
 		E9481BE6191B19DD00585A29 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = E9481BE5191B19DD00585A29 /* Default.png */; };
 		E9481BE8191B19DD00585A29 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E9481BE7191B19DD00585A29 /* Default@2x.png */; };
 		E9481BEA191B19DD00585A29 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E9481BE9191B19DD00585A29 /* Default-568h@2x.png */; };
@@ -210,7 +210,7 @@
 		E9481E6D191B19E000585A29 /* LICENSE_Chipmunk.txt in Resources */ = {isa = PBXBuildFile; fileRef = E9481E6C191B19E000585A29 /* LICENSE_Chipmunk.txt */; };
 		E9481E71191B19E000585A29 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E9481E70191B19E000585A29 /* main.m */; };
 		E9481E75191B19E000585A29 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E9481E74191B19E000585A29 /* AppDelegate.m */; };
-		E9481E78191B19E000585A29 /* HelloWorldScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E9481E77191B19E000585A29 /* HelloWorldScene.m */; };
+		E9481E78191B19E000585A29 /* MainGameActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = E9481E77191B19E000585A29 /* MainGameActivity.m */; };
 		E9481E7B191B19E000585A29 /* IntroScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E9481E7A191B19E000585A29 /* IntroScene.m */; };
 		E9481E8A191B1A1300585A29 /* blueFlower.png in Resources */ = {isa = PBXBuildFile; fileRef = E9481E84191B1A1300585A29 /* blueFlower.png */; };
 		E9481E8B191B1A1300585A29 /* flower_0.png in Resources */ = {isa = PBXBuildFile; fileRef = E9481E85191B1A1300585A29 /* flower_0.png */; };
@@ -221,6 +221,7 @@
 		E9E15A7A191B715D00DAA4AF /* bacon.png in Resources */ = {isa = PBXBuildFile; fileRef = E9E15A79191B715D00DAA4AF /* bacon.png */; };
 		E9E15A7D191B743500DAA4AF /* crunch.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E9E15A7C191B743500DAA4AF /* crunch.mp3 */; };
 		E9E15A7F191B74A700DAA4AF /* whip.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E9E15A7E191B74A700DAA4AF /* whip.mp3 */; };
+		E9E15A81191B75BD00DAA4AF /* boing.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E9E15A80191B75BD00DAA4AF /* boing.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -234,7 +235,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		E9481BC8191B19DD00585A29 /* FlowerSwipe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlowerSwipe.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E9481BC8191B19DD00585A29 /* PigNinja.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PigNinja.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9481BCB191B19DD00585A29 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		E9481BCD191B19DD00585A29 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		E9481BCF191B19DD00585A29 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
@@ -658,8 +659,8 @@
 		E9481E70191B19E000585A29 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = main.m; path = "Supporting Files/main.m"; sourceTree = "<group>"; };
 		E9481E73191B19E000585A29 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Classes/AppDelegate.h; sourceTree = "<group>"; };
 		E9481E74191B19E000585A29 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Classes/AppDelegate.m; sourceTree = "<group>"; };
-		E9481E76191B19E000585A29 /* HelloWorldScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HelloWorldScene.h; path = Classes/HelloWorldScene.h; sourceTree = "<group>"; };
-		E9481E77191B19E000585A29 /* HelloWorldScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = HelloWorldScene.m; path = Classes/HelloWorldScene.m; sourceTree = "<group>"; };
+		E9481E76191B19E000585A29 /* MainGameActivity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MainGameActivity.h; path = Classes/MainGameActivity.h; sourceTree = "<group>"; };
+		E9481E77191B19E000585A29 /* MainGameActivity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MainGameActivity.m; path = Classes/MainGameActivity.m; sourceTree = "<group>"; };
 		E9481E79191B19E000585A29 /* IntroScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IntroScene.h; path = Classes/IntroScene.h; sourceTree = "<group>"; };
 		E9481E7A191B19E000585A29 /* IntroScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = IntroScene.m; path = Classes/IntroScene.m; sourceTree = "<group>"; };
 		E9481E84191B1A1300585A29 /* blueFlower.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueFlower.png; sourceTree = "<group>"; };
@@ -671,6 +672,7 @@
 		E9E15A79191B715D00DAA4AF /* bacon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bacon.png; sourceTree = "<group>"; };
 		E9E15A7C191B743500DAA4AF /* crunch.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = crunch.mp3; sourceTree = "<group>"; };
 		E9E15A7E191B74A700DAA4AF /* whip.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = whip.mp3; sourceTree = "<group>"; };
+		E9E15A80191B75BD00DAA4AF /* boing.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = boing.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -678,7 +680,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E9481BE2191B19DD00585A29 /* libObjectiveChipmunk.a in Frameworks */,
+				E92B90AB191B7CEA00ECC1D3 /* libObjectiveChipmunk.a in Frameworks */,
 				E9481BD0191B19DD00585A29 /* OpenAL.framework in Frameworks */,
 				E9481BD6191B19DD00585A29 /* UIKit.framework in Frameworks */,
 				E9481BCC191B19DD00585A29 /* QuartzCore.framework in Frameworks */,
@@ -706,7 +708,7 @@
 		E9481BC9191B19DD00585A29 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E9481BC8191B19DD00585A29 /* FlowerSwipe.app */,
+				E9481BC8191B19DD00585A29 /* PigNinja.app */,
 				E9481BDF191B19DD00585A29 /* libObjectiveChipmunk.a */,
 			);
 			name = Products;
@@ -1568,8 +1570,8 @@
 			children = (
 				E9481E73191B19E000585A29 /* AppDelegate.h */,
 				E9481E74191B19E000585A29 /* AppDelegate.m */,
-				E9481E76191B19E000585A29 /* HelloWorldScene.h */,
-				E9481E77191B19E000585A29 /* HelloWorldScene.m */,
+				E9481E76191B19E000585A29 /* MainGameActivity.h */,
+				E9481E77191B19E000585A29 /* MainGameActivity.m */,
 				E9481E79191B19E000585A29 /* IntroScene.h */,
 				E9481E7A191B19E000585A29 /* IntroScene.m */,
 			);
@@ -1579,6 +1581,7 @@
 		E9E15A7B191B731500DAA4AF /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				E9E15A80191B75BD00DAA4AF /* boing.mp3 */,
 				E9E15A7E191B74A700DAA4AF /* whip.mp3 */,
 				E9E15A7C191B743500DAA4AF /* crunch.mp3 */,
 			);
@@ -1588,9 +1591,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		E9481BC7191B19DD00585A29 /* FlowerSwipe */ = {
+		E9481BC7191B19DD00585A29 /* PigNinja */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E9481E81191B19E000585A29 /* Build configuration list for PBXNativeTarget "FlowerSwipe" */;
+			buildConfigurationList = E9481E81191B19E000585A29 /* Build configuration list for PBXNativeTarget "PigNinja" */;
 			buildPhases = (
 				E9481BC4191B19DD00585A29 /* Sources */,
 				E9481BC5191B19DD00585A29 /* Frameworks */,
@@ -1601,9 +1604,9 @@
 			dependencies = (
 				E9481BE1191B19DD00585A29 /* PBXTargetDependency */,
 			);
-			name = FlowerSwipe;
+			name = PigNinja;
 			productName = FlowerSwipe;
-			productReference = E9481BC8191B19DD00585A29 /* FlowerSwipe.app */;
+			productReference = E9481BC8191B19DD00585A29 /* PigNinja.app */;
 			productType = "com.apple.product-type.application";
 		};
 		E9481BDE191B19DD00585A29 /* ObjectiveChipmunk */ = {
@@ -1630,7 +1633,7 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = com.lukeswitzer.ninjastrike;
 			};
-			buildConfigurationList = E9481BC3191B19DD00585A29 /* Build configuration list for PBXProject "FlowerSwipe" */;
+			buildConfigurationList = E9481BC3191B19DD00585A29 /* Build configuration list for PBXProject "PigNinja" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1642,7 +1645,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E9481BC7191B19DD00585A29 /* FlowerSwipe */,
+				E9481BC7191B19DD00585A29 /* PigNinja */,
 				E9481BDE191B19DD00585A29 /* ObjectiveChipmunk */,
 			);
 		};
@@ -1663,6 +1666,7 @@
 				E9481BE6191B19DD00585A29 /* Default.png in Resources */,
 				E9481BEF191B19DD00585A29 /* Icon.png in Resources */,
 				E9481BFD191B19DD00585A29 /* Icon-iPad-Spotlight-iOS7@2x.png in Resources */,
+				E9E15A81191B75BD00DAA4AF /* boing.mp3 in Resources */,
 				E9481BEC191B19DD00585A29 /* Default-Landscape~ipad.png in Resources */,
 				E9481E8D191B1A1300585A29 /* redFlower.png in Resources */,
 				E9E15A7D191B743500DAA4AF /* crunch.mp3 in Resources */,
@@ -1791,7 +1795,7 @@
 				E9481CBE191B19DE00585A29 /* ccShaders.m in Sources */,
 				E9481DD2191B19DF00585A29 /* matrix.c in Sources */,
 				E9481CE4191B19DE00585A29 /* CCTiledMapLayer.m in Sources */,
-				E9481E78191B19E000585A29 /* HelloWorldScene.m in Sources */,
+				E9481E78191B19E000585A29 /* MainGameActivity.m in Sources */,
 				E9481DD8191B19E000585A29 /* neon_matrix_impl.c in Sources */,
 				E9481C5D191B19DE00585A29 /* CCLabelTTF.m in Sources */,
 				E9481D12191B19DF00585A29 /* NSEvent+CC.m in Sources */,
@@ -1904,7 +1908,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1924,7 +1928,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1933,7 +1937,7 @@
 		E9481E7F191B19E000585A29 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ENABLE_OBJC_ARC = NO;
 				EXECUTABLE_EXTENSION = a;
@@ -1950,7 +1954,7 @@
 		E9481E80191B19E000585A29 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ENABLE_OBJC_ARC = NO;
 				EXECUTABLE_EXTENSION = a;
@@ -1967,7 +1971,7 @@
 		E9481E82191B19E000585A29 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1984,7 +1988,7 @@
 					"-lsqlite3",
 					"-ObjC",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = PigNinja;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1992,7 +1996,7 @@
 		E9481E83191B19E000585A29 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2008,7 +2012,7 @@
 					"-lsqlite3",
 					"-ObjC",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = PigNinja;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
@@ -2017,7 +2021,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E9481BC3191B19DD00585A29 /* Build configuration list for PBXProject "FlowerSwipe" */ = {
+		E9481BC3191B19DD00585A29 /* Build configuration list for PBXProject "PigNinja" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E9481E7C191B19E000585A29 /* Debug */,
@@ -2035,7 +2039,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E9481E81191B19E000585A29 /* Build configuration list for PBXNativeTarget "FlowerSwipe" */ = {
+		E9481E81191B19E000585A29 /* Build configuration list for PBXNativeTarget "PigNinja" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E9481E82191B19E000585A29 /* Debug */,
