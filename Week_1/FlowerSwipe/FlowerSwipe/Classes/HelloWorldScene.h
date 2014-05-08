@@ -16,7 +16,18 @@
 /**
  *  The main scene
  */
-@interface HelloWorldScene : CCScene <CCPhysicsCollisionDelegate>
+@interface HelloWorldScene : CCScene <CCPhysicsCollisionDelegate>{
+    
+    CCSprite *redFlower;
+    
+    CCSprite *blueFlower;
+    CCSprite *ninjaPig;
+    
+
+    
+    
+
+}
 
 // -----------------------------------------------------------------------
 

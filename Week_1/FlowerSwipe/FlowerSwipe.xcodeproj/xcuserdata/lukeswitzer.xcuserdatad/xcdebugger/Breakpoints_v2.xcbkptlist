@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FlowerSwipe/Classes/HelloWorldScene.m"
-            timestampString = "421211128.457327"
+            timestampString = "421219406.405262"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
             landmarkName = "-init"
             landmarkType = "5">
          </BreakpointContent>

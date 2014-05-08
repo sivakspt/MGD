@@ -16,7 +16,7 @@
 
 @implementation HelloWorldScene
 {
-    CCSprite *_sprite;
+
 }
 
 // -----------------------------------------------------------------------
@@ -32,6 +32,10 @@
 
 - (id)init
 {
+    redFlower = [CCSprite spriteWithImageNamed:@"redFlower.png"];
+    
+    blueFlower = [CCSprite spriteWithImageNamed:@"blueFlower.png"];
+    
     // Apple recommend assigning self with supers return value
     self = [super init];
     if (!self) return(nil);
@@ -43,6 +47,7 @@
     CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.2f green:0.2f blue:0.2f alpha:1.0f]];
     [self addChild:background];
     
+
     CCPhysicsNode *_physicsWorld;
     _physicsWorld = [CCPhysicsNode node];
     _physicsWorld.gravity = ccp(0,0);
@@ -51,11 +56,12 @@
     [self addChild:_physicsWorld];
     
     // Add a sprite
-    _sprite = [CCSprite spriteWithImageNamed:@"pig.png"];
-    _sprite.position  = ccp(self.contentSize.width/2,self.contentSize.height/2);
-    _sprite.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, _sprite.contentSize} cornerRadius:0]; // 1
-    _sprite.physicsBody.collisionGroup = @"playerGroup"; // 2
-    [_physicsWorld addChild:_sprite];
+    ninjaPig = [CCSprite spriteWithImageNamed:@"pig.png"];
+    ninjaPig.position  = ccp(self.contentSize.width/2,self.contentSize.height/2);
+    ninjaPig.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, ninjaPig.contentSize} cornerRadius:0]; // 1
+    ninjaPig.physicsBody.collisionGroup = @"userGroup";
+    ninjaPig.physicsBody.collisionType  = @"userCollision";
+    [_physicsWorld addChild:ninjaPig];
     
         
     // Create a back button
@@ -110,29 +116,36 @@
     CCActionRotateBy* actionSpin = [CCActionRotateBy actionWithDuration:1.5f angle:360];
    // [_sprite runAction:[CCActionRepeatForever actionWithAction:actionSpin]];
     
-    [_sprite runAction: [CCActionRepeat actionWithDuration:1.4f]];
+
     // Log touch location
     CCLOG(@"Move sprite to @ %@",NSStringFromCGPoint(touchLoc));
 
-    [self flowerBomb:1.5f];
+
+    
     // Move our sprite to touch location
     CCActionMoveTo *actionMove = [CCActionMoveTo actionWithDuration:1.0f position:touchLoc];
-    [_sprite runAction:actionMove];
-    [_sprite stopAction:actionSpin];
+
+    [ninjaPig runAction:actionMove];
+    //[_sprite stopAction:actionSpin];
+    [self flowerBomb:1.5f];
     
     
 }
+
+
+
+
+
 
 -(void)touchEnded:(UITouch *)touch withEvent:(UIEvent *)event{
     
 }
 - (void)flowerBomb:(CCTime)dt {
+    redFlower = [CCSprite spriteWithImageNamed:@"redFlower.png"];
     
-    CCSprite *redFlower = [CCSprite spriteWithImageNamed:@"redFlower.png"];
+    blueFlower = [CCSprite spriteWithImageNamed:@"blueFlower.png"];
     
-    CCSprite *blueFlower = [CCSprite spriteWithImageNamed:@"blueFlower.png"];
-
-    CCPhysicsNode *_physicsWorld;
+      CCPhysicsNode *_physicsWorld;
     _physicsWorld = [CCPhysicsNode node];
     _physicsWorld.gravity = ccp(0,0);
     _physicsWorld.debugDraw = YES;
@@ -144,8 +157,9 @@
     int minY = redFlower.contentSize.height / 2;
     int maxY = self.contentSize.height - redFlower.contentSize.height / 2;
    
+    //Set randoms for the blues
     int minYBlue = blueFlower.contentSize.height/2;
-    int maxYBlue = self.contentSize.height - blueFlower.contentSize.height /3;
+    int maxYBlue = self.contentSize.height - blueFlower.contentSize.height /-3;
     
     int rangeBlue = maxYBlue - minYBlue;
     int rangeY = maxY - minY;
@@ -164,7 +178,7 @@
     //Add the blueFlowers
     
     blueFlower.position = CGPointMake(self.contentSize.width + blueFlower.contentSize.width/2, randomBlueY);
-    blueFlower.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, redFlower.contentSize} cornerRadius:0];
+    blueFlower.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, blueFlower.contentSize} cornerRadius:0];
     blueFlower.physicsBody.collisionGroup = @"blueGroup";
     blueFlower.physicsBody.collisionType  = @"blueCollision";
     [_physicsWorld addChild:blueFlower];
@@ -197,6 +211,8 @@
     [[CCDirector sharedDirector] replaceScene:[IntroScene scene]
                                withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionRight duration:1.0f]];
 }
+
+
 
 // -----------------------------------------------------------------------
 @end
