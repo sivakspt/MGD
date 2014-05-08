@@ -21,10 +21,9 @@
     CCSprite *redFlower;
     
     CCSprite *blueFlower;
-    CCSprite *ninjaPig;
     
-
-    
+    CCSprite *_sprite;
+    CGPoint *touchedPoint;
     
 
 }

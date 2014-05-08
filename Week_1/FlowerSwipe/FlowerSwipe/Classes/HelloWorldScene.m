@@ -56,12 +56,12 @@
     [self addChild:_physicsWorld];
     
     // Add a sprite
-    ninjaPig = [CCSprite spriteWithImageNamed:@"pig.png"];
-    ninjaPig.position  = ccp(self.contentSize.width/2,self.contentSize.height/2);
-    ninjaPig.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, ninjaPig.contentSize} cornerRadius:0]; // 1
-    ninjaPig.physicsBody.collisionGroup = @"userGroup";
-    ninjaPig.physicsBody.collisionType  = @"userCollision";
-    [_physicsWorld addChild:ninjaPig];
+    _sprite = [CCSprite spriteWithImageNamed:@"pig.png"];
+    _sprite.position  = ccp(self.contentSize.width/2,self.contentSize.height/2);
+    _sprite.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, _sprite.contentSize} cornerRadius:0]; // 1
+    _sprite.physicsBody.collisionGroup = @"usergroup";
+    _sprite.physicsBody.collisionType  = @"userCollision";
+    [_physicsWorld addChild:_sprite];
     
         
     // Create a back button
@@ -80,6 +80,12 @@
 - (void)dealloc
 {
     // clean up code goes here
+}
+- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair monsterCollision:(CCNode *)monster projectileCollision:(CCNode *)projectile {
+    [monster removeFromParent];
+    [projectile removeFromParent];
+    
+    return YES;
 }
 
 // -----------------------------------------------------------------------
@@ -111,29 +117,48 @@
 
 -(void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
     CGPoint touchLoc = [touch locationInNode:self];
+    touchedPoint = &touchLoc;
     
-    // Animate sprite with action
-    CCActionRotateBy* actionSpin = [CCActionRotateBy actionWithDuration:1.5f angle:360];
-   // [_sprite runAction:[CCActionRepeatForever actionWithAction:actionSpin]];
+    CCPhysicsNode *_physicsWorld;
+    _physicsWorld = [CCPhysicsNode node];
+    _physicsWorld.gravity = ccp(0,0);
+    _physicsWorld.debugDraw = YES;
+    _physicsWorld.collisionDelegate = self;
     
-
+    
+    
+    _sprite = [CCSprite spriteWithImageNamed:@"pig.png"];
+    _sprite.position  = ccp(self.contentSize.width/2,self.contentSize.height/2);
+    _sprite.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, _sprite.contentSize} cornerRadius:0]; // 1
+    _sprite.physicsBody.collisionGroup = @"usergroup";
+    _sprite.physicsBody.collisionType  = @"userCollision";
+    [_physicsWorld addChild:_sprite];
+    
+    [_sprite runAction: [CCActionRepeat actionWithDuration:1.4f]];
+    
     // Log touch location
     CCLOG(@"Move sprite to @ %@",NSStringFromCGPoint(touchLoc));
 
-
-    
+    [self flowerBomb:1.5f];
     // Move our sprite to touch location
     CCActionMoveTo *actionMove = [CCActionMoveTo actionWithDuration:1.0f position:touchLoc];
+    [_sprite runAction:actionMove];
 
-    [ninjaPig runAction:actionMove];
-    //[_sprite stopAction:actionSpin];
-    [self flowerBomb:1.5f];
     
     
 }
 
+- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair userCollision:(CCNode *)_sprite redCollision:(CCNode *)redFlower {
+    [redFlower removeFromParent];
+        NSLog(@"COLLISION DETECTED:  RED FLOWER HIT, REMOVING FROM VIEW :: USER");
+    return YES;
+}
 
-
+- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair blueCollision:(CCNode *)_sprite redCollision:(CCNode *)redFlower {
+    [redFlower removeFromParent];
+    NSLog(@"COLLISION DETECTED:  RED FLOWER HIT, REMOVING FROM VIEW :: RED222");
+    return YES;
+}
 
 
 
@@ -145,12 +170,12 @@
     
     blueFlower = [CCSprite spriteWithImageNamed:@"blueFlower.png"];
     
-      CCPhysicsNode *_physicsWorld;
+    CCPhysicsNode *_physicsWorld;
     _physicsWorld = [CCPhysicsNode node];
     _physicsWorld.gravity = ccp(0,0);
     _physicsWorld.debugDraw = YES;
     _physicsWorld.collisionDelegate = self;
-   
+    
     [self addChild:_physicsWorld];
     
     // Set our bounds for flowers
@@ -178,12 +203,14 @@
     //Add the blueFlowers
     
     blueFlower.position = CGPointMake(self.contentSize.width + blueFlower.contentSize.width/2, randomBlueY);
-    blueFlower.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, blueFlower.contentSize} cornerRadius:0];
+    blueFlower.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, redFlower.contentSize} cornerRadius:0];
     blueFlower.physicsBody.collisionGroup = @"blueGroup";
     blueFlower.physicsBody.collisionType  = @"blueCollision";
     [_physicsWorld addChild:blueFlower];
     
-    
+    _sprite.physicsBody.collisionGroup = @"userGroup";
+    _sprite.physicsBody.collisionType  = @"userCollision";
+       [_physicsWorld addChild:_sprite];
     // Set time for the animation and range randomization
     int minDuration = 1.4;
     int maxDuration = 5.0;
@@ -198,6 +225,7 @@
     CCAction *actionRemove = [CCActionRemove action];
     [redFlower runAction:[CCActionSequence actionWithArray:@[actionMove,actionRemove]]];
     [blueFlower runAction:[CCActionSequence actionWithArray:@[moveBlueFlowers,actionRemove]]];
+    [_sprite removeFromParent];
 }
 
 
@@ -211,8 +239,6 @@
     [[CCDirector sharedDirector] replaceScene:[IntroScene scene]
                                withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionRight duration:1.0f]];
 }
-
-
 
 // -----------------------------------------------------------------------
 @end
