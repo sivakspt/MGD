@@ -18,3 +18,7 @@ Week 1:  Build a proof-of-concept app that demonstrates following:
 
 The application must compile and launch on an iPhone 7.1 or Android 4.3 emulator
 
+
+Github Repo: https://github.com/lswitzer/MGD/tree/master/Week_1
+
+For access to the repo please contact switzer.luke@gmail.com

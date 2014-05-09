@@ -153,8 +153,7 @@
     [blueFlower removeFromParent];
     //-=--------------------------------------------------------
     
-    
-    [self flowerBomb:1.5f];
+       [self flowerBomb:1.5f];
     
     // Move our sprite to touch location
     CCActionMoveTo *actionMove = [CCActionMoveTo actionWithDuration:1.0f position:touchLoc];
