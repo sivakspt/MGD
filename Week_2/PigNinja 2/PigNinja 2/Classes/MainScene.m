@@ -16,10 +16,10 @@
 // -----------------------------------------------------------------------
 
 @implementation MainScene
-@synthesize crunchSound,boingSound,whipSound;
+@synthesize crunchSound,boingSound,whipSound,pigX,pigY;
 
-    CCSprite *_pigPlayer;
-   
+CCSprite *_pigPlayer;
+
 
 // -----------------------------------------------------------------------
 #pragma mark - Create & Destroy
@@ -54,7 +54,7 @@
     
     // Animate sprite with action
     CCActionRotateBy* actionSpin = [CCActionRotateBy actionWithDuration:1.5f angle:360];
-  //  [_pigPlayer runAction:[CCActionRepeatForever actionWithAction:actionSpin]];
+    //  [_pigPlayer runAction:[CCActionRepeatForever actionWithAction:actionSpin]];
     
     // Create a back button
     CCButton *backButton = [CCButton buttonWithTitle:@"[ Menu ]" fontName:@"Verdana-Bold" fontSize:18.0f];
@@ -62,7 +62,7 @@
     backButton.position = ccp(0.85f, 0.95f); // Top Right of screen
     [backButton setTarget:self selector:@selector(onBackClicked:)];
     [self addChild:backButton];
-
+    
     // done
 	return self;
 }
@@ -108,7 +108,7 @@
     CCSprite *baconSprite = [CCSprite spriteWithImageNamed:@"bacon.png"];
     
     CCSprite *blueFlower = [CCSprite spriteWithImageNamed:@"blueFlower.png"];
-
+    
     //Make physics for world
     CCPhysicsNode *_physicsWorld;
     _physicsWorld = [CCPhysicsNode node];
@@ -116,7 +116,7 @@
     //  _physicsWorld.debugDraw = YES;
     _physicsWorld.collisionDelegate = self;
     
-
+    
     
     
     [self addChild:_physicsWorld];
@@ -181,21 +181,37 @@
     CGPoint touchLoc = [touch locationInNode:self];
     
     touchedPoint = touchLoc;
-   
+    
     //If you tap the pig
     if (CGRectContainsPoint(_pigPlayer.boundingBox, touchedPoint))
     {
         NSLog(@"Tapped player sprite");
         
     }
+    float angle = 45;
+    float speed = 50/60; // Move 50 pixels in 60 frames (1 second)
+    
+    float vx = cos(angle * M_PI / 180) * speed;
+    float vy = sin(angle * M_PI / 180) * speed;
+    
+    CGPoint velocity = CGPointMake(_pigPlayer.position.x, _pigPlayer.position.y);
+    
+    CGPoint ccp = touchLoc;
+    
+    CGPoint direction = CGPointMake(_pigPlayer.position.x, _pigPlayer.position.y);
+    
+    CGPoint sum = { _pigPlayer.position.x + velocity.x, _pigPlayer.position.y + velocity.y};
+    
+    
     
     // Log touch location coords
     CCLOG(@"Move sprite to @ %@ from %@",NSStringFromCGPoint(touchLoc), NSStringFromCGPoint(_pigPlayer.position));
     
     // Move our sprite to touch location
-    CCActionMoveTo *actionMove = [CCActionMoveTo actionWithDuration:1.0 position:touchLoc];
+    CCActionMoveTo *actionMove = [CCActionMoveTo actionWithDuration:.8 position:touchedPoint];
+    
     [_pigPlayer runAction:actionMove];
-
+    
     //Play sound on movement
     OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
     [audio playEffect:@"whip.mp3"];
@@ -207,10 +223,29 @@
 -(void) update:(CCTime)delta
 {
     
-    self.position = ccpAdd(self.position, ccpMult(velocity, delta));
+    // CGPoint currPos = self.position;
+    touchedPoint.x += (_pigPlayer.position.x * delta);
+    touchedPoint.y += (_pigPlayer.position.y * delta);
     
+    deltaCurrent = delta;
     
-  //  NSLog(@"DELTA: %f", NSStringFromCGPoint(velocity),delta);
+    if (delta > deltaCurrent) {
+        deltaCurrent = delta;
+        //      NSLog(@"DELTA CURRENT SMALLER, Increment...: %f", deltaCurrent);
+    }
+    else if(delta < deltaCurrent){
+        deltaCurrent = delta;
+        
+    }
+    NSLog(@"DELTA CURRENT : %f", deltaCurrent);
+    //   _pigPlayer.position = touchedPoint;
+    
+    // self.position = ccpAdd(self.position, ccpMult(velocity, delta));
+    
+    pigY = _pigPlayer.position.y;
+    pigX = _pigPlayer.position.x;
+    
+    //  NSLog(@"DELTA: %f", NSStringFromCGPoint(velocity),delta);
 }
 
 // -----------------------------------------------------------------------

@@ -30,6 +30,13 @@
     int fpsNow;
     int fpsTarget;
     int score;
+    
+    float deltaCurrent;
+    float _pigX;
+    float _pigY;
+    
+    
+    
     NSString *scoreString;
 }
 
@@ -37,6 +44,10 @@
 
 + (MainScene *)scene;
 - (id)init;
+
+@property (nonatomic, assign) float pigX;
+@property (nonatomic, assign) float pigY;
+
 @property OALSimpleAudio *whipSound;
 @property OALSimpleAudio *boingSound;
 @property OALSimpleAudio *crunchSound;
