@@ -210,7 +210,7 @@ CCSprite *_pigPlayer;
     
     CCSprite *baconSprite = [CCSprite spriteWithImageNamed:@"bacon.png"];
     
-    CCSprite *blueFlower = [CCSprite spriteWithImageNamed:@"blueFlower.png"];
+    CCSprite *blueFlower = [CCSprite spriteWithImageNamed:@"plantEnemy.png "];
     
     //Make physics for world
     CCPhysicsNode *_physicsWorld;

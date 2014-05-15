@@ -27,6 +27,6 @@ Week 2:
 	2 Game events including appropriate sound (Like  win or lose sound)
 
 
-Github Repo: https://github.com/lswitzer/MGD/tree/master/Week_1
+Github Repo: https://github.com/lswitzer/MGD/tree/master/Week_2
 
 For access to the repo please contact switzer.luke@gmail.com

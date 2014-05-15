@@ -220,6 +220,7 @@
 		E927438F1923B2C900E00EAB /* blueFlower.png in Resources */ = {isa = PBXBuildFile; fileRef = E927438E1923B2C900E00EAB /* blueFlower.png */; };
 		E9581BC01924A61C00885E31 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = E9581BBF1924A61C00885E31 /* bg.png */; };
 		E9581BC21924A6B400885E31 /* bg2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E9581BC11924A6B400885E31 /* bg2.jpg */; };
+		E968801919254F5D00E4D87F /* plantEnemy.png in Resources */ = {isa = PBXBuildFile; fileRef = E968801819254F5D00E4D87F /* plantEnemy.png */; };
 		E9E785191924872800979BE3 /* oink.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E9E785181924872800979BE3 /* oink.mp3 */; };
 /* End PBXBuildFile section */
 
@@ -670,6 +671,7 @@
 		E927438E1923B2C900E00EAB /* blueFlower.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueFlower.png; sourceTree = "<group>"; };
 		E9581BBF1924A61C00885E31 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
 		E9581BC11924A6B400885E31 /* bg2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg2.jpg; sourceTree = "<group>"; };
+		E968801819254F5D00E4D87F /* plantEnemy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plantEnemy.png; sourceTree = "<group>"; };
 		E9E785181924872800979BE3 /* oink.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = oink.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1596,6 +1598,7 @@
 			children = (
 				E927438E1923B2C900E00EAB /* blueFlower.png */,
 				E92743861923AA2C00E00EAB /* bacon.png */,
+				E968801819254F5D00E4D87F /* plantEnemy.png */,
 				E92743841923A9FF00E00EAB /* pigNormal.png */,
 			);
 			name = SpritesCharacter;
@@ -1699,6 +1702,7 @@
 				E92742CA1923A6F400E00EAB /* ChangeLog in Resources */,
 				E92743871923AA2C00E00EAB /* bacon.png in Resources */,
 				E92743851923A9FF00E00EAB /* pigNormal.png in Resources */,
+				E968801919254F5D00E4D87F /* plantEnemy.png in Resources */,
 				E92741091923A6F200E00EAB /* iTunesArtwork@2x in Resources */,
 				E927438F1923B2C900E00EAB /* blueFlower.png in Resources */,
 				E927438C1923ABB600E00EAB /* crunch.mp3 in Resources */,
