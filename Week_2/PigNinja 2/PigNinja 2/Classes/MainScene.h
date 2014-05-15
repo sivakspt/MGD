@@ -20,9 +20,9 @@
     
     CCSprite *redFlower;
     CCSprite *blueFlower;
-    CGPoint velocity;
+    CGPoint _velocity;
     CCLabelTTF *scoreLabel;
-    
+
     //    CCSprite *_sprite;
     CGPoint touchedPoint;
     CGPoint currentPoint;

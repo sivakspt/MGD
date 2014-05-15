@@ -186,30 +186,34 @@ CCSprite *_pigPlayer;
     if (CGRectContainsPoint(_pigPlayer.boundingBox, touchedPoint))
     {
         NSLog(@"Tapped player sprite");
-        
+        //Play sound on movement
+        OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
+        [audio playEffect:@"boing.mp3"];
     }
-    float angle = 45;
-    float speed = 50/60; // Move 50 pixels in 60 frames (1 second)
+    float angle = 20;
+    float speedFloat = 10/60; //10 pixels in 60 frames
     
-    float vx = cos(angle * M_PI / 180) * speed;
-    float vy = sin(angle * M_PI / 180) * speed;
+    float vx = cos(angle * M_PI / 180) * speedFloat;
+    float vy = sin(angle * M_PI / 180) * speedFloat;
     
-    CGPoint velocity = CGPointMake(_pigPlayer.position.x, _pigPlayer.position.y);
+    CGPoint velocity =  { _pigPlayer.position.x + velocity.x, velocity.y + _pigPlayer.position.y};
     
-    CGPoint ccp = touchLoc;
+    _velocity = velocity;
     
-    CGPoint direction = CGPointMake(_pigPlayer.position.x, _pigPlayer.position.y);
+    CGPoint direction = CGPointMake(vx,vy);
     
-    CGPoint sum = { _pigPlayer.position.x + velocity.x, _pigPlayer.position.y + velocity.y};
+    CGPoint sum = { touchLoc.x + direction.x, touchLoc.y + direction.y};
     
-    
+
     
     // Log touch location coords
     CCLOG(@"Move sprite to @ %@ from %@",NSStringFromCGPoint(touchLoc), NSStringFromCGPoint(_pigPlayer.position));
+
+
     
     // Move our sprite to touch location
-    CCActionMoveTo *actionMove = [CCActionMoveTo actionWithDuration:.8 position:touchedPoint];
-    
+    CCActionMoveTo *actionMove = [CCActionMoveTo actionWithDuration:1.0 position:sum];
+
     [_pigPlayer runAction:actionMove];
     
     //Play sound on movement
@@ -223,21 +227,10 @@ CCSprite *_pigPlayer;
 -(void) update:(CCTime)delta
 {
     
-    // CGPoint currPos = self.position;
-    touchedPoint.x += (_pigPlayer.position.x * delta);
-    touchedPoint.y += (_pigPlayer.position.y * delta);
+      deltaCurrent = delta;
     
-    deltaCurrent = delta;
     
-    if (delta > deltaCurrent) {
-        deltaCurrent = delta;
-        //      NSLog(@"DELTA CURRENT SMALLER, Increment...: %f", deltaCurrent);
-    }
-    else if(delta < deltaCurrent){
-        deltaCurrent = delta;
-        
-    }
-    NSLog(@"DELTA CURRENT : %f", deltaCurrent);
+   // NSLog(@"DELTA CURRENT : %f", deltaCurrent);
     //   _pigPlayer.position = touchedPoint;
     
     // self.position = ccpAdd(self.position, ccpMult(velocity, delta));
