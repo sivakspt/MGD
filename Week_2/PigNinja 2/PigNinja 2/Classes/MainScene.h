@@ -16,7 +16,7 @@
 /**
  *  The main scene
  */
-@interface MainScene : CCScene
+@interface MainScene : CCScene<CCPhysicsCollisionDelegate>
 
 // -----------------------------------------------------------------------
 
