@@ -135,9 +135,13 @@ CCSprite *_pigPlayer;
 {
     //Unload the cached loaded sound from cache---------------! MEMORY LEAKS CAN HAPPEN HERE!
     [whipSound unloadAllEffects];
-    //unschedule selectors to get dealloc to fire off
-    [self unscheduleAllSelectors];
 
+    
+    [self unscheduleAllSelectors];
+    
+    
+    [crunchSound unloadAllEffects];
+    [boingSound unloadAllEffects];
 
 
     // always call super onExit last
@@ -299,8 +303,8 @@ CCSprite *_pigPlayer;
 
 //Hit a blue flower, deduct a point
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair userCollision:(CCNode *)_sprite blueCollision:(CCNode *)blueFlower {
-    [blueFlower removeFromParentAndCleanup:true];
-    [scoreLabel removeFromParentAndCleanup:true];
+    [blueFlower removeFromParent];
+    [scoreLabel removeFromParent];
     score --;
  
     NSLog(@"COLLISION DETECTED:  BLUE FLOWER HIT, POINT DEDUCTION :: BLUE, the score is now: %d", score);
@@ -328,8 +332,8 @@ CCSprite *_pigPlayer;
     [self addChild:scoreLabel];
     
     
-    [blueFlower removeFromParentAndCleanup:true];
-    
+    [blueFlower removeFromParent];
+   
     return YES;
 }
 

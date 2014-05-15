@@ -74,15 +74,22 @@
     
     [self addChild:startButton];
     
-    // access audio objects
-    whipSound = [OALSimpleAudio sharedInstance];
-    // play background sound
-    [whipSound preloadEffect:@"whip.mp3"];
-    
- 
+
 
     // done
 	return self;
+}
+
+-(void)gameWon{
+    
+    //TODO go back to intro screen and end all processes, alert user they won, reset counter
+    
+    
+}
+
+-(void)gameLost{
+    //TODO go back to intro screen and end all processes, alert user they lost, reset counter
+    
 }
 
 // -----------------------------------------------------------------------
@@ -93,7 +100,9 @@
 {
     // start spinning scene with transition
     [[CCDirector sharedDirector] replaceScene:[MainScene scene]
-                               withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionLeft duration:1.0f]];
+                               withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionUp duration:.8f]];
+     [self unscheduleAllSelectors];
+
 }
 
 // -----------------------------------------------------------------------
