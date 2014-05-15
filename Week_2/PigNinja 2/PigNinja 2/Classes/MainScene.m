@@ -95,6 +95,9 @@
 
 - (void)onExit
 {
+    //Unload the cached loaded sound from cache---------------! MEMORY LEAKS CAN HAPPEN HERE!
+    [whipSound unloadAllEffects];
+    
     // always call super onExit last
     [super onExit];
 }
