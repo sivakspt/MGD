@@ -213,18 +213,25 @@ CCSprite *_pigPlayer;
     
     // Move our sprite to touch location
     CCActionMoveTo *actionMove = [CCActionMoveTo actionWithDuration:1.0 position:sum];
+     CCActionMoveTo *actionMoveSlow = [CCActionMoveTo actionWithDuration:2.0 position:touchLoc];
+ 
+    //Check how fast to move the character depending on delta speed
     
-    if (deltaCurrent > .03) {
-        NSLog(@"OVER .03");
+    if (deltaCurrent > .017) {
+        NSLog(@"OVER .018");
+        [_pigPlayer runAction:actionMoveSlow];
     }
-    else if (deltaCurrent > .03) {
-        NSLog(@"OVER .03");
+    else if (deltaCurrent < .017) {
+        NSLog(@"Under .017");
+
+        //Play sound on movement
+        OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
+        [audio playEffect:@"whip.mp3"];
+        [_pigPlayer runAction:actionMove];
     }
-    [_pigPlayer runAction:actionMove];
+   
     
-    //Play sound on movement
-    OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
-    [audio playEffect:@"whip.mp3"];
+
 }
 
 //Position update
@@ -236,7 +243,7 @@ CCSprite *_pigPlayer;
       deltaCurrent = delta;
     
     
-   // NSLog(@"DELTA CURRENT : %f", deltaCurrent);
+  //  NSLog(@"DELTA CURRENT : %f", deltaCurrent);
     //   _pigPlayer.position = touchedPoint;
     
     // self.position = ccpAdd(self.position, ccpMult(velocity, delta));
