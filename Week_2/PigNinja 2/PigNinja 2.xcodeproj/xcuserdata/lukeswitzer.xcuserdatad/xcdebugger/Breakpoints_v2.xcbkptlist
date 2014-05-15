@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PigNinja 2/Classes/MainScene.m"
-            timestampString = "421823663.1981"
+            timestampString = "421824309.6551"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "227"
-            endingLineNumber = "227"
+            startingLineNumber = "233"
+            endingLineNumber = "233"
             landmarkName = "-update:"
             landmarkType = "5">
          </BreakpointContent>

@@ -188,7 +188,7 @@ CCSprite *_pigPlayer;
         NSLog(@"Tapped player sprite");
         //Play sound on movement
         OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
-        [audio playEffect:@"boing.mp3"];
+        [audio playEffect:@"oink.mp3"];
     }
     float angle = 20;
     float speedFloat = 10/60; //10 pixels in 60 frames
@@ -198,7 +198,7 @@ CCSprite *_pigPlayer;
     
     CGPoint velocity =  { _pigPlayer.position.x + velocity.x, velocity.y + _pigPlayer.position.y};
     
-    _velocity = velocity;
+    
     
     CGPoint direction = CGPointMake(vx,vy);
     
@@ -213,7 +213,13 @@ CCSprite *_pigPlayer;
     
     // Move our sprite to touch location
     CCActionMoveTo *actionMove = [CCActionMoveTo actionWithDuration:1.0 position:sum];
-
+    
+    if (deltaCurrent > .03) {
+        NSLog(@"OVER .03");
+    }
+    else if (deltaCurrent > .03) {
+        NSLog(@"OVER .03");
+    }
     [_pigPlayer runAction:actionMove];
     
     //Play sound on movement

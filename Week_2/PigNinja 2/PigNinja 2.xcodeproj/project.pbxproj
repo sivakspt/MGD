@@ -218,6 +218,7 @@
 		E927438C1923ABB600E00EAB /* crunch.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E92743891923ABB600E00EAB /* crunch.mp3 */; };
 		E927438D1923ABB600E00EAB /* whip.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E927438A1923ABB600E00EAB /* whip.mp3 */; };
 		E927438F1923B2C900E00EAB /* blueFlower.png in Resources */ = {isa = PBXBuildFile; fileRef = E927438E1923B2C900E00EAB /* blueFlower.png */; };
+		E9E785191924872800979BE3 /* oink.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E9E785181924872800979BE3 /* oink.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -665,6 +666,7 @@
 		E92743891923ABB600E00EAB /* crunch.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = crunch.mp3; sourceTree = "<group>"; };
 		E927438A1923ABB600E00EAB /* whip.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = whip.mp3; sourceTree = "<group>"; };
 		E927438E1923B2C900E00EAB /* blueFlower.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueFlower.png; sourceTree = "<group>"; };
+		E9E785181924872800979BE3 /* oink.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = oink.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1568,6 +1570,7 @@
 		E92743811923A7A500E00EAB /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				E9E785181924872800979BE3 /* oink.mp3 */,
 				E92743881923ABB600E00EAB /* boing.mp3 */,
 				E92743891923ABB600E00EAB /* crunch.mp3 */,
 				E927438A1923ABB600E00EAB /* whip.mp3 */,
@@ -1678,6 +1681,7 @@
 				E927423E1923A6F300E00EAB /* LICENSE_cocos2d.txt in Resources */,
 				E92740E71923A6F200E00EAB /* Default-568h@2x.png in Resources */,
 				E927438D1923ABB600E00EAB /* whip.mp3 in Resources */,
+				E9E785191924872800979BE3 /* oink.mp3 in Resources */,
 				E92741071923A6F200E00EAB /* iTunesArtwork in Resources */,
 				E92741021923A6F200E00EAB /* Icon-Spotlight-iOS7.png in Resources */,
 				E92740F61923A6F200E00EAB /* Icon-76@2x.png in Resources */,
