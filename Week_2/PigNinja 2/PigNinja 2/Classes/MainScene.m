@@ -11,6 +11,7 @@
 #import "IntroScene.h"
 
 
+
 // -----------------------------------------------------------------------
 #pragma mark - MainScene
 // -----------------------------------------------------------------------
@@ -38,7 +39,6 @@
     self = [super init];
     if (!self) return(nil);
     
-    frameCount = 0;
     
     // Enable touch handling on scene node
     self.userInteractionEnabled = YES;
@@ -104,6 +104,9 @@
     // always call super onExit last
     [super onExit];
 }
+
+
+
 - (void)flowerBomb:(CCTime)dt {
     CCSprite *baconSprite = [CCSprite spriteWithImageNamed:@"bacon.png"];
     
@@ -210,8 +213,6 @@
     self.position = ccpAdd(self.position, ccpMult(velocity, delta));
     
     
-    
-    int frame_to_play = (frameCount * target_fps / tick_rate) % number_of_frames;
     
   //  NSLog(@"DELTA: %f", NSStringFromCGPoint(velocity),delta);
 }
