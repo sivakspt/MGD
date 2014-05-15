@@ -16,22 +16,7 @@
 /**
  *  The main scene
  */
-@interface MainScene : CCScene<CCPhysicsCollisionDelegate>{
-    
-    CCSprite *redFlower;
-    CCSprite *blueFlower;
-    CGPoint velocity;
-    CCLabelTTF *scoreLabel;
-    
-    //    CCSprite *_sprite;
-    CGPoint touchedPoint;
-    CGPoint currentPoint;
-    int frameCount;
-    int fpsNow;
-    int fpsTarget;
-    int score;
-    NSString *scoreString;
-}
+@interface MainScene : CCScene<CCPhysicsCollisionDelegate>
 
 // -----------------------------------------------------------------------
 
@@ -40,8 +25,6 @@
 @property OALSimpleAudio *whipSound;
 @property OALSimpleAudio *boingSound;
 @property OALSimpleAudio *crunchSound;
-
-
 
 // -----------------------------------------------------------------------
 @end
