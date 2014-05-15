@@ -21,7 +21,6 @@
  */
 @interface IntroScene : CCScene{
     
-
  
 }
 @property OALSimpleAudio *whipSound;
