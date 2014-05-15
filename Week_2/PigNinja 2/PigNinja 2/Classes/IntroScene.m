@@ -38,32 +38,48 @@
     // Apple recommend assigning self with supers return value
     self = [super init];
     if (!self) return(nil);
-
+    
+    //Make a purple bg
+    CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.3f green:0.2f blue:0.3f alpha:1.0f]];
+    [self addChild:background];
+    
+    //Title Screen
+    CCLabelTTF *label = [CCLabelTTF labelWithString:@"Pig Ninja" fontName:@"Chalkduster" fontSize:36.0f];
+    label.positionType = CCPositionTypeNormalized;
+    label.color = [CCColor redColor];
+    
+    //Center
+    label.position = ccp(0.5f, 0.5f);
+    [self addChild:label];
+    
+    //Title Screen - info label
+    CCLabelTTF *infoLabel = [CCLabelTTF labelWithString:@"Get the Bacon, Dodge the Plants! " fontName:@"Verdana" fontSize:18.0f];
+    infoLabel.positionType = CCPositionTypeNormalized;
+    infoLabel.color = [CCColor whiteColor];
+    
+    //Center
+    infoLabel.position = ccp(0.5f, 0.7f);
+    [self addChild:infoLabel];
+    
+    
+    // Start Button
+    CCButton *startButton = [CCButton buttonWithTitle:@"[Start]" fontName:@"Verdana-Bold" fontSize:19.0f];
+    startButton.positionType = CCPositionTypeNormalized;
+    startButton.position = ccp(0.5f, 0.35f);
+    [startButton setTarget:self selector:@selector(onSpinningClicked:)];
+    
+    //Play sound on bacon
+    OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
+    [audio playEffect:@"crunch.mp3"];
+    
+    [self addChild:startButton];
+    
     // access audio objects
     whipSound = [OALSimpleAudio sharedInstance];
     // play background sound
     [whipSound preloadEffect:@"whip.mp3"];
     
-    
-    
-    
-    // Create a colored background (Dark Grey)
-    CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.2f green:0.2f blue:0.2f alpha:1.0f]];
-    [self addChild:background];
-    
-    // Hello world
-    CCLabelTTF *label = [CCLabelTTF labelWithString:@"PigNinja 2" fontName:@"Chalkduster" fontSize:36.0f];
-    label.positionType = CCPositionTypeNormalized;
-    label.color = [CCColor redColor];
-    label.position = ccp(0.5f, 0.5f); // Middle of screen
-    [self addChild:label];
-    
-    // Helloworld scene button
-    CCButton *helloWorldButton = [CCButton buttonWithTitle:@"[ Go! ]" fontName:@"Verdana-Bold" fontSize:18.0f];
-    helloWorldButton.positionType = CCPositionTypeNormalized;
-    helloWorldButton.position = ccp(0.5f, 0.35f);
-    [helloWorldButton setTarget:self selector:@selector(onSpinningClicked:)];
-    [self addChild:helloWorldButton];
+ 
 
     // done
 	return self;

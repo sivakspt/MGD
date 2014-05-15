@@ -18,11 +18,11 @@
  */
 @interface MainScene : CCScene<CCPhysicsCollisionDelegate>{
     
-
+    
     CGPoint _velocity;
     CCLabelTTF *scoreLabel;
-
-        CCSprite *_pigPlayer;
+    
+//    CCSprite *_pigPlayer;
     CGPoint touchedPoint;
     CGPoint currentPoint;
     int frameCount;

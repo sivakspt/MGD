@@ -218,6 +218,8 @@
 		E927438C1923ABB600E00EAB /* crunch.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E92743891923ABB600E00EAB /* crunch.mp3 */; };
 		E927438D1923ABB600E00EAB /* whip.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E927438A1923ABB600E00EAB /* whip.mp3 */; };
 		E927438F1923B2C900E00EAB /* blueFlower.png in Resources */ = {isa = PBXBuildFile; fileRef = E927438E1923B2C900E00EAB /* blueFlower.png */; };
+		E9581BC01924A61C00885E31 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = E9581BBF1924A61C00885E31 /* bg.png */; };
+		E9581BC21924A6B400885E31 /* bg2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E9581BC11924A6B400885E31 /* bg2.jpg */; };
 		E9E785191924872800979BE3 /* oink.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E9E785181924872800979BE3 /* oink.mp3 */; };
 /* End PBXBuildFile section */
 
@@ -666,6 +668,8 @@
 		E92743891923ABB600E00EAB /* crunch.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = crunch.mp3; sourceTree = "<group>"; };
 		E927438A1923ABB600E00EAB /* whip.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = whip.mp3; sourceTree = "<group>"; };
 		E927438E1923B2C900E00EAB /* blueFlower.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueFlower.png; sourceTree = "<group>"; };
+		E9581BBF1924A61C00885E31 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
+		E9581BC11924A6B400885E31 /* bg2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg2.jpg; sourceTree = "<group>"; };
 		E9E785181924872800979BE3 /* oink.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = oink.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1581,6 +1585,8 @@
 		E92743821923A7AD00E00EAB /* SpritesBG */ = {
 			isa = PBXGroup;
 			children = (
+				E9581BC11924A6B400885E31 /* bg2.jpg */,
+				E9581BBF1924A61C00885E31 /* bg.png */,
 			);
 			name = SpritesBG;
 			sourceTree = "<group>";
@@ -1665,9 +1671,11 @@
 			files = (
 				E92740E51923A6F200E00EAB /* Default@2x.png in Resources */,
 				E92740F81923A6F200E00EAB /* Icon-120.png in Resources */,
+				E9581BC01924A61C00885E31 /* bg.png in Resources */,
 				E92742FC1923A6F400E00EAB /* LICENSE_CCBReader.txt in Resources */,
 				E92740EE1923A6F200E00EAB /* Icon@2x.png in Resources */,
 				E92741001923A6F200E00EAB /* Icon-Small@2x.png in Resources */,
+				E9581BC21924A6B400885E31 /* bg2.jpg in Resources */,
 				E92740F21923A6F200E00EAB /* Icon-72@2x.png in Resources */,
 				E92740E31923A6F200E00EAB /* Default.png in Resources */,
 				E92740EC1923A6F200E00EAB /* Icon.png in Resources */,
