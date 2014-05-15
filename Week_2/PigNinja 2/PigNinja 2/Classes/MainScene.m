@@ -19,7 +19,7 @@
 @synthesize crunchSound,boingSound,whipSound;
 
     CCSprite *_pigPlayer;
-
+   
 
 // -----------------------------------------------------------------------
 #pragma mark - Create & Destroy
@@ -28,15 +28,17 @@
 + (MainScene *)scene
 {
     return [[self alloc] init];
+    
 }
 
 // -----------------------------------------------------------------------
-
 - (id)init
 {
     // Apple recommend assigning self with supers return value
     self = [super init];
     if (!self) return(nil);
+    
+    frameCount = 0;
     
     // Enable touch handling on scene node
     self.userInteractionEnabled = YES;
@@ -93,8 +95,12 @@
 
 // -----------------------------------------------------------------------
 
+
 - (void)onExit
 {
+    //Unload the cached loaded sound from cache---------------! MEMORY LEAKS CAN HAPPEN HERE!
+    [whipSound unloadAllEffects];
+    
     // always call super onExit last
     [super onExit];
 }
@@ -112,6 +118,7 @@
     
 
     
+    
     [self addChild:_physicsWorld];
     
     // Set our bounds for flowers
@@ -126,7 +133,6 @@
     int rangeY = maxY - minY;
     
     int randomY = (arc4random() % rangeY) + minY;
-    int randomD = (arc4random() % rangeY) + minY;
     int randomBlueY = (arc4random() % rangeBlue + minYBlue);
     
     // Add the baconSprites
@@ -174,16 +180,37 @@
 -(void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
     CGPoint touchLoc = [touch locationInNode:self];
     
+    touchedPoint = touchLoc;
+   
+    //If you tap the pig
+    if (CGRectContainsPoint(_pigPlayer.boundingBox, touchedPoint))
+    {
+        NSLog(@"Tapped player sprite");
+        
+    }
+    
     // Log touch location coords
-    CCLOG(@"Move sprite to @ %@",NSStringFromCGPoint(touchLoc));
+    CCLOG(@"Move sprite to @ %@ from %@",NSStringFromCGPoint(touchLoc), NSStringFromCGPoint(_pigPlayer.position));
     
     // Move our sprite to touch location
-    CCActionMoveTo *actionMove = [CCActionMoveTo actionWithDuration:1.0f position:touchLoc];
+    CCActionMoveTo *actionMove = [CCActionMoveTo actionWithDuration:1.0 position:touchLoc];
     [_pigPlayer runAction:actionMove];
 
     //Play sound on movement
     OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
     [audio playEffect:@"whip.mp3"];
+}
+
+//Position update
+
+
+-(void) update:(CCTime)delta
+{
+    
+    self.position = ccpAdd(self.position, ccpMult(velocity, delta));
+    
+    
+  //  NSLog(@"DELTA: %f", NSStringFromCGPoint(velocity),delta);
 }
 
 // -----------------------------------------------------------------------
