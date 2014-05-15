@@ -130,7 +130,7 @@ CCSprite *_pigPlayer;
     [super onEnter];
     
     //Interval for bacon and flowers
-    [self schedule:@selector(flowerBomb:) interval:1.3];
+    [self schedule:@selector(flowerBomb:) interval:1.4];
     
     
     // In pre-v3, touch enable and scheduleUpdate was called here
