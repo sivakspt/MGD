@@ -237,7 +237,7 @@ CCSprite *_pigPlayer;
     int maxY = self.contentSize.height - baconSprite.contentSize.height / 2;
     
     //Set randoms for the blues
-    int minYBlue = blueFlower.contentSize.height/.2 +1 ;
+    int minYBlue = blueFlower.contentSize.height/(arc4random()) ;
     int maxYBlue = self.contentSize.height - blueFlower.contentSize.height /3;
     
     int rangeBlue = maxYBlue - minYBlue;
@@ -272,7 +272,7 @@ CCSprite *_pigPlayer;
     // Move the flowers
     CCAction *actionMove = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(-baconSprite.contentSize.width/2, randomY)];
     
-    CCAction *moveBlueFlowers = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(-blueFlower.contentSize.width/2, randomBlueY)];
+    CCAction *moveBlueFlowers = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(-blueFlower.contentSize.width/3, randomBlueY)];
 
     //Clean up
     CCAction *actionRemove = [CCActionRemove action];
