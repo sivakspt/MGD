@@ -39,6 +39,12 @@
     self = [super init];
     if (!self) return(nil);
     
+    // access audio object
+    OALSimpleAudio *crunchAudio = [OALSimpleAudio sharedInstance];
+    // play background sound
+    [crunchAudio preloadEffect:@"crunch.mp3"];
+    
+    
     
     
     //Make a purple bg
