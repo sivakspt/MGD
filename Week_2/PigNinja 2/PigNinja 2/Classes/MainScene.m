@@ -37,8 +37,30 @@ CCSprite *_pigPlayer;
     // Apple recommend assigning self with supers return value
     self = [super init];
     if (!self) return(nil);
+    score = 0;
+    
+    
+    CCSprite *blueFlower = [CCSprite spriteWithImageNamed:@"blueFlower.png"];
+    
     
     frameCount = 0;
+    
+    //Score label
+    scoreString = [NSString stringWithFormat: @"Score: %d", score];
+    
+    scoreLabel = [CCLabelTTF labelWithString:scoreString fontName:@"Verdana-Bold" fontSize:18.0f];
+    scoreLabel.positionType = CCPositionTypeNormalized;
+    scoreLabel.color = [CCColor whiteColor];
+    
+    //Physics for collisions
+    
+    CCPhysicsNode *_physicsWorld;
+    _physicsWorld = [CCPhysicsNode node];
+    _physicsWorld.gravity = ccp(0,0);
+    _physicsWorld.debugDraw = YES;
+    _physicsWorld.collisionDelegate = self;
+    [self addChild:_physicsWorld];
+    
     
     // Enable touch handling on scene node
     self.userInteractionEnabled = YES;
@@ -50,11 +72,12 @@ CCSprite *_pigPlayer;
     // Add a sprite
     _pigPlayer = [CCSprite spriteWithImageNamed:@"pigNormal.png"];
     _pigPlayer.position  = ccp(self.contentSize.width/2,self.contentSize.height/2);
-    [self addChild:_pigPlayer];
+    _pigPlayer.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, _pigPlayer.contentSize} cornerRadius:0];
+    _pigPlayer.physicsBody.collisionGroup = @"usergroup";
+    _pigPlayer.physicsBody.collisionType  = @"userCollision";
+    //[_physicsWorld addChild:_pigPlayer];
     
-    // Animate sprite with action
-    CCActionRotateBy* actionSpin = [CCActionRotateBy actionWithDuration:1.5f angle:360];
-    //  [_pigPlayer runAction:[CCActionRepeatForever actionWithAction:actionSpin]];
+    
     
     // Create a back button
     CCButton *backButton = [CCButton buttonWithTitle:@"[ Menu ]" fontName:@"Verdana-Bold" fontSize:18.0f];
@@ -84,7 +107,7 @@ CCSprite *_pigPlayer;
     [super onEnter];
     
     //Interval for bacon and flowers
-    [self schedule:@selector(flowerBomb:) interval:1.5];
+    [self schedule:@selector(flowerBomb:) interval:2.5];
     
     
     // In pre-v3, touch enable and scheduleUpdate was called here
@@ -105,6 +128,10 @@ CCSprite *_pigPlayer;
     [super onExit];
 }
 - (void)flowerBomb:(CCTime)dt {
+  
+    //Remove the created player
+    [_pigPlayer removeFromParent];
+    
     CCSprite *baconSprite = [CCSprite spriteWithImageNamed:@"bacon.png"];
     
     CCSprite *blueFlower = [CCSprite spriteWithImageNamed:@"blueFlower.png"];
@@ -113,14 +140,20 @@ CCSprite *_pigPlayer;
     CCPhysicsNode *_physicsWorld;
     _physicsWorld = [CCPhysicsNode node];
     _physicsWorld.gravity = ccp(0,0);
-    //  _physicsWorld.debugDraw = YES;
+      _physicsWorld.debugDraw = YES;
     _physicsWorld.collisionDelegate = self;
     
-    
-    
+
     
     [self addChild:_physicsWorld];
     
+    // Add a sprite
+    _pigPlayer = [CCSprite spriteWithImageNamed:@"pigNormal.png"];
+    _pigPlayer.position  = currentPoint;
+    _pigPlayer.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, _pigPlayer.contentSize} cornerRadius:0];
+    _pigPlayer.physicsBody.collisionGroup = @"usergroup";
+    _pigPlayer.physicsBody.collisionType  = @"userCollision";
+    [_physicsWorld addChild:_pigPlayer];
     // Set our bounds for flowers
     int minY = baconSprite.contentSize.height / 2;
     int maxY = self.contentSize.height - baconSprite.contentSize.height / 2;
@@ -152,7 +185,6 @@ CCSprite *_pigPlayer;
     [_physicsWorld addChild:blueFlower];
     
     
-    
     // Set time for the animation and range randomization
     int minDuration = 2;
     int maxDuration = 4;
@@ -173,6 +205,7 @@ CCSprite *_pigPlayer;
 }
 
 
+
 // -----------------------------------------------------------------------
 #pragma mark - Touch Handler
 // -----------------------------------------------------------------------
@@ -182,6 +215,8 @@ CCSprite *_pigPlayer;
     
     touchedPoint = touchLoc;
     
+    _pigPlayer.position = currentPoint;
+    
     //If you tap the pig
     if (CGRectContainsPoint(_pigPlayer.boundingBox, touchedPoint))
     {
@@ -190,6 +225,8 @@ CCSprite *_pigPlayer;
         OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
         [audio playEffect:@"oink.mp3"];
     }
+    
+    
     float angle = 20;
     float speedFloat = 10/60; //10 pixels in 60 frames
     
@@ -204,17 +241,17 @@ CCSprite *_pigPlayer;
     
     CGPoint sum = { touchLoc.x + direction.x, touchLoc.y + direction.y};
     
-
+    
     
     // Log touch location coords
     CCLOG(@"Move sprite to @ %@ from %@",NSStringFromCGPoint(touchLoc), NSStringFromCGPoint(_pigPlayer.position));
-
-
+    
+    currentPoint = touchLoc;
     
     // Move our sprite to touch location
     CCActionMoveTo *actionMove = [CCActionMoveTo actionWithDuration:1.0 position:sum];
-     CCActionMoveTo *actionMoveSlow = [CCActionMoveTo actionWithDuration:2.0 position:touchLoc];
- 
+    CCActionMoveTo *actionMoveSlow = [CCActionMoveTo actionWithDuration:2.0 position:touchLoc];
+    
     //Check how fast to move the character depending on delta speed
     
     if (deltaCurrent > .017) {
@@ -223,16 +260,90 @@ CCSprite *_pigPlayer;
     }
     else if (deltaCurrent < .017) {
         NSLog(@"Under .017");
-
+        
         //Play sound on movement
         OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
         [audio playEffect:@"whip.mp3"];
         [_pigPlayer runAction:actionMove];
     }
-   
     
-
+    
+    
 }
+
+//Hit a blue flower, deduct a point
+- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair userCollision:(CCNode *)_sprite blueCollision:(CCNode *)blueFlower {
+    //[blueFlower removeFromParent];
+    [scoreLabel removeFromParent];
+    score --;
+    scoreLabel = [CCLabelTTF labelWithString:scoreString fontName:@"Verdana" fontSize:18.0f];
+    NSLog(@"COLLISION DETECTED:  BLUE FLOWER HIT, POINT DEDUCTION :: BLUE, the score is now: %d", score);
+    
+    
+    //Play sound on point loss
+    OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
+    [audio playEffect:@"boing.mp3"];
+    
+    
+    scoreString = [NSString stringWithFormat: @"Score: %d", score];
+    
+    
+    scoreLabel = [CCLabelTTF labelWithString:scoreString fontName:@"Verdana" fontSize:18.0f];
+    scoreLabel.positionType = CCPositionTypeNormalized;
+    scoreLabel.color = [CCColor whiteColor];
+    
+    if (score < 0) {
+        scoreLabel.color = [CCColor redColor];
+    }
+    
+    //Center
+    scoreLabel.position = ccp(0.89f, 0.95f);
+    
+    [self addChild:scoreLabel];
+    
+    
+    [blueFlower removeFromParent];
+    
+    return YES;
+}
+
+-(void)touchEnded:(UITouch *)touch withEvent:(UIEvent *)event{
+    
+}
+
+
+//Bacon  hit, good, add a point
+- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair userCollision:(CCNode *)_sprite redCollision:(CCNode *)redFlower {
+    
+    
+    [redFlower removeFromParent];
+    NSLog(@"COLLISION DETECTED:  BACON HIT, REMOVING FROM VIEW AND ADDING TO SCORE the score is now: %d", score);
+    [scoreLabel removeFromParent];
+    score ++;
+    
+    //Play sound on bacon
+    OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
+    [audio playEffect:@"crunch.mp3"];
+    
+    
+    
+    scoreString = [NSString stringWithFormat: @"Score: %d", score];
+    
+    
+    scoreLabel = [CCLabelTTF labelWithString:scoreString fontName:@"Verdana" fontSize:18.0f];
+    scoreLabel.positionType = CCPositionTypeNormalized;
+    scoreLabel.color = [CCColor whiteColor];
+    
+    //Center
+    scoreLabel.position = ccp(0.89f, 0.95f);
+    
+    [self addChild:scoreLabel];
+    CCAction *actionRemove = [CCActionRemove action];
+    
+    
+    return YES;
+}
+
 
 //Position update
 
@@ -240,10 +351,11 @@ CCSprite *_pigPlayer;
 -(void) update:(CCTime)delta
 {
     
-      deltaCurrent = delta;
+    deltaCurrent = delta;
     
+    currentPoint = _pigPlayer.position;
     
-  //  NSLog(@"DELTA CURRENT : %f", deltaCurrent);
+    //  NSLog(@"DELTA CURRENT : %f", deltaCurrent);
     //   _pigPlayer.position = touchedPoint;
     
     // self.position = ccpAdd(self.position, ccpMult(velocity, delta));

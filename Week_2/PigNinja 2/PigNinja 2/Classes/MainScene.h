@@ -18,12 +18,11 @@
  */
 @interface MainScene : CCScene<CCPhysicsCollisionDelegate>{
     
-    CCSprite *redFlower;
-    CCSprite *blueFlower;
+
     CGPoint _velocity;
     CCLabelTTF *scoreLabel;
 
-    //    CCSprite *_sprite;
+        CCSprite *_pigPlayer;
     CGPoint touchedPoint;
     CGPoint currentPoint;
     int frameCount;

@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PigNinja 2/Classes/MainScene.m"
-            timestampString = "421824722.544316"
+            timestampString = "421827202.754932"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "240"
-            endingLineNumber = "240"
+            startingLineNumber = "349"
+            endingLineNumber = "349"
             landmarkName = "-update:"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PigNinja 2/Classes/MainScene.m"
-            timestampString = "421823663.1981"
+            timestampString = "421827202.754932"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "200"
-            endingLineNumber = "200"
+            startingLineNumber = "235"
+            endingLineNumber = "235"
             landmarkName = "-touchBegan:withEvent:"
             landmarkType = "5">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PigNinja 2/Classes/MainScene.m"
-            timestampString = "421823663.1981"
+            timestampString = "421827202.754932"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "212"
-            endingLineNumber = "212"
+            startingLineNumber = "247"
+            endingLineNumber = "247"
             landmarkName = "-touchBegan:withEvent:"
             landmarkType = "5">
          </BreakpointContent>
