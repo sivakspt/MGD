@@ -26,7 +26,7 @@
 {
 	return [[self alloc] init];
     
-
+    
     
 }
 
@@ -39,6 +39,8 @@
     self = [super init];
     if (!self) return(nil);
     
+    
+    
     //Make a purple bg
     CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.3f green:0.2f blue:0.3f alpha:1.0f]];
     [self addChild:background];
@@ -46,7 +48,7 @@
     //Title Screen
     CCLabelTTF *label = [CCLabelTTF labelWithString:@"Pig Ninja" fontName:@"Chalkduster" fontSize:36.0f];
     label.positionType = CCPositionTypeNormalized;
-    label.color = [CCColor redColor];
+    label.color = [CCColor whiteColor];
     
     //Center
     label.position = ccp(0.5f, 0.5f);
@@ -65,6 +67,7 @@
     // Start Button
     CCButton *startButton = [CCButton buttonWithTitle:@"[Start]" fontName:@"Verdana-Bold" fontSize:19.0f];
     startButton.positionType = CCPositionTypeNormalized;
+    startButton.color = [CCColor greenColor];
     startButton.position = ccp(0.5f, 0.35f);
     [startButton setTarget:self selector:@selector(onSpinningClicked:)];
     
@@ -74,23 +77,12 @@
     
     [self addChild:startButton];
     
-
-
+    
+    
     // done
 	return self;
 }
 
--(void)gameWon{
-    
-    //TODO go back to intro screen and end all processes, alert user they won, reset counter
-    
-    
-}
-
--(void)gameLost{
-    //TODO go back to intro screen and end all processes, alert user they lost, reset counter
-    
-}
 
 // -----------------------------------------------------------------------
 #pragma mark - Button Callbacks
@@ -101,8 +93,8 @@
     // start spinning scene with transition
     [[CCDirector sharedDirector] replaceScene:[MainScene scene]
                                withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionUp duration:.8f]];
-     [self unscheduleAllSelectors];
-
+    [self unscheduleAllSelectors];
+    
 }
 
 // -----------------------------------------------------------------------
