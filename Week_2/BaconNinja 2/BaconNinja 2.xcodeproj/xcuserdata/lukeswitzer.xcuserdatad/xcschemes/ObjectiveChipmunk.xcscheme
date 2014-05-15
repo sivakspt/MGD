@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E9A4452F1924667A007A2664"
-               BuildableName = "BaconNinja 2.app"
-               BlueprintName = "BaconNinja 2"
+               BlueprintIdentifier = "E9A445461924667A007A2664"
+               BuildableName = "libObjectiveChipmunk.a"
+               BlueprintName = "ObjectiveChipmunk"
                ReferencedContainer = "container:BaconNinja 2.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -29,15 +29,6 @@
       buildConfiguration = "Debug">
       <Testables>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E9A4452F1924667A007A2664"
-            BuildableName = "BaconNinja 2.app"
-            BlueprintName = "BaconNinja 2"
-            ReferencedContainer = "container:BaconNinja 2.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </TestAction>
    <LaunchAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
@@ -48,15 +39,6 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E9A4452F1924667A007A2664"
-            BuildableName = "BaconNinja 2.app"
-            BlueprintName = "BaconNinja 2"
-            ReferencedContainer = "container:BaconNinja 2.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -66,15 +48,6 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E9A4452F1924667A007A2664"
-            BuildableName = "BaconNinja 2.app"
-            BlueprintName = "BaconNinja 2"
-            ReferencedContainer = "container:BaconNinja 2.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
