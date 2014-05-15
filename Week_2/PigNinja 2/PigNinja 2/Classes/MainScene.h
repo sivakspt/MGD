@@ -18,6 +18,8 @@
  */
 @interface MainScene : CCScene<CCPhysicsCollisionDelegate>{
     
+    Boolean didHitFlower;
+    Boolean didHitBacon;
     
     CGPoint _velocity;
     CCLabelTTF *scoreLabel;

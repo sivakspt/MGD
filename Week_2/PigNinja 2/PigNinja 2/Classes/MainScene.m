@@ -38,7 +38,14 @@ CCSprite *_pigPlayer;
     self = [super init];
     if (!self) return(nil);
     score = 0;
+    
+    didHitBacon = false;
+    didHitFlower = false;
+    
+    
     currentPoint = CGPointMake(163.5, 54);
+    
+    
     
     CCSprite *background1 = [CCSprite spriteWithImageNamed:@"bg2.jpg"];
     
@@ -51,7 +58,7 @@ CCSprite *_pigPlayer;
     frameCount = 0;
     
     //Score label
-    scoreString = [NSString stringWithFormat: @"Score: %d", score];
+    scoreString = [NSString stringWithFormat: @"Bacon : %d", score];
     
     scoreLabel = [CCLabelTTF labelWithString:scoreString fontName:@"Verdana-Bold" fontSize:18.0f];
     scoreLabel.positionType = CCPositionTypeNormalized;
@@ -65,6 +72,8 @@ CCSprite *_pigPlayer;
     
     [self addChild:scoreLabel];
     //Physics for collisions
+    
+    
     
     CCPhysicsNode *_physicsWorld;
     _physicsWorld = [CCPhysicsNode node];
@@ -92,12 +101,14 @@ CCSprite *_pigPlayer;
     
     
     // Create a back button
-    CCButton *backButton = [CCButton buttonWithTitle:@"[ Menu ]" fontName:@"Verdana-Bold" fontSize:18.0f];
+    CCButton *backButton = [CCButton buttonWithTitle:@"Quit" fontName:@"Verdana" fontSize:18.0f];
     backButton.positionType = CCPositionTypeNormalized;
-    backButton.position = ccp(0.5f, 0.95f); // Top Right of screen
+    backButton.position = ccp(0.08f, 0.95f); // Top Right of screen
     [backButton setTarget:self selector:@selector(onBackClicked:)];
     [self addChild:backButton];
     
+    
+
     // done
 	return self;
 }
@@ -119,7 +130,7 @@ CCSprite *_pigPlayer;
     [super onEnter];
     
     //Interval for bacon and flowers
-    [self schedule:@selector(flowerBomb:) interval:2.5];
+    [self schedule:@selector(flowerBomb:) interval:1.3];
     
     
     // In pre-v3, touch enable and scheduleUpdate was called here
@@ -129,6 +140,51 @@ CCSprite *_pigPlayer;
 }
 
 // -----------------------------------------------------------------------
+-(void)gameWon{
+    
+    //TODO go back to intro screen and end all processes, alert user they won, reset counter
+    
+        [self unscheduleAllSelectors];
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Congrats!" message:@"Want to play again?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+    
+    
+    [alert show];
+    // back to intro scene with transition
+    
+    
+    
+    
+}
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 0){
+       // [self unscheduleAllSelectors];
+                NSLog(@"At 0");
+        [[CCDirector sharedDirector] replaceScene:[MainScene scene]
+                                   withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionRight duration:1.0f]];
+        
+    }
+    if (buttonIndex == 1) {
+        NSLog(@"At 1");
+        [[CCDirector sharedDirector] replaceScene:[IntroScene scene]
+                                   withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionRight duration:1.0f]];
+    }
+}
+
+-(void)gameLost{
+
+    [scoreLabel removeFromParent];
+    //TODO go back to intro screen and end all processes, alert user they lost, reset counter
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Deadly Bacon Levels!" message:@"You Lost!" delegate:self cancelButtonTitle:@"Play Again" otherButtonTitles:@"Quit", nil];
+    
+    
+    [alert show];
+
+    //Unschedule the flowerbombing
+    [self unscheduleAllSelectors];
+
+    
+}
 
 
 - (void)onExit
@@ -175,6 +231,7 @@ CCSprite *_pigPlayer;
     _pigPlayer.physicsBody.collisionGroup = @"usergroup";
     _pigPlayer.physicsBody.collisionType  = @"userCollision";
     [_physicsWorld addChild:_pigPlayer];
+  
     // Set our bounds for flowers
     int minY = baconSprite.contentSize.height / 2;
     int maxY = self.contentSize.height - baconSprite.contentSize.height / 2;
@@ -207,13 +264,13 @@ CCSprite *_pigPlayer;
     
     
     // Set time for the animation and range randomization
-    int minDuration = 2;
-    int maxDuration = 4;
+    int minDuration = 1.6;
+    int maxDuration = 2.5;
     int rangeDuration = maxDuration - minDuration;
     int randomDuration = (arc4random() % rangeDuration) + minDuration;
     
     // Move the flowers
-    CCAction *actionMove = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(-baconSprite.contentSize.width/2, randomY/2)];
+    CCAction *actionMove = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(-baconSprite.contentSize.width/2, randomY)];
     
     CCAction *moveBlueFlowers = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(-blueFlower.contentSize.width/2, randomBlueY)];
 
@@ -251,7 +308,8 @@ CCSprite *_pigPlayer;
     
     
     float angle = 20;
-    float speedFloat = 10/60; //10 pixels in 60 frames
+    //Get the proper interpolation
+    float speedFloat = deltaCurrent;
     
     float vx = cos(angle * M_PI / 180) * speedFloat;
     float vy = sin(angle * M_PI / 180) * speedFloat;
@@ -271,9 +329,10 @@ CCSprite *_pigPlayer;
     
     currentPoint = touchLoc;
     
+    
     // Move our sprite to touch location
     CCActionMoveTo *actionMove = [CCActionMoveTo actionWithDuration:1.0 position:sum];
-    CCActionMoveTo *actionMoveSlow = [CCActionMoveTo actionWithDuration:2.0 position:touchLoc];
+    CCActionMoveTo *actionMoveSlow = [CCActionMoveTo actionWithDuration:deltaCurrent position:touchLoc];
 
     //Play sound on movement
     OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
@@ -281,20 +340,15 @@ CCSprite *_pigPlayer;
     
     //Check how fast to move the character depending on delta speed
     
-    if (deltaCurrent > .017) {
-        NSLog(@"OVER .018");
-        [_pigPlayer runAction:actionMoveSlow];
+           [_pigPlayer runAction:actionMoveSlow];
 
-    }
-    else if (deltaCurrent < .017) {
-        NSLog(@"Under .017");
-        
+          
  
-        [_pigPlayer runAction:actionMove];
+     //   [_pigPlayer runAction:actionMove];
  
 
         
-    }
+    
  
     
     
@@ -303,27 +357,59 @@ CCSprite *_pigPlayer;
 
 //Hit a blue flower, deduct a point
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair userCollision:(CCNode *)_sprite blueCollision:(CCNode *)blueFlower {
+    
     [blueFlower removeFromParent];
     [scoreLabel removeFromParent];
-    score --;
- 
+    
+    
     NSLog(@"COLLISION DETECTED:  BLUE FLOWER HIT, POINT DEDUCTION :: BLUE, the score is now: %d", score);
     
+     didHitFlower = true;
+    [scoreLabel removeFromParentAndCleanup:true];
+    
+    
+    if (didHitFlower == true) {
+        score --;
+        
+    }
     
     //Play sound on point loss
     OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
     [audio playEffect:@"boing.mp3"];
     
     
-    scoreString = [NSString stringWithFormat: @"Score: %d", score];
+    
+    scoreString = [NSString stringWithFormat: @"Bacon : %d", score];
     
     
     scoreLabel = [CCLabelTTF labelWithString:scoreString fontName:@"Verdana" fontSize:18.0f];
     scoreLabel.positionType = CCPositionTypeNormalized;
     scoreLabel.color = [CCColor whiteColor];
     
-    if (score < 0) {
+    if (score == 0 && didHitFlower == true) {
+        [scoreLabel removeFromParent];
+        scoreString =  @"LOW BACON!";
+        
+        
+        scoreLabel = [CCLabelTTF labelWithString:scoreString fontName:@"Verdana" fontSize:18.0f];
+        scoreLabel.positionType = CCPositionTypeNormalized;
         scoreLabel.color = [CCColor redColor];
+        //Center
+        scoreLabel.position = ccp(0.49f, 0.95f);
+        
+//        [self addChild:scoreLabel];
+    }
+    
+    
+    
+    if (score < 0) {
+        [scoreLabel removeFromParent];
+        
+        [self gameLost];
+        //Center
+   
+        
+
     }
     
     //Center
@@ -331,6 +417,10 @@ CCSprite *_pigPlayer;
     
     [self addChild:scoreLabel];
     
+    if (score == -1) {
+        scoreString = @"DEAD!";
+        [scoreLabel removeFromParent];
+    }
     
     [blueFlower removeFromParent];
    
@@ -346,19 +436,31 @@ CCSprite *_pigPlayer;
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair userCollision:(CCNode *)_sprite redCollision:(CCNode *)redFlower {
     
 
+
+    [redFlower removeFromParent];
     
-    [redFlower removeFromParentAndCleanup:true];
     NSLog(@"COLLISION DETECTED:  BACON HIT, REMOVING FROM VIEW AND ADDING TO SCORE the score is now: %d", score);
-    [scoreLabel removeFromParentAndCleanup:true];
-    score ++;
     
+    [scoreLabel removeFromParentAndCleanup:true];
+    
+    didHitBacon = true;
+    if (didHitBacon == true) {
+         score ++;
+        
+    }
+   
+
+
     //Play sound on bacon
     OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
     [audio playEffect:@"crunch.mp3"];
     
+    if (score >= 25) {
+        [self gameWon];
+    }
     
     
-    scoreString = [NSString stringWithFormat: @"Score: %d", score];
+    scoreString = [NSString stringWithFormat: @"Bacon : %d", score];
     
     
     scoreLabel = [CCLabelTTF labelWithString:scoreString fontName:@"Verdana" fontSize:18.0f];
@@ -383,11 +485,12 @@ CCSprite *_pigPlayer;
 
 -(void) update:(CCTime)delta
 {
-
-    deltaCurrent = delta;
+ 
+    //Get our delta time for the interpolation
+    deltaCurrent = delta *166.66 ;
     currentPoint = _pigPlayer.position;
     
-    //  NSLog(@"DELTA CURRENT : %f", deltaCurrent);
+  //  NSLog(@"DELTA CURRENT : %f", deltaCurrent);
     
     
     
