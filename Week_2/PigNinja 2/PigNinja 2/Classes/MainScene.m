@@ -46,6 +46,8 @@ BOOL bearMoving;
     didHitFlower = false;
     pigMoving = false;
     
+
+    
     //Set bg
     CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.2f green:0.2f blue:0.2f alpha:1.0f]];
     
@@ -205,7 +207,7 @@ BOOL bearMoving;
     
     
     // Create a back button
-    CCButton *backButton = [CCButton buttonWithTitle:@"Quit" fontName:@"Verdana" fontSize:18.0f];
+    CCButton *backButton = [CCButton buttonWithTitle:@"Back" fontName:@"Verdana" fontSize:15.0f];
     backButton.positionType = CCPositionTypeNormalized;
     backButton.position = ccp(0.08f, 0.95f); // Top Right of screen
     [backButton setTarget:self selector:@selector(onBackClicked:)];
@@ -247,7 +249,8 @@ BOOL bearMoving;
 -(void)gameWon{
     
     //TODO go back to intro screen and end all processes, alert user they won, reset counter
-    
+  //  [pigNinja removeFromParentAndCleanup:YES];
+    [pigNinja stopAction:runCycles];
     [self unscheduleAllSelectors];
     
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Congrats!" message:@"Want to play again?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
@@ -267,19 +270,20 @@ BOOL bearMoving;
         NSLog(@"At 0");
         [[CCDirector sharedDirector] replaceScene:[MainScene scene]
                                    withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionRight duration:1.0f]];
-        
+            [pigNinja removeFromParentAndCleanup:YES];
     }
     if (buttonIndex == 1) {
         NSLog(@"At 1");
         [[CCDirector sharedDirector] replaceScene:[IntroScene scene]
                                    withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionRight duration:1.0f]];
+            [pigNinja removeFromParentAndCleanup:YES];
     }
 }
 
 -(void)gameLost{
     [pigNinja runAction:deadCycles];
     [scoreLabel removeFromParent];
-    scoreLabel = [CCLabelTTF labelWithString:@"DEAD!" fontName:@"Verdana" fontSize:18.0f];
+    scoreLabel = [CCLabelTTF labelWithString:@"DEAD!" fontName:@"Verdana-Bold" fontSize:18.0f];
     scoreLabel.positionType = CCPositionTypeNormalized;
     scoreLabel.color = [CCColor redColor];
     //Center
@@ -297,7 +301,7 @@ BOOL bearMoving;
 
     //Unschedule the flowerbombing
     [self unscheduleAllSelectors];
-
+    
   
 }
 
@@ -490,7 +494,7 @@ BOOL bearMoving;
     scoreString = [NSString stringWithFormat: @"Bacon : %d /25", score];
     
     
-    scoreLabel = [CCLabelTTF labelWithString:scoreString fontName:@"Verdana" fontSize:18.0f];
+    scoreLabel = [CCLabelTTF labelWithString:scoreString fontName:@"Verdana-Bold" fontSize:18.0f];
     scoreLabel.positionType = CCPositionTypeNormalized;
     scoreLabel.color = [CCColor whiteColor];
     
@@ -498,7 +502,7 @@ BOOL bearMoving;
         [scoreLabel removeFromParent];
         
         
-        scoreLabel = [CCLabelTTF labelWithString:scoreString fontName:@"Verdana" fontSize:18.0f];
+        scoreLabel = [CCLabelTTF labelWithString:scoreString fontName:@"Verdana-Bold" fontSize:18.0f];
         scoreLabel.positionType = CCPositionTypeNormalized;
         scoreLabel.color = [CCColor redColor];
         //Center
@@ -512,7 +516,7 @@ BOOL bearMoving;
         scoreString =  @"LOW BACON!";
         
         
-        scoreLabel = [CCLabelTTF labelWithString:scoreString fontName:@"Verdana" fontSize:18.0f];
+        scoreLabel = [CCLabelTTF labelWithString:scoreString fontName:@"Verdana-Bold" fontSize:18.0f];
         scoreLabel.positionType = CCPositionTypeNormalized;
         scoreLabel.color = [CCColor redColor];
         //Center
@@ -585,7 +589,7 @@ BOOL bearMoving;
     scoreString = [NSString stringWithFormat: @"Bacon : %d /25", score];
     
     
-    scoreLabel = [CCLabelTTF labelWithString:scoreString fontName:@"Verdana" fontSize:18.0f];
+    scoreLabel = [CCLabelTTF labelWithString:scoreString fontName:@"Verdana-Bold" fontSize:18.0f];
     scoreLabel.positionType = CCPositionTypeNormalized;
     scoreLabel.color = [CCColor whiteColor];
     
