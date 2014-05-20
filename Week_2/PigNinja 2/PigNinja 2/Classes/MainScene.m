@@ -45,10 +45,10 @@ BOOL bearMoving;
     didHitBacon = false;
     didHitFlower = false;
     pigMoving = false;
-
+    
     //Set bg
     CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.2f green:0.2f blue:0.2f alpha:1.0f]];
-  
+    
     [self addChild:background];
     
     
@@ -66,28 +66,28 @@ BOOL bearMoving;
                          animationWithSpriteFrames:animFrames
                          delay:0.1f]; //Speed in which the frames will go at
     
- 
+    
     //ANIMATION PIG===========================!
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"-ipadhdPigAnimRun.plist"];
- 
+    
     
     NSMutableArray *pigFrames = [NSMutableArray array];
     for(int i = 1; i <= 3; ++i)
     {
         [pigFrames addObject:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:
-                               [NSString stringWithFormat:@"%d.png", i]]];
+                              [NSString stringWithFormat:@"%d.png", i]]];
         NSLog(@"ADDING pigFrame to array: %lu", (unsigned long)pigFrames.count);
     }
     CCAnimation *pigAnim = [CCAnimation
-                         animationWithSpriteFrames:pigFrames
-                         delay:0.1f];
+                            animationWithSpriteFrames:pigFrames
+                            delay:0.1f];
     
     //---------END PIG ANIM---------------
     
     //Make a point for the background
     currentPoint = CGPointMake(163.5, 54);
     
-
+    
     CCSprite *background1 = [CCSprite spriteWithImageNamed:@"bg2.jpg"];
     
     //    CCSprite *blueFlower = [CCSprite spriteWithImageNamed:@"blueFlower.png"];
@@ -113,10 +113,9 @@ BOOL bearMoving;
     
     [self addChild:scoreLabel];
     
-    //Physics for collisions
-    CCPhysicsNode *_physicsWorld;
+    //Physics for pig
     _physicsWorld = [CCPhysicsNode node];
-    _physicsWorld.gravity = ccp(0,-3);
+    _physicsWorld.gravity = ccp(1,-1);
     // _physicsWorld.debugDraw = YES;
     _physicsWorld.collisionDelegate = self;
     [self addChild:_physicsWorld];
@@ -133,32 +132,38 @@ BOOL bearMoving;
     //    CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.2f green:0.2f blue:0.2f alpha:1.0f]];
     //  [self addChild:background];
     
-
+    
     //Make the bear
     CCSprite *_sprite;
     // Add a sprite
     _sprite = [CCSprite spriteWithImageNamed:@"-ipadhdBearAnim.png"];
     _sprite.position  = ccp(self.contentSize.width/2,self.contentSize.height/2);
     
-
+    
     //Move the bear
     CCActionAnimate *animAction = [CCActionAnimate actionWithAnimation:anim];
     CCActionRepeatForever *animationRepeateFor = [CCActionRepeatForever actionWithAction:animAction];
     [_sprite runAction:animationRepeateFor];
     //Add the bear to the physics of the game
-  //  [_physicsWorld addChild:_sprite];
-
-    //Make the Pig
+    //  [_physicsWorld addChild:_sprite];
     
+    //Make the Pig
+    CGSize size = [[CCDirector sharedDirector] viewSize];
     // Add a sprite
     pigNinja = [CCSprite spriteWithImageNamed:@"pigNormal.png"];
-   // pigNinja.position  = ccp(self.contentSize.width/2,self.contentSize.height/2);
+    // pigNinja.position  = ccp(self.contentSize.width/2,self.contentSize.height/2);
     pigNinja.flipX = YES;
     pigNinja.position  = currentPoint;
     pigNinja.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, pigNinja.contentSize} cornerRadius:0];
     pigNinja.physicsBody.collisionGroup = @"usergroup";
     pigNinja.physicsBody.collisionType  = @"userCollision";
-
+    
+    
+    
+    // pigNinja.position = ccp(0, size.height/2.0f);
+    
+    
+    
     
     //Move the pigs legs
     CCActionAnimate *pigMove = [CCActionAnimate actionWithAnimation:pigAnim];
@@ -251,7 +256,7 @@ BOOL bearMoving;
     scoreLabel.position = ccp(0.89f, 0.95f);
     
     [self addChild:scoreLabel];
-
+    
     //TODO go back to intro screen and end all processes, alert user they lost, reset counter
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Deadly Bacon Levels!" message:@"You Lost!" delegate:self cancelButtonTitle:@"Play Again" otherButtonTitles:@"Quit", nil];
     
@@ -280,32 +285,16 @@ BOOL bearMoving;
 - (void)flowerBomb:(CCTime)dt {
     
     //Remove the created player
-    [_pigPlayer removeFromParentAndCleanup:true];
+
     
     CCSprite *baconSprite = [CCSprite spriteWithImageNamed:@"bacon.png"];
     
     CCSprite *blueFlower = [CCSprite spriteWithImageNamed:@"blueFlower.png"];
     
-    //Make physics for world
-    CCPhysicsNode *_physicsWorld;
-    _physicsWorld = [CCPhysicsNode node];
-    _physicsWorld.gravity = ccp(0,0);
-    //  _physicsWorld.debugDraw = YES;
-    _physicsWorld.collisionDelegate = self;
+
     
     
-    
-    [self addChild:_physicsWorld];
-    
-    
-    // Add a sprite
-    _pigPlayer = [CCSprite spriteWithImageNamed:@"pigNormal.png"];
-    _pigPlayer.position  = currentPoint;
-    _pigPlayer.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, _pigPlayer.contentSize} cornerRadius:0];
-    _pigPlayer.physicsBody.collisionGroup = @"usergroup";
-    _pigPlayer.physicsBody.collisionType  = @"userCollision";
-    [_physicsWorld addChild:_pigPlayer];
-    
+
     // Set our bounds for flowers
     int minY = baconSprite.contentSize.height / 2;
     int maxY = self.contentSize.height - baconSprite.contentSize.height / 2;
@@ -319,6 +308,8 @@ BOOL bearMoving;
     
     int randomY = (arc4random() % rangeY) + minY;
     int randomBlueY = (arc4random() % rangeBlue + minYBlue);
+    
+
     
     // Add the baconSprites
     
@@ -354,7 +345,7 @@ BOOL bearMoving;
     [blueFlower runAction:[CCActionSequence actionWithArray:@[moveBlueFlowers,actionRemove]]];
     
     
-
+    
     
 }
 
@@ -365,12 +356,13 @@ BOOL bearMoving;
 // -----------------------------------------------------------------------
 
 -(void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
+
+
+    
     CGPoint touchLoc = [touch locationInNode:self];
     
-    pigNinja.position = currentPoint;
-
+ 
     _pigPlayer.position = currentPoint;
-    
     
     //If you tap the pig
     if (CGRectContainsPoint(_pigPlayer.boundingBox, touchLoc) || (CGRectContainsPoint(pigNinja.boundingBox, touchLoc)))
@@ -382,8 +374,8 @@ BOOL bearMoving;
     }
     
     
-    float angle = 25;
-
+    float angle = 0;
+    
     //Get the proper interpolation from the updates
     float speedFloat = deltaCurrent;
     
@@ -402,24 +394,23 @@ BOOL bearMoving;
     
     currentPoint = touchLoc;
     
-    CGSize screenSize = [[CCDirector sharedDirector]viewSize];
+
     
     
     
     // Move our sprite to touch location
     CCActionMoveTo *actionMove = [CCActionMoveTo actionWithDuration:1.0 position:sum];
-  
+    
     //Move with the delta multiplier
-    CCActionMoveTo *actionMoveSlow = [CCActionMoveTo actionWithDuration:deltaCurrent position:touchLoc];
+    CCActionMoveTo *actionMoveSlow = [CCActionMoveTo actionWithDuration:deltaCurrent position:currentPoint];
     
     //Play sound on movement
     OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
     [audio playEffect:@"whip.mp3"];
     
-    
     //Movement with interpolation
-    [_pigPlayer runAction:actionMoveSlow];
-    
+    //  [_pigPlayer runAction:actionMoveSlow];
+    [pigNinja runAction:actionMove];
     
     
     //   [_pigPlayer runAction:actionMove];
@@ -434,7 +425,7 @@ BOOL bearMoving;
 }
 
 //Hit a blue flower, deduct a point
-- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair userCollision:(CCNode *)_sprite blueCollision:(CCNode *)blueFlower {
+- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair userCollision:(CCNode *)pigNinja blueCollision:(CCNode *)blueFlower {
     
     [blueFlower removeFromParent];
     [scoreLabel removeFromParent];
@@ -474,7 +465,7 @@ BOOL bearMoving;
         scoreLabel.color = [CCColor redColor];
         //Center
         scoreLabel.position = ccp(0.49f, 0.95f);
-     //   [self addChild:scoreLabel];
+        //   [self addChild:scoreLabel];
         
     }
     
@@ -499,7 +490,7 @@ BOOL bearMoving;
     }
     
     [blueFlower removeFromParent];
-
+    
     
     [self addChild:scoreLabel];
     
@@ -572,6 +563,39 @@ BOOL bearMoving;
     
     pigY = _pigPlayer.position.y;
     pigX = _pigPlayer.position.x;
+    
+    //Keep the pig on the screen
+    CGSize screenSize = [[CCDirector sharedDirector]viewSize];
+    
+    float maxX = screenSize.width - pigNinja.contentSize.width/2;
+    float minX = pigNinja.contentSize.width/2;
+    float maxY = screenSize.height - pigNinja.contentSize.height/2;
+    float minY = pigNinja.contentSize.height/2;
+    
+    if (pigNinja.position.x > maxX)
+    {
+        NSLog(@"OFF SCREEN!");
+        pigNinja.position = ccp(maxX, pigNinja.position.y);
+    }
+    else if (pigNinja.position.x < minX)
+    {
+        NSLog(@"OFF SCREEN!");
+        pigNinja.position = ccp(minX, pigNinja.position.y);
+    }
+    
+    
+    if (pigNinja.position.y > maxY)
+    {
+        NSLog(@"OFF SCREEN!");
+        pigNinja.position = ccp(pigNinja.position.x, maxY);
+    }
+    else if (pigNinja.position.y < minY)
+    {
+        
+        pigNinja.position = ccp(pigNinja.position.x, minY);
+    }
+    
+
     
 }
 

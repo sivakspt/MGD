@@ -35,8 +35,8 @@
     float deltaCurrent;
     float _pigX;
     float _pigY;
-    CCPhysicsNode *physicsWorld;
-
+    CCPhysicsNode *_physicsWorld;
+    CCActionRepeatForever *pigCycles;
     NSMutableArray *animFrames;
     
     NSString *scoreString;
