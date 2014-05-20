@@ -210,11 +210,19 @@ BOOL bearMoving;
 -(void)gameLost{
     
     [scoreLabel removeFromParent];
+    scoreLabel = [CCLabelTTF labelWithString:@"DEAD!" fontName:@"Verdana" fontSize:18.0f];
+    scoreLabel.positionType = CCPositionTypeNormalized;
+    scoreLabel.color = [CCColor redColor];
+    //Center
+    scoreLabel.position = ccp(0.89f, 0.95f);
+    
+    [self addChild:scoreLabel];
+
     //TODO go back to intro screen and end all processes, alert user they lost, reset counter
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Deadly Bacon Levels!" message:@"You Lost!" delegate:self cancelButtonTitle:@"Play Again" otherButtonTitles:@"Quit", nil];
     
     
-    [alert show];
+        [alert show];
     
     //Unschedule the flowerbombing
     [self unscheduleAllSelectors];
@@ -412,7 +420,7 @@ BOOL bearMoving;
     
     
     
-    scoreString = [NSString stringWithFormat: @"Bacon : %d", score];
+    scoreString = [NSString stringWithFormat: @"Bacon : %d /25", score];
     
     
     scoreLabel = [CCLabelTTF labelWithString:scoreString fontName:@"Verdana" fontSize:18.0f];
@@ -429,8 +437,8 @@ BOOL bearMoving;
         scoreLabel.color = [CCColor redColor];
         //Center
         scoreLabel.position = ccp(0.49f, 0.95f);
+     //   [self addChild:scoreLabel];
         
-        //        [self addChild:scoreLabel];
     }
     
     
@@ -445,17 +453,19 @@ BOOL bearMoving;
         
     }
     
+    
     //Center
     scoreLabel.position = ccp(0.89f, 0.95f);
-    
-    [self addChild:scoreLabel];
-    
     if (score == -1) {
         scoreString = @"DEAD!";
         [scoreLabel removeFromParent];
     }
     
     [blueFlower removeFromParent];
+
+    
+    [self addChild:scoreLabel];
+    
     
     return YES;
 }
@@ -489,7 +499,7 @@ BOOL bearMoving;
     }
     
     
-    scoreString = [NSString stringWithFormat: @"Bacon : %d", score];
+    scoreString = [NSString stringWithFormat: @"Bacon : %d /25", score];
     
     
     scoreLabel = [CCLabelTTF labelWithString:scoreString fontName:@"Verdana" fontSize:18.0f];
