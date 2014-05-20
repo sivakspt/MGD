@@ -41,7 +41,7 @@ BOOL bearMoving;
     self = [super init];
     if (!self) return(nil);
     score = 0;
-    
+    didScoreEnough = false;
     didHitBacon = false;
     didHitFlower = false;
     pigMoving = false;
@@ -113,9 +113,9 @@ BOOL bearMoving;
     
     [self addChild:scoreLabel];
     
-    //Physics for pig
+    //Physics for world
     _physicsWorld = [CCPhysicsNode node];
-    _physicsWorld.gravity = ccp(1,-1);
+    _physicsWorld.gravity = ccp(0,0);
     // _physicsWorld.debugDraw = YES;
     _physicsWorld.collisionDelegate = self;
     [self addChild:_physicsWorld];
@@ -205,7 +205,7 @@ BOOL bearMoving;
     [super onEnter];
     
     //Interval for bacon and flowers
-    [self schedule:@selector(flowerBomb:) interval:1.4];
+    [self schedule:@selector(flowerBomb:) interval:1.6];
     
     
     // In pre-v3, touch enable and scheduleUpdate was called here
@@ -382,7 +382,7 @@ BOOL bearMoving;
     float vx = cos(angle * M_PI / 180) * speedFloat;
     float vy = sin(angle * M_PI / 180) * speedFloat;
     
-    CGPoint velocity =  { _pigPlayer.position.x + velocity.x, velocity.y + _pigPlayer.position.y};
+    CGPoint velocity =  { pigNinja.position.x + velocity.x, velocity.y + pigNinja.position.y};
     
     CGPoint direction = CGPointMake(vx,vy);
     
@@ -441,6 +441,9 @@ BOOL bearMoving;
         score --;
         
     }
+
+    
+
     
     //Play sound on point loss
     OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
@@ -454,6 +457,19 @@ BOOL bearMoving;
     scoreLabel = [CCLabelTTF labelWithString:scoreString fontName:@"Verdana" fontSize:18.0f];
     scoreLabel.positionType = CCPositionTypeNormalized;
     scoreLabel.color = [CCColor whiteColor];
+    
+    if (didScoreEnough && score < 3) {
+        [scoreLabel removeFromParent];
+        
+        
+        scoreLabel = [CCLabelTTF labelWithString:scoreString fontName:@"Verdana" fontSize:18.0f];
+        scoreLabel.positionType = CCPositionTypeNormalized;
+        scoreLabel.color = [CCColor redColor];
+        //Center
+        scoreLabel.position = ccp(0.49f, 0.95f);
+        //   [self addChild:scoreLabel];
+        
+    }
     
     if (score == 0 && didHitFlower == true) {
         [scoreLabel removeFromParent];
@@ -515,7 +531,10 @@ BOOL bearMoving;
         score ++;
         
     }
-    
+    if (score > 3) {
+        didScoreEnough = true;
+        NSLog(@"DID SCORE ENOUGH");
+    }
     
     
     //Play sound on bacon

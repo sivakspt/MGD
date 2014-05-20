@@ -17,7 +17,7 @@
  *  The main scene
  */
 @interface MainScene : CCScene<CCPhysicsCollisionDelegate>{
-    
+    Boolean didScoreEnough;
     Boolean didHitFlower;
     Boolean didHitBacon;
     Boolean pigMoving;
