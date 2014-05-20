@@ -20,7 +20,7 @@
     
     Boolean didHitFlower;
     Boolean didHitBacon;
-    
+    Boolean pigMoving;
     CGPoint _velocity;
     CCLabelTTF *scoreLabel;
     NSMutableArray *animationFramesRun;
@@ -31,12 +31,13 @@
     int fpsNow;
     int fpsTarget;
     int score;
-    
+    CCAnimation *pigAnim;
     float deltaCurrent;
     float _pigX;
     float _pigY;
-    
-    
+    CCPhysicsNode *physicsWorld;
+
+    NSMutableArray *animFrames;
     
     NSString *scoreString;
 }
@@ -49,6 +50,7 @@
 @property (nonatomic, assign) float pigX;
 @property (nonatomic, assign) float pigY;
 @property (nonatomic, strong) CCSprite *bear;
+@property (nonatomic, strong) CCSprite *pigNinja;
 @property (nonatomic, strong) CCAction *walkAction;
 @property (nonatomic, strong) CCAction *moveAction;
 @property OALSimpleAudio *whipSound;

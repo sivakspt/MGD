@@ -218,6 +218,12 @@
 		E927438C1923ABB600E00EAB /* crunch.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E92743891923ABB600E00EAB /* crunch.mp3 */; };
 		E927438D1923ABB600E00EAB /* whip.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E927438A1923ABB600E00EAB /* whip.mp3 */; };
 		E927438F1923B2C900E00EAB /* blueFlower.png in Resources */ = {isa = PBXBuildFile; fileRef = E927438E1923B2C900E00EAB /* blueFlower.png */; };
+		E9366E97192BA49B0076A86D /* -hdPigAnimRun.png in Resources */ = {isa = PBXBuildFile; fileRef = E9366E91192BA49B0076A86D /* -hdPigAnimRun.png */; };
+		E9366E98192BA49B0076A86D /* -ipadhdPigAnimRun.png in Resources */ = {isa = PBXBuildFile; fileRef = E9366E92192BA49B0076A86D /* -ipadhdPigAnimRun.png */; };
+		E9366E99192BA49B0076A86D /* PigAnimRun.png in Resources */ = {isa = PBXBuildFile; fileRef = E9366E93192BA49B0076A86D /* PigAnimRun.png */; };
+		E9366E9A192BA49B0076A86D /* -hdPigAnimRun.plist in Resources */ = {isa = PBXBuildFile; fileRef = E9366E94192BA49B0076A86D /* -hdPigAnimRun.plist */; };
+		E9366E9B192BA49B0076A86D /* -ipadhdPigAnimRun.plist in Resources */ = {isa = PBXBuildFile; fileRef = E9366E95192BA49B0076A86D /* -ipadhdPigAnimRun.plist */; };
+		E9366E9C192BA49B0076A86D /* PigAnimRun.plist in Resources */ = {isa = PBXBuildFile; fileRef = E9366E96192BA49B0076A86D /* PigAnimRun.plist */; };
 		E9581BC01924A61C00885E31 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = E9581BBF1924A61C00885E31 /* bg.png */; };
 		E9581BC21924A6B400885E31 /* bg2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E9581BC11924A6B400885E31 /* bg2.jpg */; };
 		E9943F7B192B0C5D00BD2C1D /* -hdAnimBear-ipadhd.plist in Resources */ = {isa = PBXBuildFile; fileRef = E9943F75192B0C5D00BD2C1D /* -hdAnimBear-ipadhd.plist */; };
@@ -674,6 +680,12 @@
 		E92743891923ABB600E00EAB /* crunch.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = crunch.mp3; sourceTree = "<group>"; };
 		E927438A1923ABB600E00EAB /* whip.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = whip.mp3; sourceTree = "<group>"; };
 		E927438E1923B2C900E00EAB /* blueFlower.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueFlower.png; sourceTree = "<group>"; };
+		E9366E91192BA49B0076A86D /* -hdPigAnimRun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "-hdPigAnimRun.png"; path = "../-hdPigAnimRun.png"; sourceTree = "<group>"; };
+		E9366E92192BA49B0076A86D /* -ipadhdPigAnimRun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "-ipadhdPigAnimRun.png"; path = "../-ipadhdPigAnimRun.png"; sourceTree = "<group>"; };
+		E9366E93192BA49B0076A86D /* PigAnimRun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PigAnimRun.png; path = ../PigAnimRun.png; sourceTree = "<group>"; };
+		E9366E94192BA49B0076A86D /* -hdPigAnimRun.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "-hdPigAnimRun.plist"; path = "../-hdPigAnimRun.plist"; sourceTree = "<group>"; };
+		E9366E95192BA49B0076A86D /* -ipadhdPigAnimRun.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "-ipadhdPigAnimRun.plist"; path = "../-ipadhdPigAnimRun.plist"; sourceTree = "<group>"; };
+		E9366E96192BA49B0076A86D /* PigAnimRun.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PigAnimRun.plist; path = ../PigAnimRun.plist; sourceTree = "<group>"; };
 		E9581BBF1924A61C00885E31 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
 		E9581BC11924A6B400885E31 /* bg2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg2.jpg; sourceTree = "<group>"; };
 		E9943F75192B0C5D00BD2C1D /* -hdAnimBear-ipadhd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "-hdAnimBear-ipadhd.plist"; sourceTree = "<group>"; };
@@ -754,6 +766,12 @@
 		E92740E11923A6F200E00EAB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E9366E91192BA49B0076A86D /* -hdPigAnimRun.png */,
+				E9366E92192BA49B0076A86D /* -ipadhdPigAnimRun.png */,
+				E9366E93192BA49B0076A86D /* PigAnimRun.png */,
+				E9366E94192BA49B0076A86D /* -hdPigAnimRun.plist */,
+				E9366E95192BA49B0076A86D /* -ipadhdPigAnimRun.plist */,
+				E9366E96192BA49B0076A86D /* PigAnimRun.plist */,
 				E9943F75192B0C5D00BD2C1D /* -hdAnimBear-ipadhd.plist */,
 				E9943F76192B0C5D00BD2C1D /* -hdBearAnim.png */,
 				E9943F77192B0C5D00BD2C1D /* -ipadhdAnimBear-ipadhd.plist */,
@@ -1690,10 +1708,12 @@
 				E92740E51923A6F200E00EAB /* Default@2x.png in Resources */,
 				E92740F81923A6F200E00EAB /* Icon-120.png in Resources */,
 				E9581BC01924A61C00885E31 /* bg.png in Resources */,
+				E9366E9A192BA49B0076A86D /* -hdPigAnimRun.plist in Resources */,
 				E92742FC1923A6F400E00EAB /* LICENSE_CCBReader.txt in Resources */,
 				E92740EE1923A6F200E00EAB /* Icon@2x.png in Resources */,
 				E9943F7E192B0C5D00BD2C1D /* -ipadhdBearAnim.png in Resources */,
 				E92741001923A6F200E00EAB /* Icon-Small@2x.png in Resources */,
+				E9366E97192BA49B0076A86D /* -hdPigAnimRun.png in Resources */,
 				E9581BC21924A6B400885E31 /* bg2.jpg in Resources */,
 				E92740F21923A6F200E00EAB /* Icon-72@2x.png in Resources */,
 				E92740E31923A6F200E00EAB /* Default.png in Resources */,
@@ -1708,7 +1728,9 @@
 				E9943F7C192B0C5D00BD2C1D /* -hdBearAnim.png in Resources */,
 				E92740F01923A6F200E00EAB /* Icon-72.png in Resources */,
 				E927423E1923A6F300E00EAB /* LICENSE_cocos2d.txt in Resources */,
+				E9366E9C192BA49B0076A86D /* PigAnimRun.plist in Resources */,
 				E9943F7D192B0C5D00BD2C1D /* -ipadhdAnimBear-ipadhd.plist in Resources */,
+				E9366E99192BA49B0076A86D /* PigAnimRun.png in Resources */,
 				E92740E71923A6F200E00EAB /* Default-568h@2x.png in Resources */,
 				E927438D1923ABB600E00EAB /* whip.mp3 in Resources */,
 				E9E785191924872800979BE3 /* oink.mp3 in Resources */,
@@ -1717,6 +1739,8 @@
 				E92740F61923A6F200E00EAB /* Icon-76@2x.png in Resources */,
 				E927436A1923A6F500E00EAB /* LICENSE_Chipmunk.txt in Resources */,
 				E9943F7F192B0C5D00BD2C1D /* -sdAnimBear-ipadhd.plist in Resources */,
+				E9366E98192BA49B0076A86D /* -ipadhdPigAnimRun.png in Resources */,
+				E9366E9B192BA49B0076A86D /* -ipadhdPigAnimRun.plist in Resources */,
 				E92741041923A6F200E00EAB /* Icon-Spotlight-iOS7@2x.png in Resources */,
 				E92740F41923A6F200E00EAB /* Icon-76.png in Resources */,
 				E92742CA1923A6F400E00EAB /* ChangeLog in Resources */,

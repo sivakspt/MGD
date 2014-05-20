@@ -19,7 +19,7 @@
 
 @implementation MainScene
 
-@synthesize crunchSound,boingSound,whipSound,pigX,pigY,walkAction,bear,moveAction;
+@synthesize crunchSound,boingSound,whipSound,pigX,pigY,walkAction,bear,moveAction,pigNinja;
 
 CCSprite *_pigPlayer;
 BOOL bearMoving;
@@ -44,27 +44,46 @@ BOOL bearMoving;
     
     didHitBacon = false;
     didHitFlower = false;
+    pigMoving = false;
 
-    
-    
-    //ANIMATION===========================!
-    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"-ipadhdAnimBear-ipadhd.plist"];
+    //Set bg
     CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.2f green:0.2f blue:0.2f alpha:1.0f]];
+  
     [self addChild:background];
+    
+    
+    //ANIMATION BEAR===========================!
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"-ipadhdAnimBear-ipadhd.plist"];
     
     NSMutableArray *animFrames = [NSMutableArray array];
     for(int i = 1; i <= 8; ++i)
     {
         [animFrames addObject:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:
                                [NSString stringWithFormat:@"bear%d.png", i]]];
-        NSLog(@"ADDING frame to array: %d", animFrames.count);
+        NSLog(@"ADDING frame to array: %lu", animFrames.count);
     }
     CCAnimation *anim = [CCAnimation
                          animationWithSpriteFrames:animFrames
                          delay:0.1f]; //Speed in which the frames will go at
     
  
-   
+    //ANIMATION PIG===========================!
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"-ipadhdPigAnimRun.plist"];
+ 
+    
+    NSMutableArray *pigFrames = [NSMutableArray array];
+    for(int i = 1; i <= 3; ++i)
+    {
+        [pigFrames addObject:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:
+                               [NSString stringWithFormat:@"%d.png", i]]];
+        NSLog(@"ADDING pigFrame to array: %lu", (unsigned long)pigFrames.count);
+    }
+    CCAnimation *pigAnim = [CCAnimation
+                         animationWithSpriteFrames:pigFrames
+                         delay:0.1f];
+    
+    //---------END PIG ANIM---------------
+    
     //Make a point for the background
     currentPoint = CGPointMake(163.5, 54);
     
@@ -115,7 +134,7 @@ BOOL bearMoving;
     //  [self addChild:background];
     
     // Add a sprite
-    _pigPlayer = [CCSprite spriteWithImageNamed:@"pigNormal.png"];
+    _pigPlayer = [CCSprite spriteWithImageNamed:@"-ipadhdPigAnimRun.png"];
     _pigPlayer.position  = ccp(self.contentSize.width/2,self.contentSize.height/2);
     _pigPlayer.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, _pigPlayer.contentSize} cornerRadius:0];
     _pigPlayer.physicsBody.collisionGroup = @"usergroup";
@@ -133,7 +152,23 @@ BOOL bearMoving;
     CCActionRepeatForever *animationRepeateFor = [CCActionRepeatForever actionWithAction:animAction];
     [_sprite runAction:animationRepeateFor];
     //Add the bear to the physics of the game
-    [_physicsWorld addChild:_sprite];
+  //  [_physicsWorld addChild:_sprite];
+
+    //Make the Pig
+    
+    // Add a sprite
+    pigNinja = [CCSprite spriteWithImageNamed:@"-ipadhdPigAnimRun.png"];
+    pigNinja.position  = ccp(self.contentSize.width/2,self.contentSize.height/2);
+
+    
+    //Move the pig
+    CCActionAnimate *pigMove = [CCActionAnimate actionWithAnimation:pigAnim];
+    CCActionRepeatForever *pigCycles = [CCActionRepeatForever actionWithAction:pigMove];
+    [pigNinja runAction:pigCycles];
+    //Add the bear to the physics of the game
+  //  [_physicsWorld addChild:pigNinja];
+    
+    
     
     
     // Create a back button
@@ -222,7 +257,7 @@ BOOL bearMoving;
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Deadly Bacon Levels!" message:@"You Lost!" delegate:self cancelButtonTitle:@"Play Again" otherButtonTitles:@"Quit", nil];
     
     
-        [alert show];
+    [alert show];
     
     //Unschedule the flowerbombing
     [self unscheduleAllSelectors];
@@ -366,7 +401,8 @@ BOOL bearMoving;
     
     currentPoint = touchLoc;
     
-    
+    CGSize screenSize = [[CCDirector sharedDirector]viewSize];
+      
     
     
     // Move our sprite to touch location
