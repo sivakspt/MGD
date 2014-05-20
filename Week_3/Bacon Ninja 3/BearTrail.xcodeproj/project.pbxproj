@@ -218,6 +218,7 @@
 		E9943F6F192A5DC100BD2C1D /* -ipadhdBearAnim.png in Resources */ = {isa = PBXBuildFile; fileRef = E9943F69192A5DC100BD2C1D /* -ipadhdBearAnim.png */; };
 		E9943F70192A5DC100BD2C1D /* -sdAnimBear-ipadhd.plist in Resources */ = {isa = PBXBuildFile; fileRef = E9943F6A192A5DC100BD2C1D /* -sdAnimBear-ipadhd.plist */; };
 		E9943F71192A5DC100BD2C1D /* -sdBearAnim.png in Resources */ = {isa = PBXBuildFile; fileRef = E9943F6B192A5DC100BD2C1D /* -sdBearAnim.png */; };
+		E9943F74192B0C3E00BD2C1D /* CCAnimatedSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = E9943F73192B0C3E00BD2C1D /* CCAnimatedSprite.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -665,6 +666,8 @@
 		E9943F69192A5DC100BD2C1D /* -ipadhdBearAnim.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "-ipadhdBearAnim.png"; path = "Resources/-ipadhdBearAnim.png"; sourceTree = "<group>"; };
 		E9943F6A192A5DC100BD2C1D /* -sdAnimBear-ipadhd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "-sdAnimBear-ipadhd.plist"; path = "Resources/-sdAnimBear-ipadhd.plist"; sourceTree = "<group>"; };
 		E9943F6B192A5DC100BD2C1D /* -sdBearAnim.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "-sdBearAnim.png"; path = "Resources/-sdBearAnim.png"; sourceTree = "<group>"; };
+		E9943F72192B0C3E00BD2C1D /* CCAnimatedSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCAnimatedSprite.h; path = ../CCAnimatedSprite.h; sourceTree = "<group>"; };
+		E9943F73192B0C3E00BD2C1D /* CCAnimatedSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCAnimatedSprite.m; path = ../CCAnimatedSprite.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -777,6 +780,8 @@
 		E927B7F3192A546A002696F1 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				E9943F72192B0C3E00BD2C1D /* CCAnimatedSprite.h */,
+				E9943F73192B0C3E00BD2C1D /* CCAnimatedSprite.m */,
 				E927B926192A546B002696F1 /* LICENSE_cocos2d.txt */,
 				E927B9CD192A546C002696F1 /* LICENSE_Kazmath.txt */,
 				E927B9E4192A546C002696F1 /* LICENSE_CCBReader.txt */,
@@ -1772,6 +1777,7 @@
 				E927B9B8192A546C002696F1 /* matrix.c in Sources */,
 				E927B8CA192A546B002696F1 /* CCTiledMapLayer.m in Sources */,
 				E927BA5E192A546D002696F1 /* HelloWorldScene.m in Sources */,
+				E9943F74192B0C3E00BD2C1D /* CCAnimatedSprite.m in Sources */,
 				E927B9BE192A546C002696F1 /* neon_matrix_impl.c in Sources */,
 				E927B843192A546A002696F1 /* CCLabelTTF.m in Sources */,
 				E927B8F8192A546B002696F1 /* NSEvent+CC.m in Sources */,

@@ -23,7 +23,7 @@
     
     CGPoint _velocity;
     CCLabelTTF *scoreLabel;
-    
+    NSMutableArray *animationFramesRun;
 //    CCSprite *_pigPlayer;
     CGPoint touchedPoint;
     CGPoint currentPoint;

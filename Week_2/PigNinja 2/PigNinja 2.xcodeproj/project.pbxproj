@@ -220,6 +220,12 @@
 		E927438F1923B2C900E00EAB /* blueFlower.png in Resources */ = {isa = PBXBuildFile; fileRef = E927438E1923B2C900E00EAB /* blueFlower.png */; };
 		E9581BC01924A61C00885E31 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = E9581BBF1924A61C00885E31 /* bg.png */; };
 		E9581BC21924A6B400885E31 /* bg2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E9581BC11924A6B400885E31 /* bg2.jpg */; };
+		E9943F7B192B0C5D00BD2C1D /* -hdAnimBear-ipadhd.plist in Resources */ = {isa = PBXBuildFile; fileRef = E9943F75192B0C5D00BD2C1D /* -hdAnimBear-ipadhd.plist */; };
+		E9943F7C192B0C5D00BD2C1D /* -hdBearAnim.png in Resources */ = {isa = PBXBuildFile; fileRef = E9943F76192B0C5D00BD2C1D /* -hdBearAnim.png */; };
+		E9943F7D192B0C5D00BD2C1D /* -ipadhdAnimBear-ipadhd.plist in Resources */ = {isa = PBXBuildFile; fileRef = E9943F77192B0C5D00BD2C1D /* -ipadhdAnimBear-ipadhd.plist */; };
+		E9943F7E192B0C5D00BD2C1D /* -ipadhdBearAnim.png in Resources */ = {isa = PBXBuildFile; fileRef = E9943F78192B0C5D00BD2C1D /* -ipadhdBearAnim.png */; };
+		E9943F7F192B0C5D00BD2C1D /* -sdAnimBear-ipadhd.plist in Resources */ = {isa = PBXBuildFile; fileRef = E9943F79192B0C5D00BD2C1D /* -sdAnimBear-ipadhd.plist */; };
+		E9943F80192B0C5D00BD2C1D /* -sdBearAnim.png in Resources */ = {isa = PBXBuildFile; fileRef = E9943F7A192B0C5D00BD2C1D /* -sdBearAnim.png */; };
 		E9E785191924872800979BE3 /* oink.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E9E785181924872800979BE3 /* oink.mp3 */; };
 /* End PBXBuildFile section */
 
@@ -670,6 +676,12 @@
 		E927438E1923B2C900E00EAB /* blueFlower.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueFlower.png; sourceTree = "<group>"; };
 		E9581BBF1924A61C00885E31 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
 		E9581BC11924A6B400885E31 /* bg2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg2.jpg; sourceTree = "<group>"; };
+		E9943F75192B0C5D00BD2C1D /* -hdAnimBear-ipadhd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "-hdAnimBear-ipadhd.plist"; sourceTree = "<group>"; };
+		E9943F76192B0C5D00BD2C1D /* -hdBearAnim.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "-hdBearAnim.png"; sourceTree = "<group>"; };
+		E9943F77192B0C5D00BD2C1D /* -ipadhdAnimBear-ipadhd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "-ipadhdAnimBear-ipadhd.plist"; sourceTree = "<group>"; };
+		E9943F78192B0C5D00BD2C1D /* -ipadhdBearAnim.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "-ipadhdBearAnim.png"; sourceTree = "<group>"; };
+		E9943F79192B0C5D00BD2C1D /* -sdAnimBear-ipadhd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "-sdAnimBear-ipadhd.plist"; sourceTree = "<group>"; };
+		E9943F7A192B0C5D00BD2C1D /* -sdBearAnim.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "-sdBearAnim.png"; sourceTree = "<group>"; };
 		E9E785181924872800979BE3 /* oink.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = oink.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -742,6 +754,12 @@
 		E92740E11923A6F200E00EAB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E9943F75192B0C5D00BD2C1D /* -hdAnimBear-ipadhd.plist */,
+				E9943F76192B0C5D00BD2C1D /* -hdBearAnim.png */,
+				E9943F77192B0C5D00BD2C1D /* -ipadhdAnimBear-ipadhd.plist */,
+				E9943F78192B0C5D00BD2C1D /* -ipadhdBearAnim.png */,
+				E9943F79192B0C5D00BD2C1D /* -sdAnimBear-ipadhd.plist */,
+				E9943F7A192B0C5D00BD2C1D /* -sdBearAnim.png */,
 				E92743831923A7B800E00EAB /* SpritesCharacter */,
 				E92743821923A7AD00E00EAB /* SpritesBG */,
 				E92743811923A7A500E00EAB /* Audio */,
@@ -1674,6 +1692,7 @@
 				E9581BC01924A61C00885E31 /* bg.png in Resources */,
 				E92742FC1923A6F400E00EAB /* LICENSE_CCBReader.txt in Resources */,
 				E92740EE1923A6F200E00EAB /* Icon@2x.png in Resources */,
+				E9943F7E192B0C5D00BD2C1D /* -ipadhdBearAnim.png in Resources */,
 				E92741001923A6F200E00EAB /* Icon-Small@2x.png in Resources */,
 				E9581BC21924A6B400885E31 /* bg2.jpg in Resources */,
 				E92740F21923A6F200E00EAB /* Icon-72@2x.png in Resources */,
@@ -1682,11 +1701,14 @@
 				E92740FA1923A6F200E00EAB /* Icon-iPad-Spotlight-iOS7@2x.png in Resources */,
 				E92740E91923A6F200E00EAB /* Default-Landscape~ipad.png in Resources */,
 				E92740FE1923A6F200E00EAB /* Icon-Small.png in Resources */,
+				E9943F80192B0C5D00BD2C1D /* -sdBearAnim.png in Resources */,
 				E927438B1923ABB600E00EAB /* boing.mp3 in Resources */,
 				E92740FC1923A6F200E00EAB /* Icon-Small-50.png in Resources */,
 				E92742E51923A6F400E00EAB /* LICENSE_Kazmath.txt in Resources */,
+				E9943F7C192B0C5D00BD2C1D /* -hdBearAnim.png in Resources */,
 				E92740F01923A6F200E00EAB /* Icon-72.png in Resources */,
 				E927423E1923A6F300E00EAB /* LICENSE_cocos2d.txt in Resources */,
+				E9943F7D192B0C5D00BD2C1D /* -ipadhdAnimBear-ipadhd.plist in Resources */,
 				E92740E71923A6F200E00EAB /* Default-568h@2x.png in Resources */,
 				E927438D1923ABB600E00EAB /* whip.mp3 in Resources */,
 				E9E785191924872800979BE3 /* oink.mp3 in Resources */,
@@ -1694,10 +1716,12 @@
 				E92741021923A6F200E00EAB /* Icon-Spotlight-iOS7.png in Resources */,
 				E92740F61923A6F200E00EAB /* Icon-76@2x.png in Resources */,
 				E927436A1923A6F500E00EAB /* LICENSE_Chipmunk.txt in Resources */,
+				E9943F7F192B0C5D00BD2C1D /* -sdAnimBear-ipadhd.plist in Resources */,
 				E92741041923A6F200E00EAB /* Icon-Spotlight-iOS7@2x.png in Resources */,
 				E92740F41923A6F200E00EAB /* Icon-76.png in Resources */,
 				E92742CA1923A6F400E00EAB /* ChangeLog in Resources */,
 				E92743871923AA2C00E00EAB /* bacon.png in Resources */,
+				E9943F7B192B0C5D00BD2C1D /* -hdAnimBear-ipadhd.plist in Resources */,
 				E92743851923A9FF00E00EAB /* pigNormal.png in Resources */,
 				E92741091923A6F200E00EAB /* iTunesArtwork@2x in Resources */,
 				E927438F1923B2C900E00EAB /* blueFlower.png in Resources */,

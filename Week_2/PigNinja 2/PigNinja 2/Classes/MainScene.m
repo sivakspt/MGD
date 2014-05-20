@@ -9,6 +9,8 @@
 
 #import "MainScene.h"
 #import "IntroScene.h"
+#import "CCAnimation.h"
+
 
 
 // -----------------------------------------------------------------------
@@ -83,6 +85,10 @@ CCSprite *_pigPlayer;
     
     // Enable touch handling on scene node
     self.userInteractionEnabled = YES;
+    
+    //Load spritesheet to animate
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"-ipadhdAnimBear-ipadhd.plist"];
+    
     
     // Create a colored background (Dark Grey)
     //    CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.2f green:0.2f blue:0.2f alpha:1.0f]];
@@ -274,7 +280,7 @@ CCSprite *_pigPlayer;
     [blueFlower runAction:[CCActionSequence actionWithArray:@[moveBlueFlowers,actionRemove]]];
     
     
-    
+
     
 }
 
@@ -287,8 +293,7 @@ CCSprite *_pigPlayer;
 -(void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
     CGPoint touchLoc = [touch locationInNode:self];
     
-    
-    
+
     _pigPlayer.position = currentPoint;
     
     //If you tap the pig

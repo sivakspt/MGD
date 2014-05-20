@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E927B7AD192A546A002696F1"
-               BuildableName = "Bacon Ninja 3.app"
+               BuildableName = "BearTrail.app"
                BlueprintName = "BearTrail"
                ReferencedContainer = "container:BearTrail.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E927B7AD192A546A002696F1"
-            BuildableName = "Bacon Ninja 3.app"
+            BuildableName = "BearTrail.app"
             BlueprintName = "BearTrail"
             ReferencedContainer = "container:BearTrail.xcodeproj">
          </BuildableReference>
@@ -52,7 +52,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E927B7AD192A546A002696F1"
-            BuildableName = "Bacon Ninja 3.app"
+            BuildableName = "BearTrail.app"
             BlueprintName = "BearTrail"
             ReferencedContainer = "container:BearTrail.xcodeproj">
          </BuildableReference>
@@ -70,7 +70,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E927B7AD192A546A002696F1"
-            BuildableName = "Bacon Ninja 3.app"
+            BuildableName = "BearTrail.app"
             BlueprintName = "BearTrail"
             ReferencedContainer = "container:BearTrail.xcodeproj">
          </BuildableReference>
