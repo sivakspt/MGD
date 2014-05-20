@@ -137,7 +137,7 @@ BOOL bearMoving;
     
     //Physics for world
     _physicsWorld = [CCPhysicsNode node];
-    _physicsWorld.gravity = ccp(0,0);
+    _physicsWorld.gravity = ccp(0,-9);
     // _physicsWorld.debugDraw = YES;
     _physicsWorld.collisionDelegate = self;
     [self addChild:_physicsWorld];
@@ -207,13 +207,13 @@ BOOL bearMoving;
     
     
     // Create a back button
-    CCButton *backButton = [CCButton buttonWithTitle:@"Quit" fontName:@"Verdana" fontSize:15.0f];
+    CCButton *backButton = [CCButton buttonWithTitle:@"[ Quit ]" fontName:@"Verdana" fontSize:15.0f];
     backButton.positionType = CCPositionTypeNormalized;
     backButton.position = ccp(0.08f, 0.95f); // Top Right of screen
     [backButton setTarget:self selector:@selector(onBackClicked:)];
     [self addChild:backButton];
     
-    CCButton *pauseBtn = [CCButton buttonWithTitle:@""
+    pauseBtn = [CCButton buttonWithTitle:@""
                                               spriteFrame:[CCSpriteFrame frameWithImageNamed:@"pause.png"]
                                    highlightedSpriteFrame:[CCSpriteFrame frameWithImageNamed:@"pause_pressed.png"]
                                       disabledSpriteFrame:nil];
@@ -292,10 +292,13 @@ BOOL bearMoving;
     else if (alertView.tag == 2){
         
         if (buttonIndex == 0) {
-            
+            NSLog(@"AT 0 PAUSE");
+            [self gameResume];
         }
         if (buttonIndex == 1) {
 
+            NSLog(@"AT 1 PAUSE");
+            
         }
     }
 }
@@ -314,7 +317,7 @@ BOOL bearMoving;
     //TODO go back to intro screen and end all processes, alert user they lost, reset counter
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Deadly Bacon Levels!" message:@"You Lost!" delegate:self cancelButtonTitle:@"Play Again" otherButtonTitles:@"Quit", nil];
     
-    
+    alert.tag =1;
     [alert show];
     
     
@@ -481,7 +484,8 @@ BOOL bearMoving;
 }
 -(void)touchEnded:(UITouch *)touch withEvent:(UIEvent *)event{
     
-
+//Comment this line out to demo the win
+//    [self gameWon];
 }
 
 //Hit a blue flower, deduct a point
@@ -591,7 +595,7 @@ BOOL bearMoving;
         score ++;
         
     }
-    if (score > 3) {
+    if (score >= 2) {
         didScoreEnough = true;
         NSLog(@"DID SCORE ENOUGH");
     }
@@ -681,9 +685,9 @@ BOOL bearMoving;
 -(void)gamePause:(id)sender{
       [[CCDirector sharedDirector] pause];
     NSLog(@" Pause Game");
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Game Paused" message:@"Resume Game?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Game Paused" message:nil delegate:self cancelButtonTitle:@"Resume" otherButtonTitles:nil, nil];
     
-    
+    alert.tag = 2;
     [alert show];
 
     
