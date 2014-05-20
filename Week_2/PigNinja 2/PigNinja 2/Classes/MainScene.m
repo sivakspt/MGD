@@ -44,8 +44,34 @@ BOOL bearMoving;
     
     didHitBacon = false;
     didHitFlower = false;
-    
 
+    
+    
+    //ANIMATION===========================!
+    NSMutableArray *walkAnimFrames = [NSMutableArray array];
+    for(int i = 1; i <= 7; ++i)
+    {
+        [walkAnimFrames addObject:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName: [NSString stringWithFormat:@"bear%d.png", i]]];
+    }
+    CCAnimation *walkAnim = [CCAnimation
+                             animationWithSpriteFrames:walkAnimFrames delay:0.1f]; //Speed in which the frames will go at
+    
+    //Adding png to sprite
+    _pigPlayer = [CCSprite spriteWithImageNamed:@"bear1.png"];
+    
+    //Positioning the sprite
+    _pigPlayer.position  = ccp(self.contentSize.width/2,self.contentSize.height/2);
+    
+    //Repeating the sprite animation
+    CCActionAnimate *animationAction = [CCActionAnimate actionWithAnimation:walkAnim];
+    CCActionRepeatForever *repeatingAnimation = [CCActionRepeatForever actionWithAction:animationAction];
+    
+    //Animation continuously repeating
+    [_pigPlayer runAction:repeatingAnimation];
+    
+    //Adding the Sprite to the Scene
+    [self addChild:_pigPlayer];
+   
     //Make a point for the background
     currentPoint = CGPointMake(163.5, 54);
     
