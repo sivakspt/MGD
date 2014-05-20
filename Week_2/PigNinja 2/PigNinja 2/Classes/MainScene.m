@@ -116,7 +116,7 @@ BOOL bearMoving;
     //Physics for collisions
     CCPhysicsNode *_physicsWorld;
     _physicsWorld = [CCPhysicsNode node];
-    _physicsWorld.gravity = ccp(0,-9);
+    _physicsWorld.gravity = ccp(0,-3);
     // _physicsWorld.debugDraw = YES;
     _physicsWorld.collisionDelegate = self;
     [self addChild:_physicsWorld];
@@ -133,19 +133,13 @@ BOOL bearMoving;
     //    CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.2f green:0.2f blue:0.2f alpha:1.0f]];
     //  [self addChild:background];
     
-    // Add a sprite
-    _pigPlayer = [CCSprite spriteWithImageNamed:@"-ipadhdPigAnimRun.png"];
-    _pigPlayer.position  = ccp(self.contentSize.width/2,self.contentSize.height/2);
-    _pigPlayer.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, _pigPlayer.contentSize} cornerRadius:0];
-    _pigPlayer.physicsBody.collisionGroup = @"usergroup";
-    _pigPlayer.physicsBody.collisionType  = @"userCollision";
-    //[_physicsWorld addChild:_pigPlayer];
-    
+
     //Make the bear
     CCSprite *_sprite;
     // Add a sprite
     _sprite = [CCSprite spriteWithImageNamed:@"-ipadhdBearAnim.png"];
     _sprite.position  = ccp(self.contentSize.width/2,self.contentSize.height/2);
+    
 
     //Move the bear
     CCActionAnimate *animAction = [CCActionAnimate actionWithAnimation:anim];
@@ -157,16 +151,21 @@ BOOL bearMoving;
     //Make the Pig
     
     // Add a sprite
-    pigNinja = [CCSprite spriteWithImageNamed:@"-ipadhdPigAnimRun.png"];
-    pigNinja.position  = ccp(self.contentSize.width/2,self.contentSize.height/2);
+    pigNinja = [CCSprite spriteWithImageNamed:@"pigNormal.png"];
+   // pigNinja.position  = ccp(self.contentSize.width/2,self.contentSize.height/2);
+    pigNinja.flipX = YES;
+    pigNinja.position  = currentPoint;
+    pigNinja.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, pigNinja.contentSize} cornerRadius:0];
+    pigNinja.physicsBody.collisionGroup = @"usergroup";
+    pigNinja.physicsBody.collisionType  = @"userCollision";
 
     
-    //Move the pig
+    //Move the pigs legs
     CCActionAnimate *pigMove = [CCActionAnimate actionWithAnimation:pigAnim];
     CCActionRepeatForever *pigCycles = [CCActionRepeatForever actionWithAction:pigMove];
     [pigNinja runAction:pigCycles];
     //Add the bear to the physics of the game
-  //  [_physicsWorld addChild:pigNinja];
+    [_physicsWorld addChild:pigNinja];
     
     
     
@@ -368,11 +367,13 @@ BOOL bearMoving;
 -(void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
     CGPoint touchLoc = [touch locationInNode:self];
     
+    pigNinja.position = currentPoint;
 
     _pigPlayer.position = currentPoint;
     
+    
     //If you tap the pig
-    if (CGRectContainsPoint(_pigPlayer.boundingBox, touchLoc))
+    if (CGRectContainsPoint(_pigPlayer.boundingBox, touchLoc) || (CGRectContainsPoint(pigNinja.boundingBox, touchLoc)))
     {
         NSLog(@"Tapped player sprite");
         //Play sound on movement
@@ -402,7 +403,7 @@ BOOL bearMoving;
     currentPoint = touchLoc;
     
     CGSize screenSize = [[CCDirector sharedDirector]viewSize];
-      
+    
     
     
     // Move our sprite to touch location
