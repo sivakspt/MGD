@@ -2031,6 +2031,10 @@
 				);
 				INFOPLIST_FILE = "PigNinja 2/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SpriteAnimation/Libraries/Chipmunk/objectivec",
+				);
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-lsqlite3",
@@ -2057,6 +2061,10 @@
 				);
 				INFOPLIST_FILE = "PigNinja 2/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SpriteAnimation/Libraries/Chipmunk/objectivec",
+				);
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-lsqlite3",

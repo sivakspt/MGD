@@ -18,10 +18,11 @@
 // -----------------------------------------------------------------------
 
 @implementation MainScene
-@synthesize crunchSound,boingSound,whipSound,pigX,pigY;
+
+@synthesize crunchSound,boingSound,whipSound,pigX,pigY,walkAction,bear,moveAction;
 
 CCSprite *_pigPlayer;
-
+BOOL bearMoving;
 
 // -----------------------------------------------------------------------
 #pragma mark - Create & Destroy
@@ -30,7 +31,7 @@ CCSprite *_pigPlayer;
 + (MainScene *)scene
 {
     return [[self alloc] init];
-    
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"-ipadhdAnimBear-ipadhd.plist"];
 }
 
 // -----------------------------------------------------------------------
@@ -44,11 +45,11 @@ CCSprite *_pigPlayer;
     didHitBacon = false;
     didHitFlower = false;
     
-    
+
+    //Make a point for the background
     currentPoint = CGPointMake(163.5, 54);
     
-    
-    
+
     CCSprite *background1 = [CCSprite spriteWithImageNamed:@"bg2.jpg"];
     
     //    CCSprite *blueFlower = [CCSprite spriteWithImageNamed:@"blueFlower.png"];
@@ -325,6 +326,8 @@ CCSprite *_pigPlayer;
     CCLOG(@"Move sprite to @ %@ from %@",NSStringFromCGPoint(touchLoc), NSStringFromCGPoint(_pigPlayer.position));
     
     currentPoint = touchLoc;
+    
+    
     
     
     // Move our sprite to touch location

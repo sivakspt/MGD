@@ -48,7 +48,9 @@
 
 @property (nonatomic, assign) float pigX;
 @property (nonatomic, assign) float pigY;
-
+@property (nonatomic, strong) CCSprite *bear;
+@property (nonatomic, strong) CCAction *walkAction;
+@property (nonatomic, strong) CCAction *moveAction;
 @property OALSimpleAudio *whipSound;
 @property OALSimpleAudio *boingSound;
 @property OALSimpleAudio *crunchSound;
