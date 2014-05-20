@@ -22,6 +22,7 @@
     Boolean didHitBacon;
     Boolean pigMoving;
     CGPoint _velocity;
+    CCButton *pauseBtn;
     CCLabelTTF *scoreLabel;
     NSMutableArray *animationFramesRun;
 //    CCSprite *_pigPlayer;

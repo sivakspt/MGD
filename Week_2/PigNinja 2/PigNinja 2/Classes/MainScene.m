@@ -207,15 +207,24 @@ BOOL bearMoving;
     
     
     // Create a back button
-    CCButton *backButton = [CCButton buttonWithTitle:@"Back" fontName:@"Verdana" fontSize:15.0f];
+    CCButton *backButton = [CCButton buttonWithTitle:@"Quit" fontName:@"Verdana" fontSize:15.0f];
     backButton.positionType = CCPositionTypeNormalized;
     backButton.position = ccp(0.08f, 0.95f); // Top Right of screen
     [backButton setTarget:self selector:@selector(onBackClicked:)];
     [self addChild:backButton];
     
+    CCButton *pauseBtn = [CCButton buttonWithTitle:@""
+                                              spriteFrame:[CCSpriteFrame frameWithImageNamed:@"pause.png"]
+                                   highlightedSpriteFrame:[CCSpriteFrame frameWithImageNamed:@"pause_pressed.png"]
+                                      disabledSpriteFrame:nil];
     
+    pauseBtn.togglesSelectedState = YES;
+    pauseBtn.positionType = CCPositionTypeNormalized;
+    pauseBtn.position = ccp(0.08f, 0.75f); // Top Left of screen
+    [pauseBtn setTarget:self selector:@selector(gamePause:)];
+    [self addChild:pauseBtn];
+
     
-    // done
 	return self;
 }
 
@@ -249,22 +258,23 @@ BOOL bearMoving;
 -(void)gameWon{
     
     //TODO go back to intro screen and end all processes, alert user they won, reset counter
-  //  [pigNinja removeFromParentAndCleanup:YES];
+  // [pigNinja removeFromParentAndCleanup:YES];
     [pigNinja stopAction:runCycles];
     [self unscheduleAllSelectors];
     
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Congrats!" message:@"Want to play again?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
     
-    
+    alert.tag = 1;
     [alert show];
     // back to intro scene with transition
     [self removeFromParentAndCleanup:YES];
 
     
-    
-    
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (alertView.tag == 1) {
+        
+    
     if (buttonIndex == 0){
         // [self unscheduleAllSelectors];
         NSLog(@"At 0");
@@ -273,10 +283,20 @@ BOOL bearMoving;
             [pigNinja removeFromParentAndCleanup:YES];
     }
     if (buttonIndex == 1) {
-        NSLog(@"At 1");
+        NSLog(@"At 1" );
         [[CCDirector sharedDirector] replaceScene:[IntroScene scene]
                                    withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionRight duration:1.0f]];
             [pigNinja removeFromParentAndCleanup:YES];
+    }
+    }
+    else if (alertView.tag == 2){
+        
+        if (buttonIndex == 0) {
+            
+        }
+        if (buttonIndex == 1) {
+
+        }
     }
 }
 
@@ -656,6 +676,24 @@ BOOL bearMoving;
     
 
     
+}
+
+-(void)gamePause:(id)sender{
+      [[CCDirector sharedDirector] pause];
+    NSLog(@" Pause Game");
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Game Paused" message:@"Resume Game?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+    
+    
+    [alert show];
+
+    
+}
+
+
+
+-(void)gameResume{
+    NSLog(@"RESUME GAME");
+    [[CCDirector sharedDirector] resume];
 }
 
 // -----------------------------------------------------------------------
