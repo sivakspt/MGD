@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>frames</key>
+        <dict>
+            <key>kisi.svg</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,2},{44,179}}</string>
+                <key>offset</key>
+                <string>{-65,18}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{6,24},{44,179}}</string>
+                <key>sourceSize</key>
+                <string>{186,263}</string>
+            </dict>
+        </dict>
+        <key>metadata</key>
+        <dict>
+            <key>format</key>
+            <integer>2</integer>
+            <key>realTextureFileName</key>
+            <string>PigAnimPigSd.png</string>
+            <key>size</key>
+            <string>{48,183}</string>
+            <key>smartupdate</key>
+            <string>$TexturePacker:SmartUpdate:5bf6fc20f125c9c74fd40094493f62cf:9e3acfc09f0446e039d64ee5f6e4912e:1d773234978a65a2cb7cbd9a46c534be$</string>
+            <key>textureFileName</key>
+            <string>PigAnimPigSd.png</string>
+        </dict>
+    </dict>
+</plist>

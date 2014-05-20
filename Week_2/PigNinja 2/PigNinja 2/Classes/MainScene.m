@@ -48,29 +48,22 @@ BOOL bearMoving;
     
     
     //ANIMATION===========================!
-    NSMutableArray *walkAnimFrames = [NSMutableArray array];
-    for(int i = 1; i <= 7; ++i)
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"-ipadhdAnimBear-ipadhd.plist"];
+    CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.2f green:0.2f blue:0.2f alpha:1.0f]];
+    [self addChild:background];
+    
+    NSMutableArray *animFrames = [NSMutableArray array];
+    for(int i = 1; i <= 8; ++i)
     {
-        [walkAnimFrames addObject:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName: [NSString stringWithFormat:@"bear%d.png", i]]];
+        [animFrames addObject:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:
+                               [NSString stringWithFormat:@"bear%d.png", i]]];
+        NSLog(@"ADDING frame to array: %d", animFrames.count);
     }
-    CCAnimation *walkAnim = [CCAnimation
-                             animationWithSpriteFrames:walkAnimFrames delay:0.1f]; //Speed in which the frames will go at
+    CCAnimation *anim = [CCAnimation
+                         animationWithSpriteFrames:animFrames
+                         delay:0.1f]; //Speed in which the frames will go at
     
-    //Adding png to sprite
-    _pigPlayer = [CCSprite spriteWithImageNamed:@"bear1.png"];
-    
-    //Positioning the sprite
-    _pigPlayer.position  = ccp(self.contentSize.width/2,self.contentSize.height/2);
-    
-    //Repeating the sprite animation
-    CCActionAnimate *animationAction = [CCActionAnimate actionWithAnimation:walkAnim];
-    CCActionRepeatForever *repeatingAnimation = [CCActionRepeatForever actionWithAction:animationAction];
-    
-    //Animation continuously repeating
-    [_pigPlayer runAction:repeatingAnimation];
-    
-    //Adding the Sprite to the Scene
-    [self addChild:_pigPlayer];
+ 
    
     //Make a point for the background
     currentPoint = CGPointMake(163.5, 54);
@@ -129,6 +122,18 @@ BOOL bearMoving;
     _pigPlayer.physicsBody.collisionType  = @"userCollision";
     //[_physicsWorld addChild:_pigPlayer];
     
+    //Make the bear
+    CCSprite *_sprite;
+    // Add a sprite
+    _sprite = [CCSprite spriteWithImageNamed:@"-ipadhdBearAnim.png"];
+    _sprite.position  = ccp(self.contentSize.width/2,self.contentSize.height/2);
+
+    //Move the bear
+    CCActionAnimate *animAction = [CCActionAnimate actionWithAnimation:anim];
+    CCActionRepeatForever *animationRepeateFor = [CCActionRepeatForever actionWithAction:animAction];
+    [_sprite runAction:animationRepeateFor];
+    //Add the bear to the physics of the game
+    [_physicsWorld addChild:_sprite];
     
     
     // Create a back button
