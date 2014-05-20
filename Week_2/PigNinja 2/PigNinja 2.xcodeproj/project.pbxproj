@@ -224,6 +224,10 @@
 		E9366E9A192BA49B0076A86D /* -hdPigAnimRun.plist in Resources */ = {isa = PBXBuildFile; fileRef = E9366E94192BA49B0076A86D /* -hdPigAnimRun.plist */; };
 		E9366E9B192BA49B0076A86D /* -ipadhdPigAnimRun.plist in Resources */ = {isa = PBXBuildFile; fileRef = E9366E95192BA49B0076A86D /* -ipadhdPigAnimRun.plist */; };
 		E9366E9C192BA49B0076A86D /* PigAnimRun.plist in Resources */ = {isa = PBXBuildFile; fileRef = E9366E96192BA49B0076A86D /* PigAnimRun.plist */; };
+		E9366EAF192BDF6D0076A86D /* PigSpinHDPigNinja.plist in Resources */ = {isa = PBXBuildFile; fileRef = E9366EAD192BDF6D0076A86D /* PigSpinHDPigNinja.plist */; };
+		E9366EB0192BDF6D0076A86D /* PigSpinSDPigNinja.plist in Resources */ = {isa = PBXBuildFile; fileRef = E9366EAE192BDF6D0076A86D /* PigSpinSDPigNinja.plist */; };
+		E9366EB3192BDF770076A86D /* PigNinjaPigSpinHD.png in Resources */ = {isa = PBXBuildFile; fileRef = E9366EB1192BDF770076A86D /* PigNinjaPigSpinHD.png */; };
+		E9366EB4192BDF770076A86D /* PigNinjaPigSpinSD.png in Resources */ = {isa = PBXBuildFile; fileRef = E9366EB2192BDF770076A86D /* PigNinjaPigSpinSD.png */; };
 		E9581BC01924A61C00885E31 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = E9581BBF1924A61C00885E31 /* bg.png */; };
 		E9581BC21924A6B400885E31 /* bg2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E9581BC11924A6B400885E31 /* bg2.jpg */; };
 		E9943F7B192B0C5D00BD2C1D /* -hdAnimBear-ipadhd.plist in Resources */ = {isa = PBXBuildFile; fileRef = E9943F75192B0C5D00BD2C1D /* -hdAnimBear-ipadhd.plist */; };
@@ -686,6 +690,10 @@
 		E9366E94192BA49B0076A86D /* -hdPigAnimRun.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "-hdPigAnimRun.plist"; path = "../-hdPigAnimRun.plist"; sourceTree = "<group>"; };
 		E9366E95192BA49B0076A86D /* -ipadhdPigAnimRun.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "-ipadhdPigAnimRun.plist"; path = "../-ipadhdPigAnimRun.plist"; sourceTree = "<group>"; };
 		E9366E96192BA49B0076A86D /* PigAnimRun.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PigAnimRun.plist; path = ../PigAnimRun.plist; sourceTree = "<group>"; };
+		E9366EAD192BDF6D0076A86D /* PigSpinHDPigNinja.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PigSpinHDPigNinja.plist; sourceTree = "<group>"; };
+		E9366EAE192BDF6D0076A86D /* PigSpinSDPigNinja.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PigSpinSDPigNinja.plist; sourceTree = "<group>"; };
+		E9366EB1192BDF770076A86D /* PigNinjaPigSpinHD.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PigNinjaPigSpinHD.png; path = Resources/PigNinjaPigSpinHD.png; sourceTree = "<group>"; };
+		E9366EB2192BDF770076A86D /* PigNinjaPigSpinSD.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PigNinjaPigSpinSD.png; path = Resources/PigNinjaPigSpinSD.png; sourceTree = "<group>"; };
 		E9581BBF1924A61C00885E31 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
 		E9581BC11924A6B400885E31 /* bg2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg2.jpg; sourceTree = "<group>"; };
 		E9943F75192B0C5D00BD2C1D /* -hdAnimBear-ipadhd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "-hdAnimBear-ipadhd.plist"; sourceTree = "<group>"; };
@@ -769,6 +777,10 @@
 				E9366E91192BA49B0076A86D /* -hdPigAnimRun.png */,
 				E9366E92192BA49B0076A86D /* -ipadhdPigAnimRun.png */,
 				E9366E93192BA49B0076A86D /* PigAnimRun.png */,
+				E9366EB1192BDF770076A86D /* PigNinjaPigSpinHD.png */,
+				E9366EB2192BDF770076A86D /* PigNinjaPigSpinSD.png */,
+				E9366EAD192BDF6D0076A86D /* PigSpinHDPigNinja.plist */,
+				E9366EAE192BDF6D0076A86D /* PigSpinSDPigNinja.plist */,
 				E9366E94192BA49B0076A86D /* -hdPigAnimRun.plist */,
 				E9366E95192BA49B0076A86D /* -ipadhdPigAnimRun.plist */,
 				E9366E96192BA49B0076A86D /* PigAnimRun.plist */,
@@ -1715,14 +1727,18 @@
 				E92741001923A6F200E00EAB /* Icon-Small@2x.png in Resources */,
 				E9366E97192BA49B0076A86D /* -hdPigAnimRun.png in Resources */,
 				E9581BC21924A6B400885E31 /* bg2.jpg in Resources */,
+				E9366EB0192BDF6D0076A86D /* PigSpinSDPigNinja.plist in Resources */,
 				E92740F21923A6F200E00EAB /* Icon-72@2x.png in Resources */,
 				E92740E31923A6F200E00EAB /* Default.png in Resources */,
 				E92740EC1923A6F200E00EAB /* Icon.png in Resources */,
+				E9366EB3192BDF770076A86D /* PigNinjaPigSpinHD.png in Resources */,
 				E92740FA1923A6F200E00EAB /* Icon-iPad-Spotlight-iOS7@2x.png in Resources */,
 				E92740E91923A6F200E00EAB /* Default-Landscape~ipad.png in Resources */,
 				E92740FE1923A6F200E00EAB /* Icon-Small.png in Resources */,
 				E9943F80192B0C5D00BD2C1D /* -sdBearAnim.png in Resources */,
+				E9366EAF192BDF6D0076A86D /* PigSpinHDPigNinja.plist in Resources */,
 				E927438B1923ABB600E00EAB /* boing.mp3 in Resources */,
+				E9366EB4192BDF770076A86D /* PigNinjaPigSpinSD.png in Resources */,
 				E92740FC1923A6F200E00EAB /* Icon-Small-50.png in Resources */,
 				E92742E51923A6F400E00EAB /* LICENSE_Kazmath.txt in Resources */,
 				E9943F7C192B0C5D00BD2C1D /* -hdBearAnim.png in Resources */,

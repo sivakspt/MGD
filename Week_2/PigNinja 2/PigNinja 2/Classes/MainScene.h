@@ -27,6 +27,7 @@
 //    CCSprite *_pigPlayer;
     CGPoint touchedPoint;
     CGPoint currentPoint;
+    CCActionMoveTo *actionMove;
     int frameCount;
     int fpsNow;
     int fpsTarget;
@@ -37,6 +38,10 @@
     float _pigY;
     CCPhysicsNode *_physicsWorld;
     CCActionRepeatForever *pigCycles;
+    CCActionRepeatForever *runCycles;
+    CCActionRepeatForever *deadCycles;
+
+    CCActionAnimate *pigMove;
     NSMutableArray *animFrames;
     
     NSString *scoreString;

@@ -72,7 +72,7 @@ BOOL bearMoving;
     
     
     NSMutableArray *pigFrames = [NSMutableArray array];
-    for(int i = 1; i <= 3; ++i)
+    for(int i = 1; i <= 3; i++)
     {
         [pigFrames addObject:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:
                               [NSString stringWithFormat:@"%d.png", i]]];
@@ -83,6 +83,26 @@ BOOL bearMoving;
                             delay:0.1f];
     
     //---------END PIG ANIM---------------
+    
+    
+    //Pig death animation
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"PigSpinHDPigNinja.plist"];
+    
+    
+    NSMutableArray *spunFrames = [NSMutableArray array];
+    for(int j = 1; j <= 3; j++)
+    {
+        [spunFrames addObject:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:
+                              [NSString stringWithFormat:@"spin%d.png", j]]];
+        NSLog(@"ADDING death frames: %lu", (unsigned long)spunFrames.count);
+    }
+    CCAnimation *spunAnim = [CCAnimation
+                            animationWithSpriteFrames:spunFrames
+                            delay:0.1f];
+    
+    
+
+    
     
     //Make a point for the background
     currentPoint = CGPointMake(163.5, 54);
@@ -109,7 +129,7 @@ BOOL bearMoving;
     }
     
     //Center
-    scoreLabel.position = ccp(0.89f, 0.95f);
+   scoreLabel.position = ccp(0.79f, 0.95f);
     
     [self addChild:scoreLabel];
     
@@ -166,10 +186,19 @@ BOOL bearMoving;
     
     
     //Move the pigs legs
-    CCActionAnimate *pigMove = [CCActionAnimate actionWithAnimation:pigAnim];
-    CCActionRepeatForever *pigCycles = [CCActionRepeatForever actionWithAction:pigMove];
+    pigMove = [CCActionAnimate actionWithAnimation:pigAnim];
+    pigCycles = [CCActionRepeatForever actionWithAction:pigMove];
     [pigNinja runAction:pigCycles];
     //Add the bear to the physics of the game
+
+    
+    //Dead piggy spin
+    CCActionAnimate *pigDeadAnim = [CCActionAnimate actionWithAnimation:spunAnim];
+    deadCycles = [CCActionRepeatForever actionWithAction:pigDeadAnim];
+    [pigNinja stopAction:deadCycles];
+    //Add the bear to the physics of the game
+
+    
     [_physicsWorld addChild:pigNinja];
     
     
@@ -226,7 +255,8 @@ BOOL bearMoving;
     
     [alert show];
     // back to intro scene with transition
-    
+    [self removeFromParentAndCleanup:YES];
+
     
     
     
@@ -247,13 +277,13 @@ BOOL bearMoving;
 }
 
 -(void)gameLost{
-    
+    [pigNinja runAction:deadCycles];
     [scoreLabel removeFromParent];
     scoreLabel = [CCLabelTTF labelWithString:@"DEAD!" fontName:@"Verdana" fontSize:18.0f];
     scoreLabel.positionType = CCPositionTypeNormalized;
     scoreLabel.color = [CCColor redColor];
     //Center
-    scoreLabel.position = ccp(0.89f, 0.95f);
+   scoreLabel.position = ccp(0.79f, 0.95f);
     
     [self addChild:scoreLabel];
     
@@ -263,10 +293,12 @@ BOOL bearMoving;
     
     [alert show];
     
+    
+
     //Unschedule the flowerbombing
     [self unscheduleAllSelectors];
-    
-    
+
+  
 }
 
 
@@ -276,7 +308,7 @@ BOOL bearMoving;
     [whipSound unloadAllEffects];
     [crunchSound unloadAllEffects];
     [boingSound unloadAllEffects];
-    
+    [pigNinja removeFromParentAndCleanup:YES];
     [self unscheduleAllSelectors];
     
     
@@ -399,7 +431,7 @@ BOOL bearMoving;
     
     
     // Move our sprite to touch location
-    CCActionMoveTo *actionMove = [CCActionMoveTo actionWithDuration:1.0 position:sum];
+    actionMove = [CCActionMoveTo actionWithDuration:1.0 position:sum];
     
     //Move with the delta multiplier
     CCActionMoveTo *actionMoveSlow = [CCActionMoveTo actionWithDuration:deltaCurrent position:currentPoint];
@@ -422,6 +454,10 @@ BOOL bearMoving;
     
     
     
+}
+-(void)touchEnded:(UITouch *)touch withEvent:(UIEvent *)event{
+    
+
 }
 
 //Hit a blue flower, deduct a point
@@ -466,7 +502,7 @@ BOOL bearMoving;
         scoreLabel.positionType = CCPositionTypeNormalized;
         scoreLabel.color = [CCColor redColor];
         //Center
-        scoreLabel.position = ccp(0.49f, 0.95f);
+        scoreLabel.position = ccp(0.79f, 0.95f);
         //   [self addChild:scoreLabel];
         
     }
@@ -480,7 +516,7 @@ BOOL bearMoving;
         scoreLabel.positionType = CCPositionTypeNormalized;
         scoreLabel.color = [CCColor redColor];
         //Center
-        scoreLabel.position = ccp(0.49f, 0.95f);
+        scoreLabel.position = ccp(0.79f, 0.95f);
         //   [self addChild:scoreLabel];
         
     }
@@ -499,7 +535,7 @@ BOOL bearMoving;
     
     
     //Center
-    scoreLabel.position = ccp(0.89f, 0.95f);
+    scoreLabel.position = ccp(0.79f, 0.95f);
     if (score == -1) {
         scoreString = @"DEAD!";
         [scoreLabel removeFromParent];
@@ -554,7 +590,7 @@ BOOL bearMoving;
     scoreLabel.color = [CCColor whiteColor];
     
     //Center
-    scoreLabel.position = ccp(0.89f, 0.95f);
+    scoreLabel.position = ccp(0.79f, 0.95f);
     
     [self addChild:scoreLabel];
     

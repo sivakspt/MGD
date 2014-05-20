@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>frames</key>
+	<dict>
+		<key>spin1.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{2,2},{46,66}}</string>
+			<key>offset</key>
+			<string>{-3,-6}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{2,13},{46,66}}</string>
+			<key>sourceSize</key>
+			<string>{56,80}</string>
+		</dict>
+		<key>spin2.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{2,138},{44,66}}</string>
+			<key>offset</key>
+			<string>{-2,-6}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{4,13},{44,66}}</string>
+			<key>sourceSize</key>
+			<string>{56,80}</string>
+		</dict>
+		<key>spin3.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{2,70},{44,66}}</string>
+			<key>offset</key>
+			<string>{0,-6}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{6,13},{44,66}}</string>
+			<key>sourceSize</key>
+			<string>{56,80}</string>
+		</dict>
+	</dict>
+	<key>metadata</key>
+	<dict>
+		<key>format</key>
+		<integer>2</integer>
+		<key>realTextureFileName</key>
+		<string>PigNinjaPigSpinHD.png</string>
+		<key>size</key>
+		<string>{50,206}</string>
+		<key>smartupdate</key>
+		<string>$TexturePacker:SmartUpdate:911eebe5063a44cf24394232ed9a918f:eb1885bbfbdf24e6d970dbb62fce7079:3fc0d4cf270f9dfcd911aa3337704629$</string>
+		<key>textureFileName</key>
+		<string>PigNinjaPigSpinHD.png</string>
+	</dict>
+</dict>
+</plist>
