@@ -10,6 +10,7 @@
 // Import the interfaces
 #import "IntroScene.h"
 #import "MainScene.h"
+#import "CreditsScene.h"
 
 // -----------------------------------------------------------------------
 #pragma mark - IntroScene
@@ -69,6 +70,16 @@
     infoLabel.position = ccp(0.5f, 0.7f);
     [self addChild:infoLabel];
     
+    //Title Screen - info label
+    CCButton *credButton = [CCButton buttonWithTitle:@"Info & Credits" fontName:@"Verdana-Bold" fontSize:12.0f];
+    credButton.positionType = CCPositionTypeNormalized;
+    credButton.color = [CCColor whiteColor];
+    [credButton setTarget:self selector:@selector(onCredits:)];
+    //Center
+    credButton.position = ccp(0.5f, 0.2f);
+    [self addChild:credButton];
+    
+    
     
     // Start Button
     CCButton *startButton = [CCButton buttonWithTitle:@"[Start]" fontName:@"Verdana-Bold" fontSize:19.0f];
@@ -89,6 +100,12 @@
 	return self;
 }
 
+
+-(void)onCredits:(id)sender{
+    NSLog(@"Go to creds");
+    [[CCDirector sharedDirector] replaceScene:[CreditsScene scene]
+                               withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionRight duration:1.0f]];
+}
 
 // -----------------------------------------------------------------------
 #pragma mark - Button Callbacks

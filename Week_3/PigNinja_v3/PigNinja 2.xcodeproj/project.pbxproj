@@ -11,6 +11,7 @@
 		E906A113192C750C009E1930 /* Icon-60.png in Resources */ = {isa = PBXBuildFile; fileRef = E906A112192C750C009E1930 /* Icon-60.png */; };
 		E906A115192C7573009E1930 /* Icon-40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E906A114192C7573009E1930 /* Icon-40@2x.png */; };
 		E906A117192C75AE009E1930 /* Icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E906A116192C75AE009E1930 /* Icon-60@2x.png */; };
+		E906A125192C790A009E1930 /* CreditsScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E906A124192C790A009E1930 /* CreditsScene.m */; };
 		E92740C91923A6F200E00EAB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E92740C81923A6F200E00EAB /* QuartzCore.framework */; };
 		E92740CB1923A6F200E00EAB /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E92740CA1923A6F200E00EAB /* OpenGLES.framework */; };
 		E92740CD1923A6F200E00EAB /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E92740CC1923A6F200E00EAB /* OpenAL.framework */; };
@@ -260,6 +261,8 @@
 		E906A112192C750C009E1930 /* Icon-60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60.png"; sourceTree = "<group>"; };
 		E906A114192C7573009E1930 /* Icon-40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-40@2x.png"; sourceTree = "<group>"; };
 		E906A116192C75AE009E1930 /* Icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@2x.png"; sourceTree = "<group>"; };
+		E906A123192C790A009E1930 /* CreditsScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CreditsScene.h; path = ../CreditsScene.h; sourceTree = "<group>"; };
+		E906A124192C790A009E1930 /* CreditsScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CreditsScene.m; path = ../CreditsScene.m; sourceTree = "<group>"; };
 		E92740C51923A6F100E00EAB /* PigNinja 2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PigNinja 2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E92740C81923A6F200E00EAB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		E92740CA1923A6F200E00EAB /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -1633,6 +1636,8 @@
 				E92743741923A6F500E00EAB /* MainScene.m */,
 				E92743761923A6F500E00EAB /* IntroScene.h */,
 				E92743771923A6F500E00EAB /* IntroScene.m */,
+				E906A123192C790A009E1930 /* CreditsScene.h */,
+				E906A124192C790A009E1930 /* CreditsScene.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1917,6 +1922,7 @@
 				E92742EC1923A6F400E00EAB /* CCBKeyframe.m in Sources */,
 				E92742A61923A6F400E00EAB /* CCControlTextureFactory.m in Sources */,
 				E927412B1923A6F200E00EAB /* CCAnimationCache.m in Sources */,
+				E906A125192C790A009E1930 /* CreditsScene.m in Sources */,
 				E92742AF1923A6F400E00EAB /* CCTableView.m in Sources */,
 				E92743721923A6F500E00EAB /* AppDelegate.m in Sources */,
 				E92741421923A6F200E00EAB /* CCDrawingPrimitives.m in Sources */,
