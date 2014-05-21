@@ -26,7 +26,7 @@ Week 2:
 	1 Entity to entity collision
 	2 Game events including appropriate sound (Like  win or lose sound)
 	
-Week 3:
+Week 3 & 4:
 
 	3 Sprites
 	2 Sound effects
