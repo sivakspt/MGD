@@ -27,6 +27,7 @@ Week 2:
 	2 Game events including appropriate sound (Like  win or lose sound)
 	
 Week 3:
+
 	3 Sprites
 	2 Sound effects
 	1 Type of input control
