@@ -9,6 +9,8 @@
 
 #import "MainScene.h"
 #import "IntroScene.h"
+#import "CCAnimation.h"
+
 
 
 // -----------------------------------------------------------------------
@@ -16,10 +18,11 @@
 // -----------------------------------------------------------------------
 
 @implementation MainScene
-@synthesize crunchSound,boingSound,whipSound,pigX,pigY;
+
+@synthesize crunchSound,boingSound,whipSound,pigX,pigY,walkAction,bear,moveAction,pigNinja;
 
 CCSprite *_pigPlayer;
-
+BOOL bearMoving;
 
 // -----------------------------------------------------------------------
 #pragma mark - Create & Destroy
@@ -28,7 +31,7 @@ CCSprite *_pigPlayer;
 + (MainScene *)scene
 {
     return [[self alloc] init];
-    
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"-ipadhdAnimBear-ipadhd.plist"];
 }
 
 // -----------------------------------------------------------------------
@@ -38,13 +41,73 @@ CCSprite *_pigPlayer;
     self = [super init];
     if (!self) return(nil);
     score = 0;
-    
+    didScoreEnough = false;
     didHitBacon = false;
     didHitFlower = false;
+    pigMoving = false;
+    
+
+    
+    //Set bg
+    CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.2f green:0.2f blue:0.2f alpha:1.0f]];
+    
+    [self addChild:background];
     
     
+    //ANIMATION BEAR===========================!
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"-ipadhdAnimBear-ipadhd.plist"];
+    
+    NSMutableArray *animFrames = [NSMutableArray array];
+    for(int i = 1; i <= 8; ++i)
+    {
+        [animFrames addObject:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:
+                               [NSString stringWithFormat:@"bear%d.png", i]]];
+        NSLog(@"ADDING frame to array: %lu", animFrames.count);
+    }
+    CCAnimation *anim = [CCAnimation
+                         animationWithSpriteFrames:animFrames
+                         delay:0.1f]; //Speed in which the frames will go at
+    
+    
+    //ANIMATION PIG===========================!
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"-ipadhdPigAnimRun.plist"];
+    
+    
+    NSMutableArray *pigFrames = [NSMutableArray array];
+    for(int i = 1; i <= 3; i++)
+    {
+        [pigFrames addObject:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:
+                              [NSString stringWithFormat:@"%d.png", i]]];
+        NSLog(@"ADDING pigFrame to array: %lu", (unsigned long)pigFrames.count);
+    }
+    CCAnimation *pigAnim = [CCAnimation
+                            animationWithSpriteFrames:pigFrames
+                            delay:0.1f];
+    
+    //---------END PIG ANIM---------------
+    
+    
+    //Pig death animation
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"PigSpinHDPigNinja.plist"];
+    
+    
+    NSMutableArray *spunFrames = [NSMutableArray array];
+    for(int j = 1; j <= 3; j++)
+    {
+        [spunFrames addObject:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:
+                              [NSString stringWithFormat:@"spin%d.png", j]]];
+        NSLog(@"ADDING death frames: %lu", (unsigned long)spunFrames.count);
+    }
+    CCAnimation *spunAnim = [CCAnimation
+                            animationWithSpriteFrames:spunFrames
+                            delay:0.1f];
+    
+    
+
+    
+    
+    //Make a point for the background
     currentPoint = CGPointMake(163.5, 54);
-    
     
     
     CCSprite *background1 = [CCSprite spriteWithImageNamed:@"bg2.jpg"];
@@ -68,12 +131,11 @@ CCSprite *_pigPlayer;
     }
     
     //Center
-    scoreLabel.position = ccp(0.89f, 0.95f);
+   scoreLabel.position = ccp(0.79f, 0.95f);
     
     [self addChild:scoreLabel];
     
-    //Physics for collisions
-    CCPhysicsNode *_physicsWorld;
+    //Physics for world
     _physicsWorld = [CCPhysicsNode node];
     _physicsWorld.gravity = ccp(0,-9);
     // _physicsWorld.debugDraw = YES;
@@ -84,30 +146,85 @@ CCSprite *_pigPlayer;
     // Enable touch handling on scene node
     self.userInteractionEnabled = YES;
     
+    //Load spritesheet to animate
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"-ipadhdAnimBear-ipadhd.plist"];
+    
+    
     // Create a colored background (Dark Grey)
     //    CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.2f green:0.2f blue:0.2f alpha:1.0f]];
     //  [self addChild:background];
     
+    
+    //Make the bear
+    CCSprite *_sprite;
     // Add a sprite
-    _pigPlayer = [CCSprite spriteWithImageNamed:@"pigNormal.png"];
-    _pigPlayer.position  = ccp(self.contentSize.width/2,self.contentSize.height/2);
-    _pigPlayer.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, _pigPlayer.contentSize} cornerRadius:0];
-    _pigPlayer.physicsBody.collisionGroup = @"usergroup";
-    _pigPlayer.physicsBody.collisionType  = @"userCollision";
-    //[_physicsWorld addChild:_pigPlayer];
+    _sprite = [CCSprite spriteWithImageNamed:@"-ipadhdBearAnim.png"];
+    _sprite.position  = ccp(self.contentSize.width/2,self.contentSize.height/2);
+    
+    
+    //Move the bear
+    CCActionAnimate *animAction = [CCActionAnimate actionWithAnimation:anim];
+    CCActionRepeatForever *animationRepeateFor = [CCActionRepeatForever actionWithAction:animAction];
+    [_sprite runAction:animationRepeateFor];
+    //Add the bear to the physics of the game
+    //  [_physicsWorld addChild:_sprite];
+    
+    //Make the Pig
+    CGSize size = [[CCDirector sharedDirector] viewSize];
+    // Add a sprite
+    pigNinja = [CCSprite spriteWithImageNamed:@"pigNormal.png"];
+    // pigNinja.position  = ccp(self.contentSize.width/2,self.contentSize.height/2);
+    pigNinja.flipX = YES;
+    pigNinja.position  = currentPoint;
+    pigNinja.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, pigNinja.contentSize} cornerRadius:0];
+    pigNinja.physicsBody.collisionGroup = @"usergroup";
+    pigNinja.physicsBody.collisionType  = @"userCollision";
+    
+    
+    
+    // pigNinja.position = ccp(0, size.height/2.0f);
+    
+    
+    
+    
+    //Move the pigs legs
+    pigMove = [CCActionAnimate actionWithAnimation:pigAnim];
+    pigCycles = [CCActionRepeatForever actionWithAction:pigMove];
+    [pigNinja runAction:pigCycles];
+    //Add the bear to the physics of the game
+
+    
+    //Dead piggy spin
+    CCActionAnimate *pigDeadAnim = [CCActionAnimate actionWithAnimation:spunAnim];
+    deadCycles = [CCActionRepeatForever actionWithAction:pigDeadAnim];
+    [pigNinja stopAction:deadCycles];
+    //Add the bear to the physics of the game
+
+    
+    [_physicsWorld addChild:pigNinja];
+    
     
     
     
     // Create a back button
-    CCButton *backButton = [CCButton buttonWithTitle:@"Quit" fontName:@"Verdana" fontSize:18.0f];
+    CCButton *backButton = [CCButton buttonWithTitle:@"[ Quit ]" fontName:@"Verdana" fontSize:15.0f];
     backButton.positionType = CCPositionTypeNormalized;
     backButton.position = ccp(0.08f, 0.95f); // Top Right of screen
     [backButton setTarget:self selector:@selector(onBackClicked:)];
     [self addChild:backButton];
     
+    pauseBtn = [CCButton buttonWithTitle:@""
+                                              spriteFrame:[CCSpriteFrame frameWithImageNamed:@"pause.png"]
+                                   highlightedSpriteFrame:[CCSpriteFrame frameWithImageNamed:@"pause_pressed.png"]
+                                      disabledSpriteFrame:nil];
     
+    pauseBtn.togglesSelectedState = YES;
+    pauseBtn.positionType = CCPositionTypeNormalized;
+    pauseBtn.position = ccp(0.08f, 0.75f); // Top Left of screen
+    [pauseBtn setTarget:self selector:@selector(gamePause:)];
+    [self addChild:pauseBtn];
+
     
-    // done
 	return self;
 }
 
@@ -128,7 +245,7 @@ CCSprite *_pigPlayer;
     [super onEnter];
     
     //Interval for bacon and flowers
-    [self schedule:@selector(flowerBomb:) interval:1.4];
+    [self schedule:@selector(flowerBomb:) interval:1.6];
     
     
     // In pre-v3, touch enable and scheduleUpdate was called here
@@ -141,47 +258,74 @@ CCSprite *_pigPlayer;
 -(void)gameWon{
     
     //TODO go back to intro screen and end all processes, alert user they won, reset counter
-    
+  // [pigNinja removeFromParentAndCleanup:YES];
+    [pigNinja stopAction:runCycles];
     [self unscheduleAllSelectors];
     
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Congrats!" message:@"Want to play again?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
     
-    
+    alert.tag = 1;
     [alert show];
     // back to intro scene with transition
-    
-    
-    
+    [self removeFromParentAndCleanup:YES];
+
     
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (alertView.tag == 1) {
+        
+    
     if (buttonIndex == 0){
         // [self unscheduleAllSelectors];
         NSLog(@"At 0");
         [[CCDirector sharedDirector] replaceScene:[MainScene scene]
                                    withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionRight duration:1.0f]];
-        
+            [pigNinja removeFromParentAndCleanup:YES];
     }
     if (buttonIndex == 1) {
-        NSLog(@"At 1");
+        NSLog(@"At 1" );
         [[CCDirector sharedDirector] replaceScene:[IntroScene scene]
                                    withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionRight duration:1.0f]];
+            [pigNinja removeFromParentAndCleanup:YES];
+    }
+    }
+    else if (alertView.tag == 2){
+        
+        if (buttonIndex == 0) {
+            NSLog(@"AT 0 PAUSE");
+            [self gameResume];
+        }
+        if (buttonIndex == 1) {
+
+            NSLog(@"AT 1 PAUSE");
+            
+        }
     }
 }
 
 -(void)gameLost{
-    
+    [pigNinja runAction:deadCycles];
     [scoreLabel removeFromParent];
+    scoreLabel = [CCLabelTTF labelWithString:@"DEAD!" fontName:@"Verdana-Bold" fontSize:18.0f];
+    scoreLabel.positionType = CCPositionTypeNormalized;
+    scoreLabel.color = [CCColor redColor];
+    //Center
+   scoreLabel.position = ccp(0.79f, 0.95f);
+    
+    [self addChild:scoreLabel];
+    
     //TODO go back to intro screen and end all processes, alert user they lost, reset counter
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Deadly Bacon Levels!" message:@"You Lost!" delegate:self cancelButtonTitle:@"Play Again" otherButtonTitles:@"Quit", nil];
     
-    
+    alert.tag =1;
     [alert show];
     
+    
+
     //Unschedule the flowerbombing
     [self unscheduleAllSelectors];
     
-    
+  
 }
 
 
@@ -191,7 +335,7 @@ CCSprite *_pigPlayer;
     [whipSound unloadAllEffects];
     [crunchSound unloadAllEffects];
     [boingSound unloadAllEffects];
-    
+    [pigNinja removeFromParentAndCleanup:YES];
     [self unscheduleAllSelectors];
     
     
@@ -200,32 +344,16 @@ CCSprite *_pigPlayer;
 - (void)flowerBomb:(CCTime)dt {
     
     //Remove the created player
-    [_pigPlayer removeFromParentAndCleanup:true];
+
     
     CCSprite *baconSprite = [CCSprite spriteWithImageNamed:@"bacon.png"];
     
     CCSprite *blueFlower = [CCSprite spriteWithImageNamed:@"blueFlower.png"];
     
-    //Make physics for world
-    CCPhysicsNode *_physicsWorld;
-    _physicsWorld = [CCPhysicsNode node];
-    _physicsWorld.gravity = ccp(0,0);
-    //  _physicsWorld.debugDraw = YES;
-    _physicsWorld.collisionDelegate = self;
+
     
     
-    
-    [self addChild:_physicsWorld];
-    
-    
-    // Add a sprite
-    _pigPlayer = [CCSprite spriteWithImageNamed:@"pigNormal.png"];
-    _pigPlayer.position  = currentPoint;
-    _pigPlayer.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, _pigPlayer.contentSize} cornerRadius:0];
-    _pigPlayer.physicsBody.collisionGroup = @"usergroup";
-    _pigPlayer.physicsBody.collisionType  = @"userCollision";
-    [_physicsWorld addChild:_pigPlayer];
-    
+
     // Set our bounds for flowers
     int minY = baconSprite.contentSize.height / 2;
     int maxY = self.contentSize.height - baconSprite.contentSize.height / 2;
@@ -239,6 +367,8 @@ CCSprite *_pigPlayer;
     
     int randomY = (arc4random() % rangeY) + minY;
     int randomBlueY = (arc4random() % rangeBlue + minYBlue);
+    
+
     
     // Add the baconSprites
     
@@ -285,14 +415,16 @@ CCSprite *_pigPlayer;
 // -----------------------------------------------------------------------
 
 -(void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
+
+
+    
     CGPoint touchLoc = [touch locationInNode:self];
     
-    
-    
+ 
     _pigPlayer.position = currentPoint;
     
     //If you tap the pig
-    if (CGRectContainsPoint(_pigPlayer.boundingBox, touchLoc))
+    if (CGRectContainsPoint(_pigPlayer.boundingBox, touchLoc) || (CGRectContainsPoint(pigNinja.boundingBox, touchLoc)))
     {
         NSLog(@"Tapped player sprite");
         //Play sound on movement
@@ -301,15 +433,15 @@ CCSprite *_pigPlayer;
     }
     
     
-    float angle = 25;
-
+    float angle = 0;
+    
     //Get the proper interpolation from the updates
     float speedFloat = deltaCurrent;
     
     float vx = cos(angle * M_PI / 180) * speedFloat;
     float vy = sin(angle * M_PI / 180) * speedFloat;
     
-    CGPoint velocity =  { _pigPlayer.position.x + velocity.x, velocity.y + _pigPlayer.position.y};
+    CGPoint velocity =  { pigNinja.position.x + velocity.x, velocity.y + pigNinja.position.y};
     
     CGPoint direction = CGPointMake(vx,vy);
     
@@ -321,21 +453,23 @@ CCSprite *_pigPlayer;
     
     currentPoint = touchLoc;
     
+
+    
+    
     
     // Move our sprite to touch location
-    CCActionMoveTo *actionMove = [CCActionMoveTo actionWithDuration:1.0 position:sum];
-  
+    actionMove = [CCActionMoveTo actionWithDuration:1.0 position:sum];
+    
     //Move with the delta multiplier
-    CCActionMoveTo *actionMoveSlow = [CCActionMoveTo actionWithDuration:deltaCurrent position:touchLoc];
+    CCActionMoveTo *actionMoveSlow = [CCActionMoveTo actionWithDuration:deltaCurrent position:currentPoint];
     
     //Play sound on movement
     OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
     [audio playEffect:@"whip.mp3"];
     
-    
     //Movement with interpolation
-    [_pigPlayer runAction:actionMoveSlow];
-    
+    //  [_pigPlayer runAction:actionMoveSlow];
+    [pigNinja runAction:actionMove];
     
     
     //   [_pigPlayer runAction:actionMove];
@@ -348,9 +482,14 @@ CCSprite *_pigPlayer;
     
     
 }
+-(void)touchEnded:(UITouch *)touch withEvent:(UIEvent *)event{
+    
+//Comment this line out to demo the win
+//    [self gameWon];
+}
 
 //Hit a blue flower, deduct a point
-- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair userCollision:(CCNode *)_sprite blueCollision:(CCNode *)blueFlower {
+- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair userCollision:(CCNode *)pigNinja blueCollision:(CCNode *)blueFlower {
     
     [blueFlower removeFromParent];
     [scoreLabel removeFromParent];
@@ -366,6 +505,9 @@ CCSprite *_pigPlayer;
         score --;
         
     }
+
+    
+
     
     //Play sound on point loss
     OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
@@ -373,25 +515,38 @@ CCSprite *_pigPlayer;
     
     
     
-    scoreString = [NSString stringWithFormat: @"Bacon : %d", score];
+    scoreString = [NSString stringWithFormat: @"Bacon : %d /25", score];
     
     
-    scoreLabel = [CCLabelTTF labelWithString:scoreString fontName:@"Verdana" fontSize:18.0f];
+    scoreLabel = [CCLabelTTF labelWithString:scoreString fontName:@"Verdana-Bold" fontSize:18.0f];
     scoreLabel.positionType = CCPositionTypeNormalized;
     scoreLabel.color = [CCColor whiteColor];
+    
+    if (didScoreEnough && score < 3) {
+        [scoreLabel removeFromParent];
+        
+        
+        scoreLabel = [CCLabelTTF labelWithString:scoreString fontName:@"Verdana-Bold" fontSize:18.0f];
+        scoreLabel.positionType = CCPositionTypeNormalized;
+        scoreLabel.color = [CCColor redColor];
+        //Center
+        scoreLabel.position = ccp(0.79f, 0.95f);
+        //   [self addChild:scoreLabel];
+        
+    }
     
     if (score == 0 && didHitFlower == true) {
         [scoreLabel removeFromParent];
         scoreString =  @"LOW BACON!";
         
         
-        scoreLabel = [CCLabelTTF labelWithString:scoreString fontName:@"Verdana" fontSize:18.0f];
+        scoreLabel = [CCLabelTTF labelWithString:scoreString fontName:@"Verdana-Bold" fontSize:18.0f];
         scoreLabel.positionType = CCPositionTypeNormalized;
         scoreLabel.color = [CCColor redColor];
         //Center
-        scoreLabel.position = ccp(0.49f, 0.95f);
+        scoreLabel.position = ccp(0.79f, 0.95f);
+        //   [self addChild:scoreLabel];
         
-        //        [self addChild:scoreLabel];
     }
     
     
@@ -406,17 +561,19 @@ CCSprite *_pigPlayer;
         
     }
     
+    
     //Center
-    scoreLabel.position = ccp(0.89f, 0.95f);
-    
-    [self addChild:scoreLabel];
-    
+    scoreLabel.position = ccp(0.79f, 0.95f);
     if (score == -1) {
         scoreString = @"DEAD!";
         [scoreLabel removeFromParent];
     }
     
     [blueFlower removeFromParent];
+    
+    
+    [self addChild:scoreLabel];
+    
     
     return YES;
 }
@@ -438,7 +595,10 @@ CCSprite *_pigPlayer;
         score ++;
         
     }
-    
+    if (score >= 2) {
+        didScoreEnough = true;
+        NSLog(@"DID SCORE ENOUGH");
+    }
     
     
     //Play sound on bacon
@@ -450,15 +610,15 @@ CCSprite *_pigPlayer;
     }
     
     
-    scoreString = [NSString stringWithFormat: @"Bacon : %d", score];
+    scoreString = [NSString stringWithFormat: @"Bacon : %d /25", score];
     
     
-    scoreLabel = [CCLabelTTF labelWithString:scoreString fontName:@"Verdana" fontSize:18.0f];
+    scoreLabel = [CCLabelTTF labelWithString:scoreString fontName:@"Verdana-Bold" fontSize:18.0f];
     scoreLabel.positionType = CCPositionTypeNormalized;
     scoreLabel.color = [CCColor whiteColor];
     
     //Center
-    scoreLabel.position = ccp(0.89f, 0.95f);
+    scoreLabel.position = ccp(0.79f, 0.95f);
     
     [self addChild:scoreLabel];
     
@@ -487,6 +647,57 @@ CCSprite *_pigPlayer;
     pigY = _pigPlayer.position.y;
     pigX = _pigPlayer.position.x;
     
+    //Keep the pig on the screen
+    CGSize screenSize = [[CCDirector sharedDirector]viewSize];
+    
+    float maxX = screenSize.width - pigNinja.contentSize.width/2;
+    float minX = pigNinja.contentSize.width/2;
+    float maxY = screenSize.height - pigNinja.contentSize.height/2;
+    float minY = pigNinja.contentSize.height/2;
+    
+    if (pigNinja.position.x > maxX)
+    {
+        NSLog(@"OFF SCREEN!");
+        pigNinja.position = ccp(maxX, pigNinja.position.y);
+    }
+    else if (pigNinja.position.x < minX)
+    {
+        NSLog(@"OFF SCREEN!");
+        pigNinja.position = ccp(minX, pigNinja.position.y);
+    }
+    
+    
+    if (pigNinja.position.y > maxY)
+    {
+        NSLog(@"OFF SCREEN!");
+        pigNinja.position = ccp(pigNinja.position.x, maxY);
+    }
+    else if (pigNinja.position.y < minY)
+    {
+        
+        pigNinja.position = ccp(pigNinja.position.x, minY);
+    }
+    
+
+    
+}
+
+-(void)gamePause:(id)sender{
+      [[CCDirector sharedDirector] pause];
+    NSLog(@" Pause Game");
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Game Paused" message:nil delegate:self cancelButtonTitle:@"Resume" otherButtonTitles:nil, nil];
+    
+    alert.tag = 2;
+    [alert show];
+
+    
+}
+
+
+
+-(void)gameResume{
+    NSLog(@"RESUME GAME");
+    [[CCDirector sharedDirector] resume];
 }
 
 // -----------------------------------------------------------------------
